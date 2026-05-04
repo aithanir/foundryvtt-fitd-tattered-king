@@ -13,4 +13,4 @@ A Foundry VTT module for the Tattered King campaign that adds Reality Fracture c
 3. Make sure the Blades in the Dark system and the alternate sheets module are installed and enabled.
 
 ## Notes
-This module provides a starter skeleton for campaign-specific Reality Fracture logic. Add your custom campaign behavior under `scripts/reality-fracture.js`.
+This module provides a starter skeleton for Reality Fracture logic. Add your custom behavior under `scripts/reality-fracture.js`.

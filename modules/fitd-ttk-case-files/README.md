@@ -13,4 +13,4 @@ A Foundry VTT module for the Tattered King campaign that adds campaign-specific 
 3. Make sure the Blades in the Dark system and the alternate sheets module are installed and enabled.
 
 ## Notes
-This module provides a starter skeleton for custom campaign logic and settings. Add campaign-specific behavior under `scripts/case-files.js`.
+This module provides a starter skeleton for Case Files logic. Add custom behavior under `scripts/case-files.js`.

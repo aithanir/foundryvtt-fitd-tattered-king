@@ -13,4 +13,4 @@ A Foundry VTT module for the Tattered King campaign that adds harm and trauma tr
 3. Make sure the Blades in the Dark system and the alternate sheets module are installed and enabled.
 
 ## Notes
-This module provides a starter skeleton for campaign-specific harm tracking. Add your custom harm behavior under `scripts/harm.js`.
+This module provides a starter skeleton for custom harm logic. Add your custom behavior under `scripts/harm.js`.
