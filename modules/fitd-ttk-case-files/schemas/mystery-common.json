@@ -35,42 +35,22 @@
         "Simple",
         "Standard",
         "Complex",
-        "Deep",
-        "DeepHeavy"
+        "Deep"
       ]
     },
     "vector": {
       "type": "string",
       "enum": [
         "Witness",
+        "Informant",
         "Record",
         "Surveillance",
+        "Intercept",
         "Site",
-        "Contact",
-        "Tradecraft",
+        "Object",
         "Medical",
-        "Esoteric",
-        "Informant",
-        "Intercept"
+        "Custom"
       ]
-    },
-    "commitThreshold": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "evidenceCount",
-        "vectorCount"
-      ],
-      "properties": {
-        "evidenceCount": {
-          "type": "integer",
-          "minimum": 1
-        },
-        "vectorCount": {
-          "type": "integer",
-          "minimum": 0
-        }
-      }
     }
   }
 }

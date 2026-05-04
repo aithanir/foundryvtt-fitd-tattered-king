@@ -11,11 +11,13 @@ Hooks.once("init", async function() {
   });
 
   // Load JSON schemas
+  const mysteryCommonSchema = await fetch("modules/fitd-ttk-case-files/schemas/mystery-common.json").then(r => r.json());
   const caseFileSchema = await fetch("modules/fitd-ttk-case-files/schemas/case-file.json").then(r => r.json());
   const evidenceCardSchema = await fetch("modules/fitd-ttk-case-files/schemas/evidence.json").then(r => r.json());
   const mysteryCardSchema = await fetch("modules/fitd-ttk-case-files/schemas/mystery-card.json").then(r => r.json());
 
   game.modules.get("fitd-ttk-case-files").schemas = {
+    mysteryCommon: mysteryCommonSchema,
     caseFile: caseFileSchema,
     evidenceCard: evidenceCardSchema,
     mysteryCard: mysteryCardSchema

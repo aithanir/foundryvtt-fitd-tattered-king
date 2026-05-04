@@ -1,0 +1,178 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fitd.ttk.harm/schemas/harm-card.json",
+  "title": "Harm Card",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "name",
+    "type",
+    "system"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "type": {
+      "const": "harmCard"
+    },
+    "system": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "harmType",
+        "category",
+        "level",
+        "axisPrimary",
+        "axisSecondary",
+        "narrative",
+        "conditions",
+        "injury",
+        "shock",
+        "lingering",
+        "recovery"
+      ],
+      "properties": {
+        "harmType": {
+          "$ref": "https://fitd.ttk.harm/schemas/harm-common.json#/$defs/harmType"
+        },
+        "family": {
+          "type": "string",
+          "default": ""
+        },
+        "category": {
+          "type": "string",
+          "minLength": 1
+        },
+        "level": {
+          "$ref": "https://fitd.ttk.harm/schemas/harm-common.json#/$defs/level"
+        },
+        "axisPrimary": {
+          "$ref": "https://fitd.ttk.harm/schemas/harm-common.json#/$defs/axis"
+        },
+        "axisSecondary": {
+          "$ref": "https://fitd.ttk.harm/schemas/harm-common.json#/$defs/axis"
+        },
+        "narrative": {
+          "type": "string",
+          "minLength": 1
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "https://fitd.ttk.harm/schemas/harm-conditions.json#/$defs/condition"
+          },
+          "default": []
+        },
+        "injury": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4,
+          "default": 0
+        },
+        "shock": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4,
+          "default": 0
+        },
+        "lingering": {
+          "type": "boolean",
+          "default": false
+        },
+        "recovery": {
+          "type": "object",
+          "description": "Recovery is authored directly on the harm card, not as a condition.",
+          "additionalProperties": false,
+          "oneOf": [
+            {
+              "required": [
+                "type",
+                "segments"
+              ],
+              "properties": {
+                "type": {
+                  "const": "clock"
+                },
+                "segments": {
+                  "type": "integer",
+                  "enum": [
+                    4,
+                    6,
+                    8
+                  ]
+                }
+              }
+            },
+            {
+              "required": [
+                "type",
+                "timing"
+              ],
+              "properties": {
+                "type": {
+                  "const": "auto"
+                },
+                "timing": {
+                  "type": "string",
+                  "enum": [
+                    "endOfScene",
+                    "afterNextSuccessfulRoll",
+                    "startOfDowntime"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "harmType": {
+                "const": "physicalInjury"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "family": {
+                "const": ""
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "harmType": {
+                "const": "mentalShock"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "family": {
+                "$ref": "https://fitd.ttk.harm/schemas/harm-common.json#/$defs/mentalShockFamily"
+              }
+            },
+            "required": [
+              "family"
+            ]
+          }
+        }
+      ]
+    },
+    "effects": {
+      "type": "array",
+      "description": "Optional flattened text summary for VTT convenience.",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "default": []
+    }
+  }
+}

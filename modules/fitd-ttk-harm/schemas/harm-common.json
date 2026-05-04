@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fitd.ttk.harm/schemas/harm-common.json",
+  "title": "Harm Common Definitions",
+  "$defs": {
+    "harmType": {
+      "type": "string",
+      "enum": [
+        "physicalInjury",
+        "mentalShock"
+      ]
+    },
+    "mentalShockFamily": {
+      "type": "string",
+      "enum": [
+        "Helplessness",
+        "Violence",
+        "Irrational"
+      ]
+    },
+    "level": {
+      "type": "string",
+      "enum": [        
+        "Trivial",
+        "Light",
+        "Moderate",
+        "Severe"
+      ]
+    },
+    "axis": {
+      "type": "string",
+      "enum": [
+        "Capability",
+        "Control",
+        "Stability",
+        "Survival"
+      ]
+    },
+    "competencyGroup": {
+      "type": "string",
+      "enum": [
+        "Practicality",
+        "Knowledge",
+        "Interpersonal",
+        "All"
+      ]
+    },
+    "resistanceTrait": {
+      "type": "string",
+      "enum": [
+        "Physique",
+        "Insight",
+        "Composure",
+        "All"
+      ]
+    }
+  }
+}

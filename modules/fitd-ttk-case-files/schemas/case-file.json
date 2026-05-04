@@ -8,7 +8,6 @@
     "id",
     "question",
     "complexity",
-    "commitThreshold",
     "fog",
     "frames",
     "evidence",
@@ -24,9 +23,6 @@
     },
     "complexity": {
       "$ref": "https://fitd.ttk.case-files/schemas/mystery-common.json#/$defs/caseComplexity"
-    },
-    "commitThreshold": {
-      "$ref": "https://fitd.ttk.case-files/schemas/mystery-common.json#/$defs/commitThreshold"
     },
     "fog": {
       "type": "object",

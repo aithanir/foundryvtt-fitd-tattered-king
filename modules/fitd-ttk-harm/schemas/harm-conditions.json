@@ -1,0 +1,373 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fitd.ttk.harm/schemas/harm-conditions.json",
+  "title": "Harm Condition Definitions",
+  "$defs": {
+    "conditionBase": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string"
+        }
+      }
+    },
+    "cannotCompetencyCondition": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/conditionBase"
+        },
+        {
+          "type": "object",
+          "required": [
+            "kind",
+            "target"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "cannotCompetency"
+            },
+            "target": {
+              "oneOf": [
+                {
+                  "$ref": "https://fitd.ttk.harm/schemas/harm-common.json#/$defs/competencyGroup"
+                },
+                {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 2,
+                  "items": {
+                      "$ref": "https://fitd.ttk.harm/schemas/harm-common.json#/$defs/competencyGroup"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "cannotPushCondition": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/conditionBase"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "cannotPush"
+            }
+          }
+        }
+      ]
+    },
+    "cannotResistCondition": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/conditionBase"
+        },
+        {
+          "type": "object",
+          "required": [
+            "kind",
+            "scope"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "cannotResist"
+            },
+            "scope": {
+              "type": "string",
+              "enum": [
+                "resistanceTrait",
+                "allResistanceRolls"
+              ]
+            },
+            "target": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "dicePenaltyCondition": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/conditionBase"
+        },
+        {
+          "type": "object",
+          "required": [
+            "kind",
+            "scope",
+            "value"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "dicePenalty"
+            },
+            "scope": {
+              "type": "string",
+              "enum": [
+                "competencyGroup",
+                "allCompetencyRolls",
+                "resistanceTrait",
+                "allResistanceRolls"
+              ]
+            },
+            "target": {
+              "type": [
+                "string",
+                "array"
+              ],
+              "items": {
+                "type": "string"
+              }
+            },
+            "value": {
+              "type": "integer",
+              "enum": [
+                -1,
+                -2
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "effectPenaltyCondition": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/conditionBase"
+        },
+        {
+          "type": "object",
+          "required": [
+            "kind",
+            "scope",
+            "value"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "effectPenalty"
+            },
+            "scope": {
+              "type": "string",
+              "enum": [
+                "competencyGroup",
+                "allCompetencyRolls"
+              ]
+            },
+            "target": {
+              "type": [
+                "string",
+                "array"
+              ],
+              "items": {
+                "type": "string"
+              }
+            },
+            "value": {
+              "type": "integer",
+              "const": 1
+            }
+          }
+        }
+      ]
+    },
+    "replaceOnRecoveryCondition": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/conditionBase"
+        },
+        {
+          "type": "object",
+          "required": [
+            "kind",
+            "target"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "replaceOnRecovery"
+            },
+            "target": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      ]
+    },
+    "replaceWithCondition": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/conditionBase"
+        },
+        {
+          "type": "object",
+          "required": [
+            "kind",
+            "trigger",
+            "target"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "replaceWith"
+            },
+            "trigger": {
+              "type": "string",
+              "minLength": 1
+            },
+            "target": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      ]
+    },
+    "signatureCondition": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/conditionBase"
+        },
+        {
+          "type": "object",
+          "required": [
+            "kind",
+            "name"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "signature"
+            },
+            "name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "gate": {
+              "type": "string"
+            },
+            "frequency": {
+              "type": "string"
+            },
+            "weight": {
+              "type": "string",
+              "enum": [
+                "S1",
+                "S2",
+                "S3"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "stressLossCondition": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/conditionBase"
+        },
+        {
+          "type": "object",
+          "required": [
+            "kind",
+            "amount"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "stressLoss"
+            },
+            "amount": {
+              "type": "integer",
+              "enum": [
+                2,
+                4
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "succumbsCondition": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/conditionBase"
+        },
+        {
+          "type": "object",
+          "required": [
+            "kind",
+            "mode",
+            "trigger"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "succumbs"
+            },
+            "mode": {
+              "type": "string",
+              "enum": [
+                "injuries",
+                "madness"
+              ]
+            },
+            "trigger": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      ]
+    },
+    "condition": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/conditionBase"
+        },
+        {
+          "$ref": "#/$defs/cannotCompetencyCondition"
+        },
+        {
+          "$ref": "#/$defs/cannotPushCondition"
+        },
+        {
+          "$ref": "#/$defs/cannotResistCondition"
+        },
+        {
+          "$ref": "#/$defs/dicePenaltyCondition"
+        },
+        {
+          "$ref": "#/$defs/effectPenaltyCondition"
+        },
+        {
+          "$ref": "#/$defs/replaceOnRecoveryCondition"
+        },
+        {
+          "$ref": "#/$defs/replaceWithCondition"
+        },
+        {
+          "$ref": "#/$defs/signatureCondition"
+        },
+        {
+          "$ref": "#/$defs/stressLossCondition"
+        },
+        {
+          "$ref": "#/$defs/succumbsCondition"
+        }
+      ]
+    }
+  }
+}

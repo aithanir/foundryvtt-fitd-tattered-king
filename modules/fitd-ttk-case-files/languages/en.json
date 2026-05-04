@@ -1,4 +1,30 @@
 {
   "FITD-TTK-CASE-FILES.ModuleName": "Tattered King: Case Files",
-  "FITD-TTK-CASE-FILES.ModuleDescription": "Adds the Tattered King: Case Files tools to the Blades in the Dark system."
+  "FITD-TTK-CASE-FILES.ModuleDescription": "Adds the Tattered King: Case Files tools to the Blades in the Dark system.",
+  "FITD-TTK-CASE-FILES.FrameType.Face": "Face",
+  "FITD-TTK-CASE-FILES.FrameType.Motive": "Motive",
+  "FITD-TTK-CASE-FILES.FrameType.Method": "Method",
+  "FITD-TTK-CASE-FILES.FrameType.Location": "Location",
+  "FITD-TTK-CASE-FILES.FrameType.Item": "Item",
+  "FITD-TTK-CASE-FILES.FrameType.Timing": "Timing",
+  "FITD-TTK-CASE-FILES.FrameType.Blank": "",
+  "FITD-TTK-CASE-FILES.FogLevel.Clear": "Clear",
+  "FITD-TTK-CASE-FILES.FogLevel.Hazy": "Hazy",
+  "FITD-TTK-CASE-FILES.FogLevel.Obscured": "Obscured",
+  "FITD-TTK-CASE-FILES.FogLevel.Buried": "Buried",
+  "FITD-TTK-CASE-FILES.FogLevel.Lost": "Lost",
+  "FITD-TTK-CASE-FILES.CaseComplexity.Simple": "Simple",
+  "FITD-TTK-CASE-FILES.CaseComplexity.Standard": "Standard",
+  "FITD-TTK-CASE-FILES.CaseComplexity.Complex": "Complex",
+  "FITD-TTK-CASE-FILES.CaseComplexity.Deep": "Deep",
+  "FITD-TTK-CASE-FILES.Vector.Witness": "Witness",
+  "FITD-TTK-CASE-FILES.Vector.Informant": "Informant",
+  "FITD-TTK-CASE-FILES.Vector.Record": "Record",
+  "FITD-TTK-CASE-FILES.Vector.Surveillance": "Surveillance",
+  "FITD-TTK-CASE-FILES.Vector.Intercept": "Intercept",
+  "FITD-TTK-CASE-FILES.Vector.Site": "Site",
+  "FITD-TTK-CASE-FILES.Vector.Object": "Object",
+  "FITD-TTK-CASE-FILES.Vector.Medical": "Medical",
+  "FITD-TTK-CASE-FILES.Vector.Custom": "Custom"
+
 }
