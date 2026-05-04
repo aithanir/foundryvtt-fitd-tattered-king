@@ -1,31 +1,48 @@
 {
-  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fitd.ttk.case-files/schemas/mystery-card.json",
+  "title": "Mystery Card",
   "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "type",
+    "revelation"
+  ],
   "properties": {
     "id": {
-      "type": "string",
-      "description": "Unique identifier for the mystery card"
+      "$ref": "https://fitd.ttk.case-files/schemas/mystery-common.json#/$defs/id"
     },
-    "name": {
-      "type": "string",
-      "description": "Name of the mystery card"
+    "title": {
+      "type": "string"
     },
-    "effect": {
-      "type": "string",
-      "description": "Effect or description of the card"
+    "type": {
+      "$ref": "https://fitd.ttk.case-files/schemas/mystery-common.json#/$defs/frameType",
+      "description": "Usually matches the Frame it fills. Blank Frames may accept multiple types."
     },
-    "revealed": {
+    "revelation": {
+      "type": "string",
+      "description": "The heavy structural truth this card reveals."
+    },
+    "occult": {
       "type": "boolean",
-      "description": "Whether the card has been revealed",
       "default": false
     },
-    "clues": {
+    "tags": {
       "type": "array",
       "items": {
         "type": "string"
       },
-      "description": "List of clues associated with the card"
+      "default": []
+    },
+    "gmNotes": {
+      "type": "string",
+      "default": ""
+    },
+    "revealed": {
+      "type": "boolean",
+      "default": false
     }
-  },
-  "required": ["id", "name", "effect"]
+  }
 }

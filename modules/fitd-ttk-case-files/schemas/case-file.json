@@ -1,31 +1,138 @@
 {
-  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fitd.ttk.case-files/schemas/case-file.json",
+  "title": "Case File",
   "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "question",
+    "complexity",
+    "commitThreshold",
+    "fog",
+    "frames",
+    "evidence",
+    "mysteryCards"
+  ],
   "properties": {
     "id": {
-      "type": "string",
-      "description": "Unique identifier for the case file"
+      "$ref": "https://fitd.ttk.case-files/schemas/mystery-common.json#/$defs/id"
     },
-    "title": {
+    "question": {
       "type": "string",
-      "description": "Title of the case file"
+      "description": "One-sentence investigative question."
     },
-    "status": {
-      "type": "string",
-      "enum": ["open", "closed", "pending"],
-      "description": "Current status of the case"
+    "complexity": {
+      "$ref": "https://fitd.ttk.case-files/schemas/mystery-common.json#/$defs/caseComplexity"
     },
-    "description": {
-      "type": "string",
-      "description": "Detailed description of the case"
+    "commitThreshold": {
+      "$ref": "https://fitd.ttk.case-files/schemas/mystery-common.json#/$defs/commitThreshold"
     },
-    "assignedTo": {
+    "fog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "level",
+        "value"
+      ],
+      "properties": {
+        "level": {
+          "$ref": "https://fitd.ttk.case-files/schemas/mystery-common.json#/$defs/fogLevel"
+        },
+        "value": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4
+        }
+      }
+    },
+    "frames": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "https://fitd.ttk.case-files/schemas/mystery-common.json#/$defs/id"
+          },
+          "type": {
+            "$ref": "https://fitd.ttk.case-files/schemas/mystery-common.json#/$defs/frameType"
+          },
+          "label": {
+            "type": "string",
+            "description": "Optional display label if different from type."
+          },
+          "occult": {
+            "type": "boolean",
+            "default": false
+          },
+          "filledByMysteryCardId": {
+            "oneOf": [
+              {
+                "$ref": "https://fitd.ttk.case-files/schemas/mystery-common.json#/$defs/id"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          }
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "https://fitd.ttk.case-files/schemas/evidence-card.json"
+      },
+      "default": []
+    },
+    "mysteryCards": {
+      "type": "array",
+      "description": "GM-facing Suspect Lattice. Revealed cards are also referenced by filled Frames.",
+      "items": {
+        "$ref": "https://fitd.ttk.case-files/schemas/mystery-card.json"
+      },
+      "default": []
+    },
+    "audienceOptions": {
       "type": "array",
       "items": {
         "type": "string"
       },
-      "description": "List of assigned characters or users"
+      "default": []
+    },
+    "startingSituation": {
+      "type": "string",
+      "default": ""
+    },
+    "pressures": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "humanLayer": {
+      "type": "string",
+      "default": ""
+    },
+    "occultLayer": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "notes": {
+      "type": "string",
+      "default": ""
     }
-  },
-  "required": ["id", "title", "status"]
+  }
 }

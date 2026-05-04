@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fitd.ttk.case-files/schemas/mystery-common.json",
+  "title": "Mystery System Common Definitions",
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "frameType": {
+      "type": "string",
+      "enum": [
+        "Face",
+        "Motive",
+        "Method",
+        "Location",
+        "Item",
+        "Timing",
+        "Blank"
+      ]
+    },
+    "fogLevel": {
+      "type": "string",
+      "enum": [
+        "Clear",
+        "Hazy",
+        "Obscured",
+        "Buried",
+        "Lost"
+      ]
+    },
+    "caseComplexity": {
+      "type": "string",
+      "enum": [
+        "Simple",
+        "Standard",
+        "Complex",
+        "Deep",
+        "DeepHeavy"
+      ]
+    },
+    "vector": {
+      "type": "string",
+      "enum": [
+        "Witness",
+        "Record",
+        "Surveillance",
+        "Site",
+        "Contact",
+        "Tradecraft",
+        "Medical",
+        "Esoteric",
+        "Informant",
+        "Intercept"
+      ]
+    },
+    "commitThreshold": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidenceCount",
+        "vectorCount"
+      ],
+      "properties": {
+        "evidenceCount": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "vectorCount": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    }
+  }
+}

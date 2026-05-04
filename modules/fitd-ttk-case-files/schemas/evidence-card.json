@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fitd.ttk.case-files/schemas/evidence-card.json",
+  "title": "Evidence Card",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "fact",
+    "vector"
+  ],
+  "properties": {
+    "id": {
+      "$ref": "https://fitd.ttk.case-files/schemas/mystery-common.json#/$defs/id"
+    },
+    "title": {
+      "type": "string"
+    },
+    "fact": {
+      "type": "string",
+      "description": "Concrete established fact; not interpretation."
+    },
+    "vector": {
+      "$ref": "https://fitd.ttk.case-files/schemas/mystery-common.json#/$defs/vector"
+    },
+    "contradictsEvidenceId": {
+      "oneOf": [
+        {
+          "$ref": "https://fitd.ttk.case-files/schemas/mystery-common.json#/$defs/id"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "If present, this Evidence Card directly contradicts one other Evidence Card."
+    },
+    "resolved": {
+      "type": "boolean",
+      "default": false,
+      "description": "True if this card's contradiction has been resolved."
+    },
+    "notes": {
+      "type": "string",
+      "default": ""
+    }
+  }
+}
