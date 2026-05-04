@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the mystery card"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the mystery card"
+    },
+    "effect": {
+      "type": "string",
+      "description": "Effect or description of the card"
+    },
+    "revealed": {
+      "type": "boolean",
+      "description": "Whether the card has been revealed",
+      "default": false
+    },
+    "clues": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of clues associated with the card"
+    }
+  },
+  "required": ["id", "name", "effect"]
+}
