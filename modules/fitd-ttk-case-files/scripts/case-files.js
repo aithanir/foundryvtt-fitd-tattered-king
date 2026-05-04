@@ -9,6 +9,31 @@ Hooks.once("init", async function() {
     type: Boolean,
     default: true
   });
+
+  // Load JSON schemas
+  const caseFileSchema = await fetch("modules/fitd-ttk-case-files/schemas/case-file.json").then(r => r.json());
+  const evidenceCardSchema = await fetch("modules/fitd-ttk-case-files/schemas/evidence.json").then(r => r.json());
+  const mysteryCardSchema = await fetch("modules/fitd-ttk-case-files/schemas/mystery-card.json").then(r => r.json());
+
+  game.modules.get("fitd-ttk-case-files").schemas = {
+    caseFile: caseFileSchema,
+    evidenceCard: evidenceCardSchema,
+    mysteryCard: mysteryCardSchema
+  };
+
+  // Validation function
+  game.modules.get("fitd-ttk-case-files").validateData = function(type, data) {
+    const schema = this.schemas[type];
+    if (!schema) throw new Error(`Unknown schema type: ${type}`);
+    const ajv = new Ajv();
+    const validate = ajv.compile(schema);
+    const valid = validate(data);
+    if (!valid) {
+      console.error("Validation errors:", validate.errors);
+      throw new Error(`Invalid ${type} data: ${validate.errors.map(e => e.message).join(", ")}`);
+    }
+    return true;
+  };
 });
 
 Hooks.once("ready", function() {
