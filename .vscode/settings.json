@@ -6,5 +6,31 @@
   },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "json.schemas": [
+    {
+      "fileMatch": ["**/module.json"],
+      "url": "https://raw.githubusercontent.com/foundryvtt/foundryvtt/master/schema/module.json"
+    },
+    {
+      "fileMatch": ["**/schemas/*.json"],
+      "url": "https://json-schema.org/draft/2020-12/schema"
+    },
+    {
+      "fileMatch": ["**/data/case-files/*.json"],
+      "url": "./modules/fitd-ttk-case-files/schemas/case-file.json"
+    },
+    {
+      "fileMatch": ["**/data/evidence-cards/*.json"],
+      "url": "./modules/fitd-ttk-case-files/schemas/evidence-card.json"
+    },
+    {
+      "fileMatch": ["**/data/mystery-cards/*.json"],
+      "url": "./modules/fitd-ttk-case-files/schemas/mystery-card.json"
+    },
+    {
+      "fileMatch": ["**/data/harm-cards/*.json"],
+      "url": "./modules/fitd-ttk-harm/schemas/harm-card.json"
+    }
+  ]
 }
