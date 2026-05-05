@@ -35,6 +35,16 @@
     ],
     "requires": [
     ],
+    "recommends": [
+      {
+        "id": "bitd-alternate-sheets",
+        "type": "module",
+        "manifest": "https://raw.githubusercontent.com/justinross/foundry-bitd-alternate-sheets/master/module.json",
+        "compatibility": {
+          "minimum": "1.0.20"
+        }
+      }
+    ],
     "conflicts": []
   }
 }
