@@ -427,3 +427,8 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# Foundry VTT Development Environment
+foundry-data/
+install-system.log
+.devcontainer/.env
