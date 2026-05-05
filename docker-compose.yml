@@ -1,0 +1,32 @@
+---
+
+services:
+  foundry:
+    image: ghcr.io/felddy/foundryvtt:${FOUNDRY_IMAGE_TAG:-release}
+    hostname: tattered-king-dev
+    env_file:
+      - .devcontainer/.env
+    volumes:
+      # Mount workspace for VS Code
+      - ./modules/fitd-ttk-case-files:/workspaces/fitd-ttk-case-files:cached
+      - ./modules/fitd-ttk-harm:/workspaces/fitd-ttk-harm:cached
+      - ./modules/fitd-ttk-reality-fracture:/workspaces/fitd-ttk-reality-fracture:cached
+      # Foundry data persistence (inside workspace, gitignored)
+      - ./foundry-data:/data
+      # Mount all modules into Foundry's modules directory for testing
+      - ./modules/fitd-ttk-case-files:/data/Data/modules/fitd-ttk-case-files:cached
+      - ./modules/fitd-ttk-harm:/data/Data/modules/fitd-ttk-harm:cached
+      - ./modules/fitd-ttk-reality-fracture:/data/Data/modules/fitd-ttk-reality-fracture:cached
+      # npm cache persistence
+      - tattered-king-npm-cache:/home/foundry/.npm
+    ports:
+      - target: 30000
+        published: ${FOUNDRY_EXTERNAL_PORT:-30000}
+        protocol: tcp
+    environment:
+      # Explicitly set Foundry user to avoid permission issues
+      - FOUNDRY_UID=1000
+      - FOUNDRY_GID=1000
+
+volumes:
+  tattered-king-npm-cache:
