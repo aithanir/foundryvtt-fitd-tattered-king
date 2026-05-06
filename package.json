@@ -9,8 +9,9 @@
     "format:check": "prettier --check ."
   },
   "devDependencies": {
+    "@foundryvtt/foundryvtt-cli": "^3.0.3",
     "eslint": "^9.0.0",
-    "prettier": "^3.0.0",
-    "eslint-config-prettier": "^9.0.0"
+    "eslint-config-prettier": "^9.0.0",
+    "prettier": "^3.0.0"
   }
 }

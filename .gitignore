@@ -119,6 +119,8 @@ StyleCopReport.xml
 *.tmp_proj
 *_wpftmp.csproj
 *.log
+# but not LevelDB log files, which may be part of the database state.
+!modules/*/packs/**/*.log
 *.tlog
 *.vspscc
 *.vssscc
@@ -432,3 +434,6 @@ FodyWeavers.xsd
 foundry-data/
 install-system.log
 .devcontainer/.env
+
+# Foundry/LevelDB transient lock files
+modules/*/packs/**/LOCK
