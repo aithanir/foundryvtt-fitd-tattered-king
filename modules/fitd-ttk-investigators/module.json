@@ -1,0 +1,80 @@
+{
+  "id": "fitd-ttk-investigators",
+  "title": "FitD Tattered King: Investigators",
+  "description": "Tattered King: Investigators tools for Blades in the Dark.",
+  "version": "0.0.1",
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14"
+  },
+  "authors": [
+    {
+      "name": "Tattered King Team"
+    }
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "languages/en.json"
+    }
+  ],
+  "relationships": {
+    "systems": [
+      {
+        "id": "blades-in-the-dark",
+        "type": "system",
+        "manifest": "https://raw.githubusercontent.com/Dez384/foundryvtt-blades-in-the-dark/master/system.json",
+        "compatibility": {
+          "minimum": "6.1.0"
+        }
+      }
+    ],
+    "requires": [
+    ],
+    "recommends": [
+      {
+        "id": "bitd-alternate-sheets",
+        "type": "module",
+        "manifest": "https://raw.githubusercontent.com/justinross/foundry-bitd-alternate-sheets/master/module.json",
+        "compatibility": {
+          "minimum": "1.0.20"
+        }
+      }
+    ],
+    "conflicts": []
+  },
+  "packs": [
+    {
+      "name": "class",
+      "label": "Classes",
+      "system": "blades-in-the-dark",
+      "path": "./packs/classes.db",
+      "banner": "systems/blades-in-the-dark/images/compendium-banners/Doskvol_00.webp",
+      "type": "Item"
+    },
+    {
+      "name": "ability",
+      "label": "Abilities",
+      "system": "blades-in-the-dark",
+      "path": "./packs/abilities.db",
+      "banner": "systems/blades-in-the-dark/images/compendium-banners/Doskvol_06.webp",
+      "type": "Item"
+    },
+    {
+      "name": "item",
+      "label": "Items",
+      "system": "blades-in-the-dark",
+      "path": "./packs/items.db",
+      "banner": "systems/blades-in-the-dark/images/compendium-banners/Doskvol_05.webp",
+      "type": "Item"
+    }
+  ],
+  "packFolders": [
+    {
+      "name": "Character Options",
+      "sorting": "m",
+      "packs": ["class", "ability", "item"]
+	  }
+  ]
+}

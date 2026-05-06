@@ -17,6 +17,7 @@ services:
       - ./modules/fitd-ttk-case-files:/data/Data/modules/fitd-ttk-case-files:cached
       - ./modules/fitd-ttk-harm:/data/Data/modules/fitd-ttk-harm:cached
       - ./modules/fitd-ttk-reality-fracture:/data/Data/modules/fitd-ttk-reality-fracture:cached
+      - ./modules/fitd-ttk-investigators:/data/Data/modules/fitd-ttk-investigators:cached
       # npm cache persistence
       - tattered-king-npm-cache:/home/foundry/.npm
     ports:
