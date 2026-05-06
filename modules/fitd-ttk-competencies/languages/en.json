@@ -1,0 +1,22 @@
+{
+  "FITD-TTK-COMPETENCIES.ModuleName": "Tattered King: Competencies",
+  "FITD-TTK-COMPETENCIES.ModuleDescription": "Relabels Blades in the Dark actions and resistance attributes as Tattered King competencies.",
+  "FITD-TTK-COMPETENCIES.Attribute.insight": "Practicality",
+  "FITD-TTK-COMPETENCIES.Attribute.prowess": "Knowledge",
+  "FITD-TTK-COMPETENCIES.Attribute.resolve": "Interpersonal",
+  "FITD-TTK-COMPETENCIES.Roll.insight": "Physique",
+  "FITD-TTK-COMPETENCIES.Roll.prowess": "Insight",
+  "FITD-TTK-COMPETENCIES.Roll.resolve": "Composure",
+  "FITD-TTK-COMPETENCIES.Skill.hunt": "Assault",
+  "FITD-TTK-COMPETENCIES.Skill.study": "Fabricate",
+  "FITD-TTK-COMPETENCIES.Skill.survey": "Finesse",
+  "FITD-TTK-COMPETENCIES.Skill.tinker": "Maneuver",
+  "FITD-TTK-COMPETENCIES.Skill.finesse": "Esoteric",
+  "FITD-TTK-COMPETENCIES.Skill.prowl": "Medical",
+  "FITD-TTK-COMPETENCIES.Skill.skirmish": "Research",
+  "FITD-TTK-COMPETENCIES.Skill.wreck": "Tradecraft",
+  "FITD-TTK-COMPETENCIES.Skill.attune": "Bureaucracy",
+  "FITD-TTK-COMPETENCIES.Skill.command": "Influence",
+  "FITD-TTK-COMPETENCIES.Skill.consort": "Network",
+  "FITD-TTK-COMPETENCIES.Skill.sway": "Streetwise"
+}

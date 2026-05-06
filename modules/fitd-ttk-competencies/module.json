@@ -1,0 +1,52 @@
+{
+  "id": "fitd-ttk-competencies",
+  "title": "FitD Tattered King: Competencies",
+  "description": "Tattered King competency labels for Blades in the Dark.",
+  "version": "0.0.1",
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14"
+  },
+  "authors": [
+    {
+      "name": "Tattered King Team"
+    }
+  ],
+  "esmodules": ["scripts/competencies.js"],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "languages/en.json"
+    }
+  ],
+  "relationships": {
+    "systems": [
+      {
+        "id": "blades-in-the-dark",
+        "type": "system",
+        "manifest": "https://raw.githubusercontent.com/Dez384/foundryvtt-blades-in-the-dark/master/system.json",
+        "compatibility": {
+          "minimum": "6.1.0"
+        }
+      }
+    ],
+    "requires": [],
+    "recommends": [
+      {
+        "id": "bitd-alternate-sheets",
+        "type": "module",
+        "manifest": "https://raw.githubusercontent.com/justinross/foundry-bitd-alternate-sheets/master/module.json",
+        "compatibility": {
+          "minimum": "1.0.20"
+        }
+      },
+      {
+        "id": "lib-wrapper",
+        "type": "module",
+        "manifest": "https://github.com/ruipin/fvtt-lib-wrapper/releases/latest/download/module.json"
+      }
+    ],
+    "conflicts": []
+  }
+}

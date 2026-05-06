@@ -1,5 +1,4 @@
 ---
-
 services:
   foundry:
     image: ghcr.io/felddy/foundryvtt:${FOUNDRY_IMAGE_TAG:-release}
@@ -9,12 +8,14 @@ services:
     volumes:
       # Mount workspace for VS Code
       - ./modules/fitd-ttk-case-files:/workspaces/fitd-ttk-case-files:cached
+      - ./modules/fitd-ttk-competencies:/workspaces/fitd-ttk-competencies:cached
       - ./modules/fitd-ttk-harm:/workspaces/fitd-ttk-harm:cached
       - ./modules/fitd-ttk-reality-fracture:/workspaces/fitd-ttk-reality-fracture:cached
       # Foundry data persistence (inside workspace, gitignored)
       - ./foundry-data:/data
       # Mount all modules into Foundry's modules directory for testing
       - ./modules/fitd-ttk-case-files:/data/Data/modules/fitd-ttk-case-files:cached
+      - ./modules/fitd-ttk-competencies:/data/Data/modules/fitd-ttk-competencies:cached
       - ./modules/fitd-ttk-harm:/data/Data/modules/fitd-ttk-harm:cached
       - ./modules/fitd-ttk-reality-fracture:/data/Data/modules/fitd-ttk-reality-fracture:cached
       - ./modules/fitd-ttk-investigators:/data/Data/modules/fitd-ttk-investigators:cached
