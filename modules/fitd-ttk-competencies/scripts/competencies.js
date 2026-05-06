@@ -53,7 +53,7 @@ Hooks.once('ready', function () {
 
   registerGetComputedAttributesWrapper();
   registerHelperWrappers();
-  registerTooltipHooks();
+  registerRenderHooks();
 
   console.log(`${MODULE_ID} | Competency label adapter enabled for Blades in the Dark.`);
 });
@@ -113,8 +113,9 @@ function wrapStaticHelper(methodName, wrapper) {
   };
 }
 
-function registerTooltipHooks() {
-  Hooks.on('renderBladesAlternateActorSheet', updateAlternateSheetTooltips);
+function registerRenderHooks() {
+  Hooks.on('renderBladesAlternateActorSheet', updateRenderedAttributeLabels);
+  Hooks.on('renderBladesAlternateClassSheet', updateRenderedAttributeLabels);
 }
 
 function applySheetLabels(attributes) {
@@ -147,13 +148,22 @@ function getAttributeLabel(attributeName) {
   return ATTRIBUTE_LABELS[attributeName] ?? SKILL_LABELS[attributeName] ?? null;
 }
 
-function updateAlternateSheetTooltips(_app, html) {
+function updateRenderedAttributeLabels(_app, html) {
   const root = html instanceof HTMLElement ? html : html?.[0];
   if (!root) return;
+
+  for (const [attributeName, labelKey] of Object.entries(ATTRIBUTE_LABELS)) {
+    const label = game.i18n.localize(labelKey);
+    for (const element of root.querySelectorAll(`.attributes-${attributeName} .attribute-label`)) {
+      element.textContent = label;
+      element.dataset.tooltip = label;
+    }
+  }
 
   for (const [skillName, labelKey] of Object.entries(SKILL_LABELS)) {
     const label = game.i18n.localize(labelKey);
     for (const element of root.querySelectorAll(`[data-roll-attribute="${skillName}"]`)) {
+      element.textContent = label;
       element.dataset.tooltip = label;
     }
   }
