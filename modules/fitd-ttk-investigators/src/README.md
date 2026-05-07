@@ -26,5 +26,14 @@ port those changes back into `src`.
 - Put display grouping in `class`, not in the item or ability name.
 - Put custom authoring tags in `tags`; the generator stores them in module
   flags for later automation.
-- Start abilities as plain text. Use `automation`, `effects`, and `flags` later
-  when we add richer support.
+- Author `description`, `experience_clues`, and `additional_info` as plain text
+  or light markdown.
+- Always serialize long-form text fields such as `description`,
+  `experience_clues`, and `additional_info` as `|-` block scalars for
+  consistency.
+- Do not author Foundry editor HTML in `src`. Legacy HTML belongs in migration
+  input only.
+- For now, the generator preserves plain text and markdown verbatim in the
+  generated documents.
+- Start abilities as plain text. Use `automation`, `effects`, and `flags`
+  later when we add richer support.

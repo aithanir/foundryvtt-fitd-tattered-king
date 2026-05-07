@@ -71,13 +71,14 @@ async function loadYamlDocuments(directory, validate, label) {
     const parsed = YAML.parse(await fs.readFile(filePath, 'utf8'));
     const entries = Array.isArray(parsed) ? parsed : [parsed];
 
-    for (const entry of entries) {
+    for (const [index, entry] of entries.entries()) {
       const valid = validate(entry);
       if (!valid) {
         const errors = validate.errors
           .map((error) => `${error.instancePath || '/'} ${error.message}`)
           .join('; ');
-        throw new Error(`${label} source ${filePath} failed validation: ${errors}`);
+        const entryLabel = formatEntryLabel(entry, index);
+        throw new Error(`${label} source ${filePath} ${entryLabel} failed validation: ${errors}`);
       }
       documents.push(entry);
     }
@@ -85,6 +86,13 @@ async function loadYamlDocuments(directory, validate, label) {
 
   assertUnique(documents, 'id', label);
   return documents;
+}
+
+function formatEntryLabel(entry, index) {
+  const parts = [`entry ${index + 1}`];
+  if (entry?.id) parts.push(`id "${entry.id}"`);
+  if (entry?.name) parts.push(`name "${entry.name}"`);
+  return `(${parts.join(', ')})`;
 }
 
 function validateCrossReferences(classes, abilities, items) {

@@ -19,10 +19,12 @@
       "minLength": 1
     },
     "description": {
-      "type": "string"
+      "type": "string",
+      "description": "Author as plain text or markdown. Do not store Foundry HTML."
     },
     "experience_clues": {
-      "type": "string"
+      "type": "string",
+      "description": "Author as plain text or markdown. Do not store Foundry HTML."
     },
     "base_skills": {
       "type": "object",
@@ -57,7 +59,8 @@
       }
     },
     "acquaintances_label": {
-      "type": "string"
+      "type": "string",
+      "description": "BitD i18n key or literal label, depending on downstream use."
     },
     "tags": {
       "$ref": "#/$defs/tags"
