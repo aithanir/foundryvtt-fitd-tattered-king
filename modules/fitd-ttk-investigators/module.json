@@ -19,7 +19,7 @@
       "path": "languages/en.json"
     }
   ],
-  "esmodules": ["scripts/class-icons.js"],
+  "esmodules": ["scripts/class-icons.js", "scripts/item-filters.js"],
   "relationships": {
     "systems": [
       {
