@@ -48,7 +48,7 @@
   name: Knowledge is Power
   img: icons/svg/item-bag.svg
   description: |-
-    Once per session you many spend 2 stress to resolve the competency roll using your Insight Resistance Trait.
+    Once per session you may spend 2 stress to resolve the competency roll using your Insight Resistance Trait.
   price: 1
   class_default: false
 - id: skeptic

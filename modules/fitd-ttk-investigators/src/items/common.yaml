@@ -62,14 +62,6 @@
   load: 1
   uses: 1
   num_available: 1
-- id: thing
-  name: thing
-  img: icons/svg/item-bag.svg
-  description: |-
-
-  load: 0
-  uses: 1
-  num_available: 1
 - id: torch
   name: Torch
   img: icons/svg/item-bag.svg
