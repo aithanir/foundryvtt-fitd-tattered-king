@@ -1,0 +1,71 @@
+- id: connect-the-dots
+  class: Academic
+  name: Connect the Dots
+  img: icons/svg/item-bag.svg
+  description: |-
+    When you synthesize at least 2 established facts into a coherent pattern, state the pattern plainly. Either the crew gains +1d on the next gather information roll that follows that pattern, or the next Commit to a Lead based on it ignores one contradiction among the selected Evidence.
+  price: 1
+  class_default: false
+- id: deep-knowledge
+  class: Academic
+  name: Deep Knowledge
+  img: icons/svg/item-bag.svg
+  description: |-
+    You may use your special armour to:
+
+    - Resist any one consequence with Insight
+
+    - Make a Research or Fabricate Push without paying stress
+  price: 1
+  class_default: false
+- id: eureka
+  class: Academic
+  name: Eureka!
+  img: icons/svg/item-bag.svg
+  description: |-
+    Once per session, when you push a Research or Fabricate roll, gain +1 Effect.
+    This is not a stacking bonus, and gives no benefit if you already have +1 Effect from another source.
+  price: 1
+  class_default: false
+- id: extensive-research
+  class: Academic
+  name: Extensive Research
+  img: icons/svg/item-bag.svg
+  description: |-
+    When you start a knowledge competency clock, fill in the first segment.
+  price: 1
+  class_default: false
+- id: higher-education
+  class: Academic
+  name: Higher Education
+  img: icons/svg/item-bag.svg
+  description: |-
+    When your credentials, scholarly standing, or learned bearing plausibly grant access to records, collections, experts, laboratories, or private conversations, you count as having the right introduction unless the opposition is actively hostile or security is already tight. The first action you take from that access gains improved position or +1 effect, your choice.
+  price: 1
+  class_default: false
+- id: knowledge-is-power
+  class: Academic
+  name: Knowledge is Power
+  img: icons/svg/item-bag.svg
+  description: |-
+    Once per session you many spend 2 stress to resolve the competency roll using your Insight Resistance Trait.
+  price: 1
+  class_default: false
+- id: skeptic
+  class: Academic
+  name: Skeptic
+  img: icons/svg/item-bag.svg
+  description: |-
+    Add +1d when Resisting deception or unnatural shock.
+    You also suffer -1 Effect when attempting to use the Unnatural.
+  price: 1
+  class_default: false
+- id: studious
+  class: Academic
+  name: Studious
+  img: icons/svg/item-bag.svg
+  description: |-
+    When you overindulge your vice, you may choose the lowest die result instead.
+  price: 1
+  class_default: false
+

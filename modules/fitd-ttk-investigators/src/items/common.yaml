@@ -1,0 +1,81 @@
+- id: a-blade-or-two
+  name: A Blade or Two
+  img: icons/svg/item-bag.svg
+  description: |-
+    Simple melee weapons such as a Baton, cosh, or a knife
+  load: 1
+  uses: 1
+  num_available: 1
+- id: audio-recorder
+  name: Audio recorder
+  img: icons/svg/item-bag.svg
+  description: |-
+    Cassette recorder, dictaphone
+  load: 2
+  uses: 1
+  num_available: 1
+- id: camera
+  name: Camera
+  img: icons/svg/item-bag.svg
+  description: |-
+    A common 110mm point-and-shoot camera, with film rolls
+  load: 1
+  uses: 1
+  num_available: 1
+- id: institutional-access
+  name: Institutional access
+  img: icons/svg/item-bag.svg
+  description: |-
+    Common institutional access such as a press pass, researcher card, or archival access.  The access must be suitable for your background.
+  load: 0
+  uses: 1
+  num_available: 1
+- id: maps
+  name: Maps
+  img: icons/svg/item-bag.svg
+  description: |-
+    Ordnance Survey, A-Z street book
+  load: 1
+  uses: 1
+  num_available: 1
+- id: protective-clothing
+  name: Protective clothing
+  img: icons/svg/item-bag.svg
+  description: |-
+    Thick coat, hardhat, work gloves
+  load: 1
+  uses: 1
+  num_available: 1
+- id: public-transport
+  name: Public Transport
+  img: icons/svg/item-bag.svg
+  description: |-
+    A Rail card or bus pass suitable for the area.
+  load: 0
+  uses: 1
+  num_available: 1
+- id: restraints
+  name: Restraints
+  img: icons/svg/item-bag.svg
+  description: |-
+    Enough gaffer tape, cord or similar material to implement simple restraints.
+  load: 1
+  uses: 1
+  num_available: 1
+- id: thing
+  name: thing
+  img: icons/svg/item-bag.svg
+  description: |-
+  
+  load: 0
+  uses: 1
+  num_available: 1
+- id: torch
+  name: Torch
+  img: icons/svg/item-bag.svg
+  description: |-
+    A common light source such as an anglehead torch.
+  load: 1
+  uses: 1
+  num_available: 1
+

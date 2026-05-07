@@ -1,8 +1,10 @@
 id: academic
 name: Academic
 img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-investigator-icon.01.png
-description: Clarifies difficult knowledge and stabilizes interpretation before action is taken.
-experience_clues: You addressed a challenge through scholarship, interpretation, formal knowledge, or patient study.
+description: |-
+  Clarifies difficult knowledge and stabilizes interpretation before action is taken.
+experience_clues: |-
+  You addressed a challenge through scholarship, interpretation, formal knowledge, or patient study.
 base_skills:
   hunt: 0
   study: 2
@@ -16,5 +18,4 @@ base_skills:
   command: 0
   consort: 0
   sway: 0
-tags:
-  - knowledge
+
