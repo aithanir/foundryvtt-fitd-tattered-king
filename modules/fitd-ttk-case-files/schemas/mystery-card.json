@@ -4,12 +4,7 @@
   "title": "Mystery Card",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "id",
-    "title",
-    "type",
-    "revelation"
-  ],
+  "required": ["id", "title", "type", "revelation"],
   "properties": {
     "id": {
       "$ref": "https://fitd.ttk.case-files/schemas/mystery-common.json#/$defs/id"

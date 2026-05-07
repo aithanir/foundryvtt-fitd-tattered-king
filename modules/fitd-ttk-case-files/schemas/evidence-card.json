@@ -4,12 +4,7 @@
   "title": "Evidence Card",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "id",
-    "title",
-    "fact",
-    "vector"
-  ],
+  "required": ["id", "title", "fact", "vector"],
   "properties": {
     "id": {
       "$ref": "https://fitd.ttk.case-files/schemas/mystery-common.json#/$defs/id"

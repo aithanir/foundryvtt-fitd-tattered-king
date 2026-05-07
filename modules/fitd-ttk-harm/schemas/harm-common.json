@@ -5,54 +5,27 @@
   "$defs": {
     "harmType": {
       "type": "string",
-      "enum": [
-        "physicalInjury",
-        "mentalShock"
-      ]
+      "enum": ["physicalInjury", "mentalShock"]
     },
     "mentalShockFamily": {
       "type": "string",
-      "enum": [
-        "Helplessness",
-        "Violence",
-        "Irrational"
-      ]
+      "enum": ["Helplessness", "Violence", "Irrational"]
     },
     "level": {
       "type": "string",
-      "enum": [        
-        "Trivial",
-        "Light",
-        "Moderate",
-        "Severe"
-      ]
+      "enum": ["Trivial", "Light", "Moderate", "Severe"]
     },
     "axis": {
       "type": "string",
-      "enum": [
-        "Capability",
-        "Control",
-        "Stability",
-        "Survival"
-      ]
+      "enum": ["Capability", "Control", "Stability", "Survival"]
     },
     "competencyGroup": {
       "type": "string",
-      "enum": [
-        "Practicality",
-        "Knowledge",
-        "Interpersonal",
-        "All"
-      ]
+      "enum": ["Practicality", "Knowledge", "Interpersonal", "All"]
     },
     "resistanceTrait": {
       "type": "string",
-      "enum": [
-        "Physique",
-        "Insight",
-        "Composure",
-        "All"
-      ]
+      "enum": ["Physique", "Insight", "Composure", "All"]
     }
   }
 }

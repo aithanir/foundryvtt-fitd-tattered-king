@@ -4,15 +4,7 @@
   "title": "Case File",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "id",
-    "question",
-    "complexity",
-    "fog",
-    "frames",
-    "evidence",
-    "mysteryCards"
-  ],
+  "required": ["id", "question", "complexity", "fog", "frames", "evidence", "mysteryCards"],
   "properties": {
     "id": {
       "$ref": "https://fitd.ttk.case-files/schemas/mystery-common.json#/$defs/id"
@@ -27,10 +19,7 @@
     "fog": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "level",
-        "value"
-      ],
+      "required": ["level", "value"],
       "properties": {
         "level": {
           "$ref": "https://fitd.ttk.case-files/schemas/mystery-common.json#/$defs/fogLevel"
@@ -49,10 +38,7 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "id",
-          "type"
-        ],
+        "required": ["id", "type"],
         "properties": {
           "id": {
             "$ref": "https://fitd.ttk.case-files/schemas/mystery-common.json#/$defs/id"

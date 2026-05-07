@@ -4,11 +4,7 @@
   "title": "Harm Card",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "name",
-    "type",
-    "system"
-  ],
+  "required": ["name", "type", "system"],
   "properties": {
     "name": {
       "type": "string",
@@ -87,40 +83,26 @@
           "additionalProperties": false,
           "oneOf": [
             {
-              "required": [
-                "type",
-                "segments"
-              ],
+              "required": ["type", "segments"],
               "properties": {
                 "type": {
                   "const": "clock"
                 },
                 "segments": {
                   "type": "integer",
-                  "enum": [
-                    4,
-                    6,
-                    8
-                  ]
+                  "enum": [4, 6, 8]
                 }
               }
             },
             {
-              "required": [
-                "type",
-                "timing"
-              ],
+              "required": ["type", "timing"],
               "properties": {
                 "type": {
                   "const": "auto"
                 },
                 "timing": {
                   "type": "string",
-                  "enum": [
-                    "endOfScene",
-                    "afterNextSuccessfulRoll",
-                    "startOfDowntime"
-                  ]
+                  "enum": ["endOfScene", "afterNextSuccessfulRoll", "startOfDowntime"]
                 }
               }
             }
@@ -158,9 +140,7 @@
                 "$ref": "https://fitd.ttk.harm/schemas/harm-common.json#/$defs/mentalShockFamily"
               }
             },
-            "required": [
-              "family"
-            ]
+            "required": ["family"]
           }
         }
       ]

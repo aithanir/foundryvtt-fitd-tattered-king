@@ -24,6 +24,7 @@ Extend, do not fork.
 Do not modify upstream packages. Do not replace whole actor sheets or roll engines unless explicitly requested.
 
 Prefer:
+
 - Foundry hooks
 - i18n
 - compendium packs
@@ -33,6 +34,7 @@ Prefer:
 - CSS
 
 Avoid:
+
 - schema changes
 - new skill keys
 - copied upstream source
@@ -78,6 +80,7 @@ If those folders are absent, ask the user before making assumptions about upstre
 ## Done means
 
 For code changes, provide:
+
 - changed files summary
 - manual Foundry test checklist
 - compatibility notes

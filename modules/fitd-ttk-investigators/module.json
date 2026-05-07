@@ -30,8 +30,7 @@
         }
       }
     ],
-    "requires": [
-    ],
+    "requires": [],
     "recommends": [
       {
         "id": "bitd-alternate-sheets",
@@ -75,6 +74,6 @@
       "name": "Character Options",
       "sorting": "m",
       "packs": ["class", "ability", "item"]
-	  }
+    }
   ]
 }

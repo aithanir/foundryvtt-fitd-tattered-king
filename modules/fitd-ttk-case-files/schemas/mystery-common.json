@@ -9,34 +9,15 @@
     },
     "frameType": {
       "type": "string",
-      "enum": [
-        "Face",
-        "Motive",
-        "Method",
-        "Location",
-        "Item",
-        "Timing",
-        "Blank"
-      ]
+      "enum": ["Face", "Motive", "Method", "Location", "Item", "Timing", "Blank"]
     },
     "fogLevel": {
       "type": "string",
-      "enum": [
-        "Clear",
-        "Hazy",
-        "Obscured",
-        "Buried",
-        "Lost"
-      ]
+      "enum": ["Clear", "Hazy", "Obscured", "Buried", "Lost"]
     },
     "caseComplexity": {
       "type": "string",
-      "enum": [
-        "Simple",
-        "Standard",
-        "Complex",
-        "Deep"
-      ]
+      "enum": ["Simple", "Standard", "Complex", "Deep"]
     },
     "vector": {
       "type": "string",

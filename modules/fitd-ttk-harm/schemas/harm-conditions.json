@@ -5,9 +5,7 @@
   "$defs": {
     "conditionBase": {
       "type": "object",
-      "required": [
-        "kind"
-      ],
+      "required": ["kind"],
       "properties": {
         "kind": {
           "type": "string"
@@ -21,10 +19,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "kind",
-            "target"
-          ],
+          "required": ["kind", "target"],
           "additionalProperties": false,
           "properties": {
             "kind": {
@@ -40,7 +35,7 @@
                   "minItems": 2,
                   "maxItems": 2,
                   "items": {
-                      "$ref": "https://fitd.ttk.harm/schemas/harm-common.json#/$defs/competencyGroup"
+                    "$ref": "https://fitd.ttk.harm/schemas/harm-common.json#/$defs/competencyGroup"
                   }
                 }
               ]
@@ -72,10 +67,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "kind",
-            "scope"
-          ],
+          "required": ["kind", "scope"],
           "additionalProperties": false,
           "properties": {
             "kind": {
@@ -83,10 +75,7 @@
             },
             "scope": {
               "type": "string",
-              "enum": [
-                "resistanceTrait",
-                "allResistanceRolls"
-              ]
+              "enum": ["resistanceTrait", "allResistanceRolls"]
             },
             "target": {
               "type": "string"
@@ -102,11 +91,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "kind",
-            "scope",
-            "value"
-          ],
+          "required": ["kind", "scope", "value"],
           "additionalProperties": false,
           "properties": {
             "kind": {
@@ -122,20 +107,14 @@
               ]
             },
             "target": {
-              "type": [
-                "string",
-                "array"
-              ],
+              "type": ["string", "array"],
               "items": {
                 "type": "string"
               }
             },
             "value": {
               "type": "integer",
-              "enum": [
-                -1,
-                -2
-              ]
+              "enum": [-1, -2]
             }
           }
         }
@@ -148,11 +127,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "kind",
-            "scope",
-            "value"
-          ],
+          "required": ["kind", "scope", "value"],
           "additionalProperties": false,
           "properties": {
             "kind": {
@@ -160,16 +135,10 @@
             },
             "scope": {
               "type": "string",
-              "enum": [
-                "competencyGroup",
-                "allCompetencyRolls"
-              ]
+              "enum": ["competencyGroup", "allCompetencyRolls"]
             },
             "target": {
-              "type": [
-                "string",
-                "array"
-              ],
+              "type": ["string", "array"],
               "items": {
                 "type": "string"
               }
@@ -189,10 +158,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "kind",
-            "target"
-          ],
+          "required": ["kind", "target"],
           "additionalProperties": false,
           "properties": {
             "kind": {
@@ -213,11 +179,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "kind",
-            "trigger",
-            "target"
-          ],
+          "required": ["kind", "trigger", "target"],
           "additionalProperties": false,
           "properties": {
             "kind": {
@@ -242,10 +204,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "kind",
-            "name"
-          ],
+          "required": ["kind", "name"],
           "additionalProperties": false,
           "properties": {
             "kind": {
@@ -263,11 +222,7 @@
             },
             "weight": {
               "type": "string",
-              "enum": [
-                "S1",
-                "S2",
-                "S3"
-              ]
+              "enum": ["S1", "S2", "S3"]
             }
           }
         }
@@ -280,10 +235,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "kind",
-            "amount"
-          ],
+          "required": ["kind", "amount"],
           "additionalProperties": false,
           "properties": {
             "kind": {
@@ -291,10 +243,7 @@
             },
             "amount": {
               "type": "integer",
-              "enum": [
-                2,
-                4
-              ]
+              "enum": [2, 4]
             }
           }
         }
@@ -307,11 +256,7 @@
         },
         {
           "type": "object",
-          "required": [
-            "kind",
-            "mode",
-            "trigger"
-          ],
+          "required": ["kind", "mode", "trigger"],
           "additionalProperties": false,
           "properties": {
             "kind": {
@@ -319,10 +264,7 @@
             },
             "mode": {
               "type": "string",
-              "enum": [
-                "injuries",
-                "madness"
-              ]
+              "enum": ["injuries", "madness"]
             },
             "trigger": {
               "type": "string",
