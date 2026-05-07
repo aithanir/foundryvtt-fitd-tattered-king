@@ -2,3 +2,10 @@ node_modules
 pnpm-lock.yaml
 dist
 build
+.codex
+.devcontainer
+_unshipped
+foundry-data
+refs
+upstream
+modules/*/packs
