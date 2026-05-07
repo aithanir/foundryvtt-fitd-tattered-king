@@ -27,7 +27,9 @@ port those changes back into `src`.
   a BitD key and a TTK label.
 - Generated Foundry documents always use BitD internal action keys in
   `system.base_skills` and active effect paths.
-- Put display grouping in `class`, not in the item or ability name.
+- Put display grouping in `class`, not in the item or ability name. For item
+  YAML, the generator infers `class` from class-specific source filenames such
+  as `items/academic.yaml`; `items/common.yaml` stays unclassed/general.
 - Put custom authoring tags in `tags`; the generator stores them in module
   flags for later automation.
 - Author `description`, `experience_clues`, and `additional_info` as plain text

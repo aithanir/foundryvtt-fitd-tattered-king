@@ -14,7 +14,7 @@
   load: 1
   uses: 1
   num_available: 1
-- id: Reference-materials 
+- id: reference-materials 
   name: Reference material
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-

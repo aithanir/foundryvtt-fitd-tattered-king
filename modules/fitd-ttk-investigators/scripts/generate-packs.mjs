@@ -10,6 +10,7 @@ const MODULE_ID = 'fitd-ttk-investigators';
 const MODULE_DIR = path.resolve('modules', MODULE_ID);
 const SRC_DIR = path.join(MODULE_DIR, 'src');
 const BUILD_DIR = path.join(MODULE_DIR, 'build', 'packs');
+const COMMON_ITEMS_FILE_ID = 'common';
 
 const SKILL_ATTRIBUTE = {
   hunt: 'insight',
@@ -59,7 +60,7 @@ async function main() {
     schemas.ability,
     'ability'
   );
-  const items = await loadYamlDocuments(path.join(SRC_DIR, 'items'), schemas.item, 'item');
+  const items = await loadItemDocuments(schemas.item, classes);
 
   validateCrossReferences(classes, abilities, items);
 
@@ -123,12 +124,13 @@ async function loadSchemas() {
   };
 }
 
-async function loadYamlDocuments(directory, validate, label) {
+async function loadYamlDocuments(directory, validate, label, normalize = (entry) => entry) {
   const files = (await fs.readdir(directory)).filter((file) => file.endsWith('.yaml')).sort();
   const documents = [];
 
   for (const file of files) {
     const filePath = path.join(directory, file);
+    const fileId = path.basename(file, '.yaml');
     const parsed = YAML.parse(await fs.readFile(filePath, 'utf8'));
     const entries = Array.isArray(parsed) ? parsed : [parsed];
 
@@ -141,12 +143,37 @@ async function loadYamlDocuments(directory, validate, label) {
         const entryLabel = formatEntryLabel(entry, index);
         throw new Error(`${label} source ${filePath} ${entryLabel} failed validation: ${errors}`);
       }
-      documents.push(entry);
+      documents.push(normalize(entry, { file, fileId, filePath, index }));
     }
   }
 
   assertUnique(documents, 'id', label);
   return documents;
+}
+
+async function loadItemDocuments(validate, classes) {
+  const classNameById = new Map(classes.map((entry) => [entry.id, entry.name]));
+  return loadYamlDocuments(path.join(SRC_DIR, 'items'), validate, 'item', (entry, context) =>
+    normalizeItemSource(entry, context.fileId, classNameById)
+  );
+}
+
+function normalizeItemSource(source, fileId, classNameById) {
+  if (source.class || fileId === COMMON_ITEMS_FILE_ID) {
+    return source;
+  }
+
+  const className = classNameById.get(fileId);
+  if (!className) {
+    throw new Error(
+      `Item source file "${fileId}.yaml" does not match a class id. Add the file to common.yaml or create a matching class source.`
+    );
+  }
+
+  return {
+    ...source,
+    class: className,
+  };
 }
 
 function formatEntryLabel(entry, index) {

@@ -119,6 +119,10 @@ Item source uses BitD item fields such as:
 - `description`
 - optional custom authoring `tags`
 
+Prefer omitting `class` in item YAML. The generator infers it from class-specific
+item filenames such as `src/items/academic.yaml`; `src/items/common.yaml` stays
+blank/general.
+
 ## Icons
 
 Use shared icon conventions:
