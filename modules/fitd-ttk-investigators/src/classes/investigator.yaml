@@ -1,0 +1,20 @@
+id: investigator
+name: Investigator
+img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-investigator-icon.08.png
+description: |-
+  Drives the case forward through observation, legwork, and practical deduction.
+experience_clues: |-
+  You addressed a challenge through pursuit of evidence, witness pressure, practical deduction, or relentless follow-up.
+base_skills:
+  assault: 0
+  fabricate: 0
+  finesse: 0
+  maneuver: 0
+  esoteric: 0
+  medical: 0
+  research: 0
+  tradecraft: 0
+  bureaucracy: 1
+  influence: 0
+  network: 0
+  streetwise: 2

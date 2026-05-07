@@ -1,0 +1,20 @@
+id: professional
+name: Professional
+img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-investigator-icon.11.png
+description: |-
+  Turns legitimacy, procedure, and authority into immediate control.
+experience_clues: |-
+  You addressed a challenge through legitimacy, command, procedural mastery, or disciplined organization.
+base_skills:
+  assault: 0
+  fabricate: 0
+  finesse: 0
+  maneuver: 0
+  esoteric: 0
+  medical: 0
+  research: 0
+  tradecraft: 0
+  bureaucracy: 2
+  influence: 1
+  network: 0
+  streetwise: 0

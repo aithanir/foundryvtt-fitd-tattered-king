@@ -1,0 +1,20 @@
+id: dilettante
+name: Dilettante
+img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-investigator-icon.04.png
+description: |-
+  Opens doors with privilege, invitation, taste, and effortless charm.
+experience_clues: |-
+  You addressed a challenge through wealth, social leverage, favors, invitation, or cultivated ease.
+base_skills:
+  assault: 0
+  fabricate: 0
+  finesse: 0
+  maneuver: 0
+  esoteric: 0
+  medical: 0
+  research: 0
+  tradecraft: 0
+  bureaucracy: 0
+  influence: 1
+  network: 2
+  streetwise: 0

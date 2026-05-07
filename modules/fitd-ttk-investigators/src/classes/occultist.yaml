@@ -1,0 +1,20 @@
+id: occultist
+name: Occultist
+img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-investigator-icon.10.png
+description: |-
+  Opens paths through the impossible with ritual nerve and forbidden understanding.
+experience_clues: |-
+  You addressed a challenge through ritual, taboo knowledge, or deliberate trespass into the impossible
+base_skills:
+  assault: 0
+  fabricate: 0
+  finesse: 0
+  maneuver: 0
+  esoteric: 2
+  medical: 0
+  research: 0
+  tradecraft: 1
+  bureaucracy: 0
+  influence: 0
+  network: 0
+  streetwise: 0

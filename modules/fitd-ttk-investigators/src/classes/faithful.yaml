@@ -1,0 +1,20 @@
+id: faithful
+name: Faithful
+img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-investigator-icon.07.png
+description: |-
+  Provides steadiness, respite, and holds people together when fear, and despair spread.
+experience_clues: |-
+  You addressed a challenge through conviction, consolation, ritual, sacrifice, or moral authority.
+base_skills:
+  assault: 0
+  fabricate: 0
+  finesse: 0
+  maneuver: 0
+  esoteric: 1
+  medical: 0
+  research: 0
+  tradecraft: 0
+  bureaucracy: 0
+  influence: 0
+  network: 2
+  streetwise: 0

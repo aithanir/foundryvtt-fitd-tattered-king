@@ -1,0 +1,20 @@
+id: doctor
+name: Doctor
+img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-investigator-icon.05.png
+description: |-
+  Reads the body, steadies the mind, and acts before crisis becomes catastrophe.
+experience_clues: |-
+  You addressed a challenge through diagnosis, intervention, clinical authority, or scientific method.
+base_skills:
+  assault: 0
+  fabricate: 0
+  finesse: 0
+  maneuver: 0
+  esoteric: 0
+  medical: 2
+  research: 0
+  tradecraft: 0
+  bureaucracy: 1
+  influence: 0
+  network: 0
+  streetwise: 0

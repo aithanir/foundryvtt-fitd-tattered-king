@@ -1,0 +1,20 @@
+id: military
+name: Military
+img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-investigator-icon.09.png
+description: |-
+  Meets danger with tactical discipline, hard experience, and readiness.
+experience_clues: |-
+  You addressed a challenge through force, tactical discipline, protection, or trained readiness.
+base_skills:
+  assault: 2
+  fabricate: 0
+  finesse: 0
+  maneuver: 1
+  esoteric: 0
+  medical: 0
+  research: 0
+  tradecraft: 0
+  bureaucracy: 0
+  influence: 0
+  network: 0
+  streetwise: 0

@@ -1,0 +1,20 @@
+id: eccentric
+name: Eccentric
+img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-investigator-icon.06.png
+description: |-
+  Solves field problems with contraptions, salvage, and cheerful disregard for procedure.
+experience_clues: |-
+  you addressed a challenge through homemade devices, eccentric engineering, practical obsession, or doing the wrong thing in exactly the right way.
+base_skills:
+  assault: 0
+  fabricate: 2
+  finesse: 0
+  maneuver: 0
+  esoteric: 1
+  medical: 0
+  research: 0
+  tradecraft: 0
+  bureaucracy: 0
+  influence: 0
+  network: 0
+  streetwise: 0

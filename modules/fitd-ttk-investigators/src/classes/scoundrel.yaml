@@ -1,0 +1,20 @@
+id: scoundrel
+name: Scoundrel
+img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-investigator-icon.12.png
+description: |-
+  Creates opportunity by shifting blame, and changing who has what before fading away
+experience_clues: |-
+  You addressed a challenge through theft, deception, substitution, or audacious escape.
+base_skills:
+  assault: 0
+  fabricate: 0
+  finesse: 1
+  maneuver: 0
+  esoteric: 0
+  medical: 0
+  research: 0
+  tradecraft: 2
+  bureaucracy: 0
+  influence: 0
+  network: 0
+  streetwise: 0

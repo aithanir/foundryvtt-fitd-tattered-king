@@ -1,0 +1,20 @@
+id: athlete
+name: Athlete
+img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-investigator-icon.03.png
+description: |-
+  Controls tempo through focus, physical determination, and sheer will.
+experience_clues: |-
+  You addressed a challenge through speed, daring, endurance, or physical control.
+base_skills:
+  assault: 1
+  fabricate: 0
+  finesse: 0
+  maneuver: 2
+  esoteric: 0
+  medical: 0
+  research: 0
+  tradecraft: 0
+  bureaucracy: 0
+  influence: 0
+  network: 0
+  streetwise: 0
