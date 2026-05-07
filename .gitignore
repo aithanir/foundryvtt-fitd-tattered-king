@@ -238,6 +238,9 @@ PublishScripts/
 *.nuget.props
 *.nuget.targets
 
+# Generated Foundry document JSON for investigator compendium builds
+modules/fitd-ttk-investigators/build/
+
 # Microsoft Azure Build Output
 csx/
 *.build.csdef
