@@ -1,0 +1,32 @@
+- id: academic-special-access
+  name: Special collection key
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
+  description: |-
+    Access to a special records collection, usable out of hours.  The collection must be suitable for your background.
+  load: 1
+  uses: 1
+  num_available: 1
+- id: field-notes
+  name: Field notes
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
+  description: |-
+    Paperback reference with handwritten marginalia, such as a list of common species, or a guide to local geology.
+  load: 1
+  uses: 1
+  num_available: 1
+- id: Reference-materials 
+  name: Reference material
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
+  description: |-
+    Extensive reference materials on Microfiche. Includes library back room access, and a reader.
+  load: 1
+  uses: 1
+  num_available: 1
+- id: field-kit
+  name: Field kit
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
+  description: |-
+    A field kit containing site notebook, sample bags, and tools appropriate for background.
+  load: 2
+  uses: 1
+  num_available: 1
