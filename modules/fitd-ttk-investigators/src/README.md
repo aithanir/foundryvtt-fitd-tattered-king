@@ -22,7 +22,11 @@ port those changes back into `src`.
 
 - Use clean display names. Do not add BitD-style prefixes such as `(A)` or
   `(C)`.
-- Use BitD internal action keys in `base_skills`.
+- Use either all BitD internal action keys or all lower-case TTK labels in
+  `base_skills`. Do not mix key sets; `finesse` is ambiguous because it is both
+  a BitD key and a TTK label.
+- Generated Foundry documents always use BitD internal action keys in
+  `system.base_skills` and active effect paths.
 - Put display grouping in `class`, not in the item or ability name.
 - Put custom authoring tags in `tags`; the generator stores them in module
   flags for later automation.

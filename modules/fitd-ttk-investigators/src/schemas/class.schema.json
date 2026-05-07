@@ -27,6 +27,23 @@
       "description": "Author as plain text or markdown. Do not store Foundry HTML."
     },
     "base_skills": {
+      "oneOf": [{ "$ref": "#/$defs/bitdBaseSkills" }, { "$ref": "#/$defs/ttkBaseSkills" }]
+    },
+    "acquaintances_label": {
+      "type": "string",
+      "description": "BitD i18n key or literal label, depending on downstream use."
+    },
+    "tags": {
+      "$ref": "#/$defs/tags"
+    }
+  },
+  "$defs": {
+    "actionRating": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4
+    },
+    "bitdBaseSkills": {
       "type": "object",
       "additionalProperties": false,
       "required": [
@@ -58,19 +75,37 @@
         "sway": { "$ref": "#/$defs/actionRating" }
       }
     },
-    "acquaintances_label": {
-      "type": "string",
-      "description": "BitD i18n key or literal label, depending on downstream use."
-    },
-    "tags": {
-      "$ref": "#/$defs/tags"
-    }
-  },
-  "$defs": {
-    "actionRating": {
-      "type": "integer",
-      "minimum": 0,
-      "maximum": 4
+    "ttkBaseSkills": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assault",
+        "fabricate",
+        "finesse",
+        "maneuver",
+        "esoteric",
+        "medical",
+        "research",
+        "tradecraft",
+        "bureaucracy",
+        "influence",
+        "network",
+        "streetwise"
+      ],
+      "properties": {
+        "assault": { "$ref": "#/$defs/actionRating" },
+        "fabricate": { "$ref": "#/$defs/actionRating" },
+        "finesse": { "$ref": "#/$defs/actionRating" },
+        "maneuver": { "$ref": "#/$defs/actionRating" },
+        "esoteric": { "$ref": "#/$defs/actionRating" },
+        "medical": { "$ref": "#/$defs/actionRating" },
+        "research": { "$ref": "#/$defs/actionRating" },
+        "tradecraft": { "$ref": "#/$defs/actionRating" },
+        "bureaucracy": { "$ref": "#/$defs/actionRating" },
+        "influence": { "$ref": "#/$defs/actionRating" },
+        "network": { "$ref": "#/$defs/actionRating" },
+        "streetwise": { "$ref": "#/$defs/actionRating" }
+      }
     },
     "tags": {
       "type": "array",

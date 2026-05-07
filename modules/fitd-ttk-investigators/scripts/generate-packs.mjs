@@ -26,6 +26,24 @@ const SKILL_ATTRIBUTE = {
   sway: 'resolve',
 };
 
+const TTK_SKILL_TO_BITD_SKILL = {
+  assault: 'hunt',
+  fabricate: 'study',
+  finesse: 'survey',
+  maneuver: 'tinker',
+  esoteric: 'finesse',
+  medical: 'prowl',
+  research: 'skirmish',
+  tradecraft: 'wreck',
+  bureaucracy: 'attune',
+  influence: 'command',
+  network: 'consort',
+  streetwise: 'sway',
+};
+
+const BITD_SKILL_KEYS = Object.keys(SKILL_ATTRIBUTE);
+const TTK_SKILL_KEYS = Object.keys(TTK_SKILL_TO_BITD_SKILL);
+
 const DEFAULT_ABILITY_ICON =
   'modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png';
 const DEFAULT_ITEM_ICON =
@@ -33,7 +51,9 @@ const DEFAULT_ITEM_ICON =
 
 async function main() {
   const schemas = await loadSchemas();
-  const classes = await loadYamlDocuments(path.join(SRC_DIR, 'classes'), schemas.class, 'class');
+  const classes = (
+    await loadYamlDocuments(path.join(SRC_DIR, 'classes'), schemas.class, 'class')
+  ).map(normalizeClassSource);
   const abilities = await loadYamlDocuments(
     path.join(SRC_DIR, 'abilities'),
     schemas.ability,
@@ -51,6 +71,47 @@ async function main() {
   console.log(
     `${MODULE_ID} | Generated ${classes.length} classes, ${abilities.length} abilities, ${items.length} items.`
   );
+}
+
+function normalizeClassSource(source) {
+  return {
+    ...source,
+    base_skills: normalizeBaseSkills(source),
+  };
+}
+
+function normalizeBaseSkills(source) {
+  const skillKeys = Object.keys(source.base_skills);
+  const keySet = resolveBaseSkillKeySet(skillKeys, source);
+
+  if (keySet === 'bitd') {
+    return source.base_skills;
+  }
+
+  return Object.fromEntries(
+    Object.entries(source.base_skills).map(([skill, value]) => [
+      TTK_SKILL_TO_BITD_SKILL[skill],
+      value,
+    ])
+  );
+}
+
+function resolveBaseSkillKeySet(skillKeys, source) {
+  const hasOnlyBitdKeys = hasExactKeys(skillKeys, BITD_SKILL_KEYS);
+  const hasOnlyTtkKeys = hasExactKeys(skillKeys, TTK_SKILL_KEYS);
+
+  if (hasOnlyBitdKeys) return 'bitd';
+  if (hasOnlyTtkKeys) return 'ttk';
+
+  throw new Error(
+    `Class "${source.name}" base_skills must use either all BitD keys or all lower-case TTK labels. Do not mix key sets.`
+  );
+}
+
+function hasExactKeys(actualKeys, expectedKeys) {
+  if (actualKeys.length !== expectedKeys.length) return false;
+  const actual = new Set(actualKeys);
+  return expectedKeys.every((key) => actual.has(key));
 }
 
 async function loadSchemas() {

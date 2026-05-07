@@ -16,7 +16,9 @@ Use BitD system Item types:
 
 Do not require `bitd-alternate-sheets`; recommend it only.
 
-Playbook data should continue using BitD internal keys such as `hunt`, `study`, `skirmish`, etc., because `fitd-ttk-competencies` handles presentation labels.
+Generated playbook data should continue using BitD internal keys such as `hunt`, `study`, `skirmish`, etc., because `fitd-ttk-competencies` handles presentation labels.
+
+Class YAML may use lower-case TTK labels in `base_skills` for authoring comfort. The generator must translate those labels back to BitD keys before writing Foundry JSON.
 
 ## Source of truth
 
@@ -101,6 +103,8 @@ Class source currently targets simple fields such as:
 - `experience_clues`
 - `base_skills`
 - `img`
+
+`base_skills` may use either a complete BitD key set or a complete lower-case TTK label set. Do not mix them; `finesse` is ambiguous across the two sets.
 
 Ability source starts simple:
 
