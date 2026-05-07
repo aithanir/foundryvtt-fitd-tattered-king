@@ -6,15 +6,15 @@ description: |-
 experience_clues: |-
   You addressed a challenge through scholarship, interpretation, formal knowledge, or patient study.
 base_skills:
-  hunt: 0
-  study: 2
-  survey: 1
-  tinker: 0
+  assault: 0
+  fabricate: 0
   finesse: 0
-  prowl: 0
-  skirmish: 0
-  wreck: 0
-  attune: 0
-  command: 0
-  consort: 0
-  sway: 0
+  maneuver: 0
+  esoteric: 0
+  medical: 0
+  research: 2
+  tradecraft: 0
+  bureaucracy: 0
+  influence: 0
+  network: 1
+  streetwise: 0
