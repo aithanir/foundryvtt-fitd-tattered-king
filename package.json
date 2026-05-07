@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Custom FitD modules for Tattered King campaign",
   "scripts": {
+    "generate:investigators": "node modules/fitd-ttk-investigators/scripts/generate-packs.mjs",
+    "pack:investigators": "XDG_DATA_HOME=${XDG_DATA_HOME:-/tmp/fitd-ttk-fvtt-data} pnpm exec fvtt package pack --compendiumName classes --compendiumType Item --inputDirectory modules/fitd-ttk-investigators/build/packs/classes --outputDirectory modules/fitd-ttk-investigators/packs && XDG_DATA_HOME=${XDG_DATA_HOME:-/tmp/fitd-ttk-fvtt-data} pnpm exec fvtt package pack --compendiumName abilities --compendiumType Item --inputDirectory modules/fitd-ttk-investigators/build/packs/abilities --outputDirectory modules/fitd-ttk-investigators/packs && XDG_DATA_HOME=${XDG_DATA_HOME:-/tmp/fitd-ttk-fvtt-data} pnpm exec fvtt package pack --compendiumName items --compendiumType Item --inputDirectory modules/fitd-ttk-investigators/build/packs/items --outputDirectory modules/fitd-ttk-investigators/packs",
+    "build:investigators": "pnpm run generate:investigators && pnpm run pack:investigators",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
@@ -10,8 +13,10 @@
   },
   "devDependencies": {
     "@foundryvtt/foundryvtt-cli": "^3.0.3",
+    "ajv": "^8.20.0",
     "eslint": "^9.0.0",
     "eslint-config-prettier": "^9.0.0",
-    "prettier": "^3.0.0"
+    "prettier": "^3.0.0",
+    "yaml": "^2.8.4"
   }
 }
