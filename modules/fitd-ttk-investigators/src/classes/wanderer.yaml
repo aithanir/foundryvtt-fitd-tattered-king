@@ -1,0 +1,20 @@
+id: wanderer
+name: Wanderer
+img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-investigator-icon.13.png
+description: |-
+  Survives strange margins through improvisation, scarcity, and instinct for exits.
+experience_clues: |-
+  You addressed a challenge through improvisation, survival, unofficial routes, or life in the cracks.
+base_skills:
+  assault: 0
+  fabricate: 0
+  finesse: 0
+  maneuver: 1
+  esoteric: 0
+  medical: 0
+  research: 0
+  tradecraft: 0
+  bureaucracy: 0
+  influence: 0
+  network: 0
+  streetwise: 2
