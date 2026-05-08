@@ -6,12 +6,12 @@
   load: 1
   uses: 1
   num_available: 1
-- id: fine-mobility-kit
-  name: Fine mobility kit
+- id: climbing-kit
+  name: Climbing kit
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
     Rope, ascenders, and work gloves for climbing, crossing, and getting out alive
-  load: 1
+  load: 2
   uses: 1
   num_available: 1
 - id: conditioning-supplies
@@ -30,16 +30,16 @@
   load: 1
   uses: 1
   num_available: 1
-- id: fine-protective-gear
-  name: Fine protective gear
+- id: sports-protective-gear
+  name: Sports protective gear
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Helmet and work pads fitted for movement rather than comfort
+    Helmet and pads fitted for movement
   load: 1
   uses: 1
   num_available: 1
-- id: fine-recon-aid
-  name: Fine recon aid
+- id: orienteering-kit
+  name: Orienteering kit
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
     Binoculars, detailed map, and headlamp for reading the ground before you move
@@ -54,8 +54,8 @@
   load: 1
   uses: 1
   num_available: 1
-- id: fine-borrowed-vehicle-access
-  name: Fine borrowed vehicle access
+- id: borrowed-vehicle-access
+  name: Borrowed vehicle access
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
     Club van or minibus you can plausibly borrow without too many questions

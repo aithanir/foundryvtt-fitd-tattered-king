@@ -6,8 +6,8 @@
   load: 1
   uses: 1
   num_available: 1
-- id: fine-ritual-kit
-  name: Fine ritual kit
+- id: ritual-kit
+  name: Ritual kit
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
     Candles, incense, oils, prayer cards, and salt for making a place answer to tradition
@@ -38,8 +38,8 @@
   load: 1
   uses: 1
   num_available: 1
-- id: fine-protective-garment
-  name: Fine protective garment
+- id: protected-garment
+  name: Protected garment
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
     Quiet collar and hidden charm that steady the wearer at the threshold

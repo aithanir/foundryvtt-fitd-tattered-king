@@ -30,12 +30,12 @@
   load: 1
   uses: 1
   num_available: 1
-- id: listening-kit
-  name: Listening kit
+- id: fine-camera
+  name: Fine camera
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Bug-plant basics and telephone-box routines for hearing what was meant to stay private
-  load: 1
+    35mm camera with advanced lens and camera bag
+  load: 2
   uses: 1
   num_available: 1
 - id: weapon-of-last-resort
@@ -51,7 +51,7 @@
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
     Spare coat, hat, false plates, and bus tickets for following without becoming the story
-  load: 1
+  load: 2
   uses: 1
   num_available: 1
 - id: blackmail-dossier

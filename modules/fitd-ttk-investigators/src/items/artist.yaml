@@ -35,7 +35,7 @@
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
     Harmless stage business, useful weights, and fake blood that become practical under pressure
-  load: 1
+  load: 2
   uses: 1
   num_available: 1
 - id: patron-gift

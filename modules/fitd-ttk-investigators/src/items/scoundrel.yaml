@@ -19,7 +19,7 @@
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
     Cap, spectacles, work coat, and wig for becoming forgettable on purpose
-  load: 1
+  load: 2
   uses: 1
   num_available: 1
 - id: forgery-supplies
@@ -27,7 +27,7 @@
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
     Carbon paper, stamps, typewriter ribbon, inks, and drying powder for paper lies
-  load: 1
+  load: 2
   uses: 1
   num_available: 1
 - id: safehouse-key
@@ -43,7 +43,7 @@
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
     Stolen plates, garage favour, and hotwire access for leaving before questions start
-  load: 1
+  load: 2
   uses: 1
   num_available: 1
 - id: black-market-contacts
@@ -59,6 +59,6 @@
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
     Change of clothes, soap, and spare identity papers for stepping out of the evidence trail
-  load: 1
+  load: 2
   uses: 1
   num_available: 1

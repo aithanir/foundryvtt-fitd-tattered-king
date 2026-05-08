@@ -3,7 +3,7 @@
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
     Sterile tools, sutures, and ampoules packed for clinical authority in bad places
-  load: 1
+  load: 2
   uses: 1
   num_available: 1
 - id: clinical-restraints
@@ -19,7 +19,7 @@
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
     Slides, swabs, reagents, and vials for preserving what the scene leaves behind
-  load: 1
+  load: 2
   uses: 1
   num_available: 1
 - id: diagnostic-instruments
@@ -46,8 +46,8 @@
   load: 1
   uses: 1
   num_available: 1
-- id: case-notes
-  name: Case notes
+- id: clinical-case-notes
+  name: Clinical case notes
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
     Clinical forms, carbon copies, and sealed envelopes that offer insight

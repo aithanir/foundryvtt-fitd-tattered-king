@@ -1,13 +1,13 @@
-- id: fine-internal-directory
-  name: Fine internal directory
+- id: internal-directory
+  name: Internal directory
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
     Extensions and addresses that map who reports to whom and where pressure travels
   load: 1
   uses: 1
   num_available: 1
-- id: fine-official-correspondence-kit
-  name: Fine official correspondence kit
+- id: official-correspondence-kit
+  name: Official correspondence kit
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
     Letterhead and signature stamp for moving doors, minds, and filing trays
@@ -30,8 +30,8 @@
   load: 1
   uses: 1
   num_available: 1
-- id: fine-dictation-kit
-  name: Fine dictation kit
+- id: dictation-kit
+  name: Dictation kit
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
     Dictaphone and spare cassettes for meeting notes that can become evidence

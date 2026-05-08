@@ -27,7 +27,7 @@
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
     Handheld field meter, tuned receiver, or aether dial that almost certainly should not work
-  load: 1
+  load: 2
   uses: 1
   num_available: 1
 - id: hidden-compartment-case
@@ -35,7 +35,7 @@
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
     False bottom, secret drawer, and coded latch for carrying what must not be found
-  load: 1
+  load: 2
   uses: 1
   num_available: 1
 - id: fine-antique-key-set

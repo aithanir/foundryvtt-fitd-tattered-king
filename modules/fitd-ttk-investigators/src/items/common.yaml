@@ -10,7 +10,7 @@
   name: Camera
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    110mm film camera, spare rolls, and a dark bag
+    110mm film camera, spare rolls
   load: 1
   uses: 1
   num_available: 1
@@ -19,7 +19,7 @@
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
     Cassette recorder with spare tapes
-  load: 1
+  load: 2
   uses: 1
   num_available: 1
 - id: maps-and-navigation
@@ -38,20 +38,20 @@
   load: 1
   uses: 1
   num_available: 1
-- id: cover-papers
-  name: Cover papers
+- id: change-of-clothes
+  name: Change of clothes
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Carbon copies, stamps, memos, and official-looking forms
-  load: 1
+    A fresh change of clothes
+  load: 2
   uses: 1
   num_available: 1
 - id: protective-clothing
   name: Protective clothing
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Heavy coat, helmet, and work gloves
-  load: 1
+    Heavy coat, safety helmet, and work gloves
+  load: 2
   uses: 1
   num_available: 1
 - id: simple-weapon
@@ -62,6 +62,14 @@
   load: 1
   uses: 1
   num_available: 1
+- id: heavy-weapon
+  name: Heavy weapon
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
+  description: |-
+    A bulky improvised tool, or something dangerous tha will get you arrested 
+  load: 2
+  uses: 1
+  num_available: 1  
 - id: restraints
   name: Restraints
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
@@ -75,14 +83,6 @@
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
     Local papers, classified adverts, cinema times, and small notices for finding people, places, and public traces
-  load: 1
-  uses: 1
-  num_available: 1
-- id: occult-kit
-  name: Occult kit
-  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
-  description: |-
-    Seals, sigil stamps, regalia, and coded rites
   load: 1
   uses: 1
   num_available: 1

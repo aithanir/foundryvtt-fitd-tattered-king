@@ -11,7 +11,7 @@
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
     Seal wax, sigil stamps, and coded liturgy for formal work at the edge of sense
-  load: 1
+  load: 2
   uses: 1
   num_available: 1
 - id: grimoire
@@ -35,11 +35,11 @@
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
     Black mirror and radio-noise ritual for asking questions through interference
-  load: 1
+  load: 2
   uses: 1
   num_available: 1
-- id: fine-binding-materials
-  name: Fine binding materials
+- id: binding-materials
+  name: Binding materials
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
     Sealing tape, stamps, and locks for making a boundary hold

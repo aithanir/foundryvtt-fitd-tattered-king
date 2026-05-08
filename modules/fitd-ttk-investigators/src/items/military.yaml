@@ -6,12 +6,13 @@
   load: 1
   uses: 1
   num_available: 1
-- id: fine-body-armour
-  name: Fine body armour
+- id: body-armour
+  name: Body armour
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
     Helmet, pads, or riot kit suited to sanctioned trouble
-  load: 1
+    Counts as heavy armour.
+  load: 3
   uses: 1
   num_available: 1
 - id: field-kit
@@ -27,7 +28,7 @@
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
     Licensed field radio that reaches help and creates a record
-  load: 1
+  load: 2
   uses: 1
   num_available: 1
 - id: fine-restraints
@@ -43,7 +44,7 @@
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
     Controlled entry tools for doors that must stop being doors
-  load: 1
+  load: 2
   uses: 1
   num_available: 1
 - id: squad-backup-contacts
