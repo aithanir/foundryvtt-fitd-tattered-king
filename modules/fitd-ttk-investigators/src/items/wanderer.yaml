@@ -1,64 +1,64 @@
-- id: institutional-credential
-  name: Institutional credential
+- id: shelter-kit
+  name: Shelter kit
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    University card, reader's ticket, or departmental letter that opens scholarly doors
+    Blanket roll and poncho for sleeping rough without surrendering to the weather
   load: 1
   uses: 1
   num_available: 1
-- id: seminar-invitation
-  name: Seminar invitation
+- id: weather-kit
+  name: Weather kit
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Guest lecture notice, wine-room invitation, or learned society card that gets you into the conversation
+    Wax jacket and wool layers for staying mobile through cold, rain, and neglect
   load: 1
   uses: 1
   num_available: 1
-- id: research-archive-access
-  name: Research archive access
+- id: field-blade
+  name: Field blade
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Microfiche routine, back-room library permission, and access to a reader
+    Knife or hatchet with whetstone, useful enough to worry the police
   load: 1
   uses: 1
   num_available: 1
-- id: translation-aids
-  name: Translation aids
+- id: foraging-kit
+  name: Foraging kit
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Dictionary, phrasebook, and cipher crib for turning old language into usable sense
+    Cooking tin, fishing kit, and snares for making the margins feed you
   load: 1
   uses: 1
   num_available: 1
-- id: archival-handling-kit
-  name: Archival handling kit
+- id: fine-local-route-knowledge
+  name: Fine local route knowledge
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    White gloves, acid-free folders, and tags for preserving fragile evidence
+    Alleys, footpaths, cut-throughs, and service gates that maps omit
   load: 1
   uses: 1
   num_available: 1
-- id: inspection-lens
-  name: Inspection lens
+- id: animal-companion
+  name: Animal companion
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Loupe, portable microscope, and sample slides for close examination
+    Loyal dog, bird, or stray with a bond no paperwork can explain
   load: 1
   uses: 1
   num_available: 1
-- id: fieldwork-kit
-  name: Fieldwork kit
+- id: hidey-holes-map
+  name: Hidey-holes map
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Field laboratory satchel with practical tools and specimen bags
+    Squats, sheds, and pub back rooms marked by memory and favours
   load: 1
   uses: 1
   num_available: 1
-- id: museum-contact-list
-  name: Museum contact list
+- id: trail-charm
+  name: Trail charm
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Curators, donors, and private collectors who know what ought not to be on display
+    Found object that keeps showing up, however far you walk
   load: 1
   uses: 1
   num_available: 1

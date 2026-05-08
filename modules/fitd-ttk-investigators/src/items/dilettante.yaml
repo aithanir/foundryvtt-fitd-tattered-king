@@ -1,64 +1,64 @@
-- id: institutional-credential
-  name: Institutional credential
+- id: status-wardrobe
+  name: Status wardrobe
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    University card, reader's ticket, or departmental letter that opens scholarly doors
+    Club-ready clothes and discreet tailoring that make exclusion feel impolite
   load: 1
   uses: 1
   num_available: 1
-- id: seminar-invitation
-  name: Seminar invitation
+- id: expense-account
+  name: Expense account
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Guest lecture notice, wine-room invitation, or learned society card that gets you into the conversation
+    Envelope cash and an expenses chit, useful until someone audits the trail
   load: 1
   uses: 1
   num_available: 1
-- id: research-archive-access
-  name: Research archive access
+- id: social-invitations
+  name: Social invitations
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Microfiche routine, back-room library permission, and access to a reader
+    Members' list and committee guest pass for rooms that pretend they are private
   load: 1
   uses: 1
   num_available: 1
-- id: translation-aids
-  name: Translation aids
+- id: chauffeur-access
+  name: Chauffeur access
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Dictionary, phrasebook, and cipher crib for turning old language into usable sense
+    Car service or official lift that makes arrival look arranged in advance
   load: 1
   uses: 1
   num_available: 1
-- id: archival-handling-kit
-  name: Archival handling kit
+- id: fine-gift
+  name: Fine gift
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    White gloves, acid-free folders, and tags for preserving fragile evidence
+    Bottle, envelope, and favours owed, presented as hospitality rather than bribery
   load: 1
   uses: 1
   num_available: 1
-- id: inspection-lens
-  name: Inspection lens
+- id: gossip-web
+  name: Gossip web
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Loupe, portable microscope, and sample slides for close examination
+    Rolodex and private lunch circuit for learning who is bored, compromised, or desperate
   load: 1
   uses: 1
   num_available: 1
-- id: fieldwork-kit
-  name: Fieldwork kit
+- id: private-problem-solver
+  name: Private problem solver
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Field laboratory satchel with practical tools and specimen bags
+    A fixer with departmental ties who can make one difficulty quieter
   load: 1
   uses: 1
   num_available: 1
-- id: museum-contact-list
-  name: Museum contact list
+- id: exotic-memento
+  name: Exotic memento
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Curators, donors, and private collectors who know what ought not to be on display
+    Lodge relic with paperwork, respectable enough to show and strange enough to matter
   load: 1
   uses: 1
   num_available: 1

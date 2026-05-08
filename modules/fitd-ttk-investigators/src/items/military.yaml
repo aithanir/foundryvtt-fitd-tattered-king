@@ -1,64 +1,64 @@
-- id: institutional-credential
-  name: Institutional credential
+- id: service-weapon
+  name: Service weapon
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    University card, reader's ticket, or departmental letter that opens scholarly doors
+    Sidearm, rare outside official use and dangerous even when justified
   load: 1
   uses: 1
   num_available: 1
-- id: seminar-invitation
-  name: Seminar invitation
+- id: fine-body-armour
+  name: Fine body armour
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Guest lecture notice, wine-room invitation, or learned society card that gets you into the conversation
+    Helmet, pads, or riot kit suited to sanctioned trouble
   load: 1
   uses: 1
   num_available: 1
-- id: research-archive-access
-  name: Research archive access
+- id: field-kit
+  name: Field kit
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Microfiche routine, back-room library permission, and access to a reader
+    Webbing, rations, and poncho for operating away from comfort or permission
   load: 1
   uses: 1
   num_available: 1
-- id: translation-aids
-  name: Translation aids
+- id: field-radio
+  name: Field radio
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Dictionary, phrasebook, and cipher crib for turning old language into usable sense
+    Licensed field radio that reaches help and creates a record
   load: 1
   uses: 1
   num_available: 1
-- id: archival-handling-kit
-  name: Archival handling kit
+- id: fine-restraints
+  name: Fine restraints
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    White gloves, acid-free folders, and tags for preserving fragile evidence
+    Official handcuffs carried with procedure and consequences attached
   load: 1
   uses: 1
   num_available: 1
-- id: inspection-lens
-  name: Inspection lens
+- id: breach-tools
+  name: Breach tools
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Loupe, portable microscope, and sample slides for close examination
+    Controlled entry tools for doors that must stop being doors
   load: 1
   uses: 1
   num_available: 1
-- id: fieldwork-kit
-  name: Fieldwork kit
+- id: squad-backup-contacts
+  name: Squad backup contacts
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Field laboratory satchel with practical tools and specimen bags
+    Old comrades and veterans' club connections who still answer the call
   load: 1
   uses: 1
   num_available: 1
-- id: museum-contact-list
-  name: Museum contact list
+- id: deniable-orders
+  name: Deniable orders
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Curators, donors, and private collectors who know what ought not to be on display
+    Briefing notes, or verbal authority that justify action until someone senior denies giving them
   load: 1
   uses: 1
   num_available: 1

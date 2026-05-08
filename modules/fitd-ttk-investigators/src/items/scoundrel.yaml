@@ -1,64 +1,64 @@
-- id: institutional-credential
-  name: Institutional credential
+- id: bypass-tools
+  name: Bypass tools
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    University card, reader's ticket, or departmental letter that opens scholarly doors
+    Lockpicks and slim jim for entering without permission or noise
   load: 1
   uses: 1
   num_available: 1
-- id: seminar-invitation
-  name: Seminar invitation
+- id: concealed-weapon
+  name: Concealed weapon
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Guest lecture notice, wine-room invitation, or learned society card that gets you into the conversation
+    Knife or cosh that ends careers as quickly as fights
   load: 1
   uses: 1
   num_available: 1
-- id: research-archive-access
-  name: Research archive access
+- id: disguise-kit
+  name: Disguise kit
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Microfiche routine, back-room library permission, and access to a reader
+    Cap, spectacles, work coat, and wig for becoming forgettable on purpose
   load: 1
   uses: 1
   num_available: 1
-- id: translation-aids
-  name: Translation aids
+- id: forgery-supplies
+  name: Forgery supplies
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Dictionary, phrasebook, and cipher crib for turning old language into usable sense
+    Carbon paper, stamps, typewriter ribbon, inks, and drying powder for paper lies
   load: 1
   uses: 1
   num_available: 1
-- id: archival-handling-kit
-  name: Archival handling kit
+- id: safehouse-key
+  name: Safehouse key
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    White gloves, acid-free folders, and tags for preserving fragile evidence
+    Council flat spare and backdoor arrangement for a place that is not quite safe
   load: 1
   uses: 1
   num_available: 1
-- id: inspection-lens
-  name: Inspection lens
+- id: stolen-vehicle-access
+  name: Stolen vehicle access
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Loupe, portable microscope, and sample slides for close examination
+    Stolen plates, garage favour, and hotwire access for leaving before questions start
   load: 1
   uses: 1
   num_available: 1
-- id: fieldwork-kit
-  name: Fieldwork kit
+- id: black-market-contacts
+  name: Black market contacts
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Field laboratory satchel with practical tools and specimen bags
+    Pub back-room fixers who can source what respectable channels cannot
   load: 1
   uses: 1
   num_available: 1
-- id: museum-contact-list
-  name: Museum contact list
+- id: clean-bag
+  name: Clean bag
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Curators, donors, and private collectors who know what ought not to be on display
+    Change of clothes, soap, and spare identity papers for stepping out of the evidence trail
   load: 1
   uses: 1
   num_available: 1

@@ -1,64 +1,64 @@
-- id: institutional-credential
-  name: Institutional credential
+- id: focus-object
+  name: Focus object
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    University card, reader's ticket, or departmental letter that opens scholarly doors
+    Ring, mirror, deck, or bone dice that gives the impossible somewhere to gather
   load: 1
   uses: 1
   num_available: 1
-- id: seminar-invitation
-  name: Seminar invitation
+- id: spellwork-kit
+  name: Spellwork kit
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Guest lecture notice, wine-room invitation, or learned society card that gets you into the conversation
+    Seal wax, sigil stamps, and coded liturgy for formal work at the edge of sense
   load: 1
   uses: 1
   num_available: 1
-- id: research-archive-access
-  name: Research archive access
+- id: grimoire
+  name: Grimoire
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Microfiche routine, back-room library permission, and access to a reader
+    Marginalia, coded notes, and partial translations that reward dangerous rereading
   load: 1
   uses: 1
   num_available: 1
-- id: translation-aids
-  name: Translation aids
+- id: protective-charms
+  name: Protective charms
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Dictionary, phrasebook, and cipher crib for turning old language into usable sense
+    Iron, rowan, seals, and tradition marks against things that respect old boundaries
   load: 1
   uses: 1
   num_available: 1
-- id: archival-handling-kit
-  name: Archival handling kit
+- id: scrying-kit
+  name: Scrying kit
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    White gloves, acid-free folders, and tags for preserving fragile evidence
+    Black mirror and radio-noise ritual for asking questions through interference
   load: 1
   uses: 1
   num_available: 1
-- id: inspection-lens
-  name: Inspection lens
+- id: fine-binding-materials
+  name: Fine binding materials
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Loupe, portable microscope, and sample slides for close examination
+    Sealing tape, stamps, and locks for making a boundary hold
   load: 1
   uses: 1
   num_available: 1
-- id: fieldwork-kit
-  name: Fieldwork kit
+- id: sacrificial-valuables
+  name: Sacrificial valuables
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Field laboratory satchel with practical tools and specimen bags
+    Coins, heirlooms, and blooded keepsakes that can be paid to the wrong audience
   load: 1
   uses: 1
   num_available: 1
-- id: museum-contact-list
-  name: Museum contact list
+- id: true-name-ledger
+  name: True-name ledger
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Curators, donors, and private collectors who know what ought not to be on display
+    Dangerous, incomplete, and tempting names that should not be spoken casually
   load: 1
   uses: 1
   num_available: 1

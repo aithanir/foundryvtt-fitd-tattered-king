@@ -1,0 +1,64 @@
+- id: oddity-collection
+  name: Oddity collection
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
+  description: |-
+    A useful curiosity from the case, kept because of course it would matter one day
+  load: 1
+  uses: 1
+  num_available: 1
+- id: cataloguing-system
+  name: Cataloguing system
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
+  description: |-
+    Index cards, labels, and cross-reference string for imposing order on impossible clutter
+  load: 1
+  uses: 1
+  num_available: 1
+- id: restoration-kit
+  name: Restoration kit
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
+  description: |-
+    Glue, solvent, stitching tools, and soft brushes for recovering damaged objects
+  load: 1
+  uses: 1
+  num_available: 1
+- id: prototype-instrument
+  name: Prototype instrument
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
+  description: |-
+    Handheld field meter, tuned receiver, or aether dial that almost certainly should not work
+  load: 1
+  uses: 1
+  num_available: 1
+- id: hidden-compartment-case
+  name: Hidden compartment case
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
+  description: |-
+    False bottom, secret drawer, and coded latch for carrying what must not be found
+  load: 1
+  uses: 1
+  num_available: 1
+- id: fine-antique-key-set
+  name: Fine antique key set
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
+  description: |-
+    Cabinet keys, institutional blanks, and heavy old keys for doors no one remembers using
+  load: 1
+  uses: 1
+  num_available: 1
+- id: private-collection-access
+  name: Private collection access
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
+  description: |-
+    Special collection card and back-room permission from someone who trusts the wrong people
+  load: 1
+  uses: 1
+  num_available: 1
+- id: unsettling-correspondence
+  name: Unsettling correspondence
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
+  description: |-
+    Letters with a non-human cadence and implications the postmark cannot explain
+  load: 1
+  uses: 1
+  num_available: 1

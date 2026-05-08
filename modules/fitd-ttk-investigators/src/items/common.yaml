@@ -1,40 +1,48 @@
-- id: a-blade-or-two
-  name: A Blade or Two
+- id: light-source
+  name: Light source
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Simple melee weapons such as a Baton, cosh, or a knife
+    Work torch or anglehead lamp
   load: 1
-  uses: 1
-  num_available: 1
-- id: audio-recorder
-  name: Audio recorder
-  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
-  description: |-
-    Cassette recorder, dictaphone
-  load: 2
   uses: 1
   num_available: 1
 - id: camera
   name: Camera
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    A common 110mm point-and-shoot camera, with film rolls
+    110mm film camera, spare rolls, and a dark bag
   load: 1
   uses: 1
   num_available: 1
-- id: institutional-access
-  name: Institutional access
+- id: audio-capture
+  name: Audio capture
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Common institutional access such as a press pass, researcher card, or archival access.  The access must be suitable for your background.
-  load: 0
+    Cassette recorder with spare tapes
+  load: 1
   uses: 1
   num_available: 1
-- id: maps
-  name: Maps
+- id: maps-and-navigation
+  name: Maps and navigation
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Ordnance Survey, A-Z street book
+    Ordnance Survey sheets or an A-Z street atlas
+  load: 1
+  uses: 1
+  num_available: 1
+- id: transport-access
+  name: Transport access
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
+  description: |-
+    Railcard, hired car, or plausible travel cover
+  load: 1
+  uses: 1
+  num_available: 1
+- id: cover-papers
+  name: Cover papers
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
+  description: |-
+    Carbon copies, stamps, memos, and official-looking forms
   load: 1
   uses: 1
   num_available: 1
@@ -42,31 +50,47 @@
   name: Protective clothing
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Thick coat, hardhat, work gloves
+    Heavy coat, helmet, and work gloves
   load: 1
   uses: 1
   num_available: 1
-- id: public-transport
-  name: Public Transport
+- id: simple-weapon
+  name: Simple weapon
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    A Rail card or bus pass suitable for the area.
-  load: 0
+    Either a crude improvised tool, or something that will cause you trouble if you get caught with it 
+  load: 1
   uses: 1
   num_available: 1
 - id: restraints
   name: Restraints
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    Enough gaffer tape, cord or similar material to implement simple restraints.
+    Handcuffs, tape, or cord
   load: 1
   uses: 1
   num_available: 1
-- id: torch
-  name: Torch
+- id: newspaper
+  name: Newspaper
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
   description: |-
-    A common light source such as an anglehead torch.
+    Local papers, classified adverts, cinema times, and small notices for finding people, places, and public traces
+  load: 1
+  uses: 1
+  num_available: 1
+- id: occult-kit
+  name: Occult kit
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
+  description: |-
+    Seals, sigil stamps, regalia, and coded rites
+  load: 1
+  uses: 1
+  num_available: 1
+- id: gubbins
+  name: Gubbins
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-item-icon.default.png
+  description: |-
+    Something specific to your character that you think might be useful
   load: 1
   uses: 1
   num_available: 1
