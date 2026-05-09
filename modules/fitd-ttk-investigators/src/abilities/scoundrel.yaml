@@ -1,0 +1,64 @@
+- id: cheat-death
+  class: Scoundrel
+  name: Cheat Death
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.special-armor.png
+  description: |-
+    Expend to resist sudden violence, discovery, blame, or being cornered, or to push when timing and trickery keep you alive.
+  price: 1
+  class_default: false
+- id: bait-and-switch
+  class: Scoundrel
+  name: Bait and Switch
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When you swap, plant, remove, or mislabel an object, record, or Evidence, **Improve position**.
+  price: 1
+  class_default: false
+- id: pilfer
+  class: Scoundrel
+  name: Pilfer
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When you steal, lift, palm, or remove something before anyone notices, gain **+1 effect**.
+  price: 1
+  class_default: false
+- id: slip-away
+  class: Scoundrel
+  name: Slip Away
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When confusion, darkness, crowds, or misdirection give you an exit, pay 1 Stress to leave the scene or lose pursuit.
+  price: 1
+  class_default: false
+- id: easy-mark
+  class: Scoundrel
+  name: Easy Mark
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When you study someone’s greed, vanity, habit, blind spot, or procedural weakness, gain **+1d** to exploit it.
+  price: 1
+  class_default: false
+- id: double-or-nothing
+  class: Scoundrel
+  name: Double or Nothing
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    Before a risky action, you may resolve it with a fortune roll. On success, gain **+1 effect**. On a miss, suffer the consequence as if your position were worsened.
+  price: 1
+  class_default: false
+- id: smoke-and-mirrors
+  class: Scoundrel
+  name: Smoke and Mirrors
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    During downtime, gain **+1 effect** when you Reduce Heat or Clear the Fog by exposing a false trail, alibi, plant, or frame-up.
+  price: 1
+  class_default: false
+- id: opportunist
+  class: Scoundrel
+  name: Opportunist
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When a member of the crew gains a critical success, gain **+1d** to your next action in the same scene.
+  price: 1
+  class_default: false
