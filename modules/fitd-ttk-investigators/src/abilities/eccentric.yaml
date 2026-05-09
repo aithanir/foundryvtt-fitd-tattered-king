@@ -1,0 +1,64 @@
+- id: unorthodox-method
+  class: Eccentric
+  name: Unorthodox Method
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.special-armor.png
+  description: |-
+    Expend to resist malfunction, ridicule, dangerous curios, or dubious procedure, or to push when odd methods carry you.
+  price: 1
+  class_default: false
+- id: private-collection
+  class: Eccentric
+  name: Private Collection
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    Once per operation, produce an odd object, tool, part, map, specimen, or hobby resource that plausibly helps now.
+  price: 1
+  class_default: false
+- id: i-know-a-chap
+  class: Eccentric
+  name: I Know a Chap
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    Pay 1 less Stress for flashbacks involving a collector, hobbyist, repairer, enthusiast, or peculiar practical contact.
+  price: 1
+  class_default: false
+- id: surprising-find
+  class: Eccentric
+  name: Surprising Find
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When your odd knowledge, collection, or hobby experience reframes Evidence, add an alternate Vector if the table agrees.
+  price: 1
+  class_default: false
+- id: curiosity
+  class: Eccentric
+  name: Curiosity
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When you risk touching, opening, testing, or taking apart something odd, gain **+1 effect** to learn what it does or how it fails.
+  price: 1
+  class_default: false
+- id: cryptic-research
+  class: Eccentric
+  name: Cryptic Research
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    During downtime, fill **2 segments** to distribute among long-term project clocks involving self-taught knowledge, collecting, or hobby experience.
+  price: 1
+  class_default: false
+- id: deciphered-reality
+  class: Eccentric
+  name: Deciphered Reality
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    After observing local weirdness in action, ignore reduced effect from unfamiliarity with that weirdness.
+  price: 1
+  class_default: false
+- id: jury-rig
+  class: Eccentric
+  name: Jury-Rig
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When you inspect a place or object, say what could be repurposed, repaired, misused, or made useful. Gain **+1 effect** acting on it.
+  price: 1
+  class_default: false

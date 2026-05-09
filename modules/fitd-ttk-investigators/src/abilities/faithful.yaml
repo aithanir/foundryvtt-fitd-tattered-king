@@ -1,0 +1,64 @@
+- id: delay-the-inevitable
+  class: Faithful
+  name: Delay the Inevitable
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.special-armor.png
+  description: |-
+    Expend to resist panic, despair, dread, or collapse, or to push when faith, duty, or conviction carries you.
+  price: 1
+  class_default: false
+- id: keeping-faith
+  class: Faithful
+  name: Keeping Faith
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    Once per scene, when fear, despair, or pressure would split the crew, isolate someone, or make an ally give up, reduce or redirect that consequence.
+  price: 1
+  class_default: false
+- id: hallow
+  class: Faithful
+  name: Hallow
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When you set apart a place, object, or threshold, allies defending it gain **+1 effect** until the scene shifts.
+  price: 1
+  class_default: false
+- id: take-heart
+  class: Faithful
+  name: Take Heart
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    Once per scene, steady someone with prayer, witness, or conviction. They gain **+1d** on their next resistance roll against Mental Shock.
+  price: 1
+  class_default: false
+- id: a-glimmer-of-hope
+  class: Faithful
+  name: A Glimmer of Hope
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When a person, plan, or situation is about to collapse, name what could still save it. The GM must offer a risky path.
+  price: 1
+  class_default: false
+- id: bear-witness
+  class: Faithful
+  name: Bear Witness
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When testimony is contradicted, grief-stricken, coerced, or shameful, gain **+1 effect** to resolve the Contradiction or Clear the Fog around it.
+  price: 1
+  class_default: false
+- id: moment-of-respite
+  class: Faithful
+  name: Moment of Respite
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    Once per scene, create a brief pause: silence, prayer, breath, touch, or stillness. One person may act before pressure resumes.
+  price: 1
+  class_default: false
+- id: confession
+  class: Faithful
+  name: Confession
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    During downtime, when someone confesses fear, guilt, doubt, or a hard choice, give them **+1 effect** to recover Stress or Shock. If filling a clock, fill **+1 segment**.
+  price: 1
+  class_default: false

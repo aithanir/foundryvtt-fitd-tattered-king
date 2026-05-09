@@ -1,0 +1,64 @@
+- id: under-surveillance
+  class: Investigator
+  name: Under Surveillance
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.special-armor.png
+  description: |-
+    Expend to resist being watched, followed, exposed, or trapped in a surveillance net, or to push when surveillance carries you.
+  price: 1
+  class_default: false
+- id: working-a-hunch
+  class: Investigator
+  name: Working a Hunch
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When you act on an incomplete but grounded lead, gain **+1 effect**. If it fails, the GM shows what your hunch missed.
+  price: 1
+  class_default: false
+- id: evidence
+  class: Investigator
+  name: "Evidence!"
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When you confront someone with Evidence, gain **+1 effect** to pressure, expose, unsettle, or force a reaction.
+  price: 1
+  class_default: false
+- id: no-stone-unturned
+  class: Investigator
+  name: No Stone Unturned
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When a contradiction would make Evidence unusable, name one follow-up still available. Gain **+1 effect** to resolve it.
+  price: 1
+  class_default: false
+- id: seeking-answers
+  class: Investigator
+  name: Seeking Answers
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When you press a witness, source, suspect, or system for answers despite risk, gain **+1d**.
+  price: 1
+  class_default: false
+- id: small-favor
+  class: Investigator
+  name: Small Favor
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    Once per operation, name a minor contact, clerk, copper, journalist, or old acquaintance who can provide a narrow help.
+  price: 1
+  class_default: false
+- id: loose-ends
+  class: Investigator
+  name: Loose Ends
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    During downtime, when you review notes, follow up, or protect a source, gain **+1 effect** to casework or source maintenance. If filling a clock, fill **+1 segment**.
+  price: 1
+  class_default: false
+- id: crack-the-case
+  class: Investigator
+  name: Crack the Case
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When you Commit using Evidence you personally followed up in play, **Improve Alignment**.
+  price: 1
+  class_default: false

@@ -1,70 +1,64 @@
-- id: connect-the-dots
-  class: Academic
-  name: Connect the Dots
-  img: icons/svg/item-bag.svg
-  description: |-
-    When you synthesize at least 2 established facts into a coherent pattern, state the pattern plainly. Either the crew gains +1d on the next gather information roll that follows that pattern, or the next Commit to a Lead based on it ignores one contradiction among the selected Evidence.
-  price: 1
-  class_default: false
 - id: deep-knowledge
   class: Academic
   name: Deep Knowledge
-  img: icons/svg/item-bag.svg
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.special-armor.png
   description: |-
-    You may use your special armour to:
-
-    - Resist any one consequence with Insight
-
-    - Make a Research or Fabricate Push without paying stress
-  price: 1
-  class_default: false
-- id: eureka
-  class: Academic
-  name: Eureka!
-  img: icons/svg/item-bag.svg
-  description: |-
-    Once per session, when you push a Research or Fabricate roll, gain +1 Effect.
-    This is not a stacking bonus, and gives no benefit if you already have +1 Effect from another source.
-  price: 1
-  class_default: false
-- id: extensive-research
-  class: Academic
-  name: Extensive Research
-  img: icons/svg/item-bag.svg
-  description: |-
-    When you start a knowledge competency clock, fill in the first segment.
-  price: 1
-  class_default: false
-- id: higher-education
-  class: Academic
-  name: Higher Education
-  img: icons/svg/item-bag.svg
-  description: |-
-    When your credentials, scholarly standing, or learned bearing plausibly grant access to records, collections, experts, laboratories, or private conversations, you count as having the right introduction unless the opposition is actively hostile or security is already tight. The first action you take from that access gains improved position or +1 effect, your choice.
-  price: 1
-  class_default: false
-- id: knowledge-is-power
-  class: Academic
-  name: Knowledge is Power
-  img: icons/svg/item-bag.svg
-  description: |-
-    Once per session you may spend 2 stress to resolve the competency roll using your Insight Resistance Trait.
+    Expend to resist ambiguity, false certainty, or limited information, or to push when comprehensive knowledge carries you.
   price: 1
   class_default: false
 - id: skeptic
   class: Academic
   name: Skeptic
-  img: icons/svg/item-bag.svg
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
   description: |-
-    Add +1d when Resisting deception or unnatural shock.
-    You also suffer -1 Effect when attempting to use the Unnatural.
+    Gain **+1d** when resisting deception, false certainty, or unnatural shock.
+  price: 1
+  class_default: false
+- id: extensive-research
+  class: Academic
+  name: Extensive Research
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When working through records, archives, books, or correspondence, gain **+1 effect** to Clear the Fog or fill **+1 segment** on a relevant clock.
+  price: 1
+  class_default: false
+- id: eureka
+  class: Academic
+  name: "Eureka!"
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When you Push on a Research or Fabricate action, gain **+1 effect**.
+  price: 1
+  class_default: false
+- id: knowledge-is-power
+  class: Academic
+  name: Knowledge is Power
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    Once per session, when you Push, you may resolve an action with Insight.
+  price: 1
+  class_default: false
+- id: higher-education
+  class: Academic
+  name: Higher Education
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    Your credentials grant access to experts, archives, collections, labs, or formal conversations unless opposition is active or security is tight.
   price: 1
   class_default: false
 - id: studious
   class: Academic
   name: Studious
-  img: icons/svg/item-bag.svg
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
   description: |-
-    When you overindulge your vice, you may choose the lowest die result instead.
+    When you **Indulge Vice** and would overindulge, you may use the lowest die instead.
+  price: 1
+  class_default: false
+- id: connect-the-dots
+  class: Academic
+  name: Connect the Dots
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When you successfully Commit to a Lead, explain what the filled Frame now clarifies. Create one Evidence card.
   price: 1
   class_default: false

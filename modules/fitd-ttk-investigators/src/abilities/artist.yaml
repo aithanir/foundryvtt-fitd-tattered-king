@@ -1,0 +1,64 @@
+- id: celebrated
+  class: Artist
+  name: Celebrated
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.special-armor.png
+  description: |-
+    Expend to resist scandal, scrutiny, or dangerous attention, or to push when reputation or persona carries the attempt.
+  price: 1
+  class_default: false
+- id: captivating-performance
+  class: Artist
+  name: Captivating Performance
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When you seize a room’s attention through performance, speech, spectacle, or charm, gain **+1 effect** to create an opening.
+  price: 1
+  class_default: false
+- id: truth-from-fiction
+  class: Artist
+  name: Truth from Fiction
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    Frame a person, scene, or case through a work of art. Say what emotional or symbolic truth it exposes. Gain **+1d** when you exploit it.
+  price: 1
+  class_default: false
+- id: the-painted-word
+  class: Artist
+  name: The Painted Word
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When your work reaches someone, choose: they are moved, unsettled, or fixated. Gain **+1 effect** when you exploit that reaction.
+  price: 1
+  class_default: false
+- id: preposterous-sketches
+  class: Artist
+  name: Preposterous Sketches
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    After a scene, say what your sketches reveal as out of place, repeated, or staged. If the table agrees, create one Evidence card.
+  price: 1
+  class_default: false
+- id: artist-a-chance-encounter
+  class: Artist
+  name: A Chance Encounter
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    In a cultural, fashionable, theatrical, or public venue, name who you hope is present. The GM says where or why.
+  price: 1
+  class_default: false
+- id: endearing-disposition
+  class: Artist
+  name: Endearing Disposition
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When someone treats you as harmless, decorative, or safe company, **Improve position** to draw them out or deflect suspicion.
+  price: 1
+  class_default: false
+- id: notices-and-reviews
+  class: Artist
+  name: Notices and Reviews
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    During downtime, your work circulates. Say who saw it, who was moved by it, or who was angered by it. Gain a lead or opening.
+  price: 1
+  class_default: false

@@ -1,0 +1,64 @@
+- id: hard-living
+  class: Wanderer
+  name: Hard Living
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.special-armor.png
+  description: |-
+    Expend to resist hunger, cold, pursuit, exposure, or being cast out, or to push when rough survival carries you.
+  price: 1
+  class_default: false
+- id: scrounge-for-supplies
+  class: Wanderer
+  name: Scrounge for Supplies
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    During downtime or in the field, find rough shelter, food, kit, transport, rumour, or a place to hide from overlooked sources.
+  price: 1
+  class_default: false
+- id: wanderer-a-chance-encounter
+  class: Wanderer
+  name: A Chance Encounter
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    In a station, hostel, pub, shelter, dock, market, road, or back way, name who you hope is present. The GM says where or why.
+  price: 1
+  class_default: false
+- id: sharp-sighted
+  class: Wanderer
+  name: Sharp-Sighted
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    Gain **+1 effect** when you notice what official people, locals, or experts overlook in marginal or transient spaces.
+  price: 1
+  class_default: false
+- id: the-long-way-round
+  class: Wanderer
+  name: The Long Way Round
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When the obvious route closes, say what back way, habit, gap, or overlooked opening remains. **Improve position** to use it.
+  price: 1
+  class_default: false
+- id: third-times-a-charm
+  class: Wanderer
+  name: "Third Time’s a Charm"
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When you revisit a failed lead from another angle, gain **+1 effect** to Clear the Fog or create Evidence from what changed.
+  price: 1
+  class_default: false
+- id: not-without-a-fight
+  class: Wanderer
+  name: "Not Without a Fight!"
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When you protect someone from being abandoned, removed, or written off, gain **+1d** to resist or oppose it.
+  price: 1
+  class_default: false
+- id: act-of-desperation
+  class: Wanderer
+  name: Act of Desperation
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When there is no proper tool, safe route, shelter, time, or respectable help, gain **+1 effect** using whatever is at hand.
+  price: 1
+  class_default: false

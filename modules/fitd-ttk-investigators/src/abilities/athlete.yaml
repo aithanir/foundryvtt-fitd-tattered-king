@@ -1,0 +1,64 @@
+- id: able-bodied
+  class: Athlete
+  name: Able-Bodied
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.special-armor.png
+  description: |-
+    Expend to resist exhaustion, impact, pursuit, or overreach, or to push when bodily discipline carries you.
+  price: 1
+  class_default: false
+- id: watch-this
+  class: Athlete
+  name: "Watch This!"
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    Push yourself to attempt a physical line that would normally need setup, more time, or be too much to resolve in one action.
+  price: 1
+  class_default: false
+- id: expeditious-retreat
+  class: Athlete
+  name: Expeditious Retreat
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When you extract yourself or another person before the trap closes, gain **+1 effect**. You may take them with you on a 4/5.
+  price: 1
+  class_default: false
+- id: daredevil
+  class: Athlete
+  name: Daredevil
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When you make a physical action from a **desperate position**, gain **+1 effect**. On success, you may immediately reposition yourself.
+  price: 1
+  class_default: false
+- id: grit-your-teeth
+  class: Athlete
+  name: Grit Your Teeth
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    Gain **+1d** to resist pain, fatigue, fear, intimidation, or panic when training, breath, or bodily focus steadies you.
+  price: 1
+  class_default: false
+- id: perseverance
+  class: Athlete
+  name: Perseverance
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When a pursuit, search, stakeout, climb, or chase would stall from exhaustion or repetition, **Improve position** to continue.
+  price: 1
+  class_default: false
+- id: practice-makes-perfect
+  class: Athlete
+  name: Practice Makes Perfect
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    During downtime, when you train, drill, condition, or spar, gain **+1 effect** to prepare or recover. If filling a training clock, fill **+1 segment**.
+  price: 1
+  class_default: false
+- id: second-wind
+  class: Athlete
+  name: Second Wind
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    Once per session, roll Fortune using **Physique** to clear Stress. **6:** clear 2. **4/5:** clear 1. **1–3:** clear 0.
+  price: 1
+  class_default: false

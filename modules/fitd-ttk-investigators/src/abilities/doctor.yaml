@@ -1,0 +1,64 @@
+- id: white-coat
+  class: Doctor
+  name: White Coat
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.special-armor.png
+  description: |-
+    Expend to resist panic in treatment, contamination, medical scrutiny, or challenged authority, or to push when clinical authority carries you.
+  price: 1
+  class_default: false
+- id: diagnosis
+  class: Doctor
+  name: Diagnosis
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When you roll to examine or treat a body, symptom, or contamination, on success say what you tested for and create Evidence with a Forensic Vector.
+  price: 1
+  class_default: false
+- id: emergency-aid
+  class: Doctor
+  name: Emergency Aid
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    Once per session, you may treat injury outside downtime. Roll as normal; the treatment takes effect immediately.
+  price: 1
+  class_default: false
+- id: clinical-eye
+  class: Doctor
+  name: Clinical Eye
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    Gain **+1 effect** when your action depends on a precise eye for detail.
+  price: 1
+  class_default: false
+- id: anatomical-diagrams
+  class: Doctor
+  name: Anatomical Diagrams
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When bodily knowledge helps you disable, stabilize, intimidate, or prove what happened, gain **+1 effect**.
+  price: 1
+  class_default: false
+- id: calm-in-emergency
+  class: Doctor
+  name: Calm in Emergency
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When others panic, freeze, or spiral, gain **+1d** to resist confusion, shock, or emotional contagion. One ally gains improved position.
+  price: 1
+  class_default: false
+- id: clinical-authority
+  class: Doctor
+  name: Clinical Authority
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When a situation is recognizably clinical, medical staff, officials, or bystanders accept your standing unless opposed.
+  price: 1
+  class_default: false
+- id: aftercare
+  class: Doctor
+  name: Aftercare
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    During downtime, when you oversee recovery, prognosis, notes, or follow-up care, gain **+1 effect** to recovery or medical casework. If filling a clock, fill **+1 segment**.
+  price: 1
+  class_default: false

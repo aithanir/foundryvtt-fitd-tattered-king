@@ -1,0 +1,64 @@
+- id: professionalism
+  class: Professional
+  name: Professionalism
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.special-armor.png
+  description: |-
+    Expend to resist official scrutiny, procedural obstruction, or loss of authority, or to push when procedure carries you.
+  price: 1
+  class_default: false
+- id: rise-to-authority
+  class: Professional
+  name: Rise to Authority
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When rank, credentials, or procedure could plausibly seize control of a scene, step in. **Improve position** on your first action.
+  price: 1
+  class_default: false
+- id: professional-courtesy
+  class: Professional
+  name: Professional Courtesy
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    Your standing opens offices, files, staff, registries, meetings, or formal conversations that would otherwise remain closed.
+  price: 1
+  class_default: false
+- id: burning-the-midnight-oil
+  class: Professional
+  name: Burning the Midnight Oil
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    During downtime, when you work through paperwork, records, reports, or memos, gain **+1 effect** to casework. If filling a clock, fill **+1 segment**.
+  price: 1
+  class_default: false
+- id: commanding-presence
+  class: Professional
+  name: Commanding Presence
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When you give clear direction under pressure, one ally gains **+1d** if they follow your instruction.
+  price: 1
+  class_default: false
+- id: company-car
+  class: Professional
+  name: Company Car
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    Once per operation, produce mundane official support: car, phone, letterhead, desk, courier, forms, appointment, or clerical help.
+  price: 1
+  class_default: false
+- id: official-channels
+  class: Professional
+  name: Official Channels
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When you put Evidence before the right office, superior, committee, or formal audience, gain **+1d** to Prove or compel an institutional response.
+  price: 1
+  class_default: false
+- id: overcharge
+  class: Professional
+  name: Overcharge
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    During payoff, increase your personal take by 1, or increase the crew’s payoff by 1 if the table agrees your role justifies it.
+  price: 1
+  class_default: false

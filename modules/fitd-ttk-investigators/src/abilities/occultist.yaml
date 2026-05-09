@@ -1,0 +1,64 @@
+- id: the-stars-are-right
+  class: Occultist
+  name: The Stars Are Right
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.special-armor.png
+  description: |-
+    Expend to resist occult consequence, dread, or threshold pressure, or to push when forbidden understanding carries you.
+  price: 1
+  class_default: false
+- id: faustian-bargain
+  class: Occultist
+  name: Faustian Bargain
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When no ordinary route can give access, passage, or audience, bargain with something dangerous. It opens the way; the GM names what it believes you owe.
+  price: 1
+  class_default: false
+- id: glimpse-the-unthinkable
+  class: Occultist
+  name: Glimpse the Unthinkable
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When you resist a supernatural threat, learn what it wanted from you. If that reveals something concrete about the case, create Evidence.
+  price: 1
+  class_default: false
+- id: read-the-signs
+  class: Occultist
+  name: Read the Signs
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When a sign, omen, phrase, number, or image recurs, name the pattern. Gain **+1d** when acting on it.
+  price: 1
+  class_default: false
+- id: a-test-of-will
+  class: Occultist
+  name: A Test of Will
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When you expose yourself to impossible truth, gain **+1 effect** against the local phenomenon.
+  price: 1
+  class_default: false
+- id: premonition
+  class: Occultist
+  name: Premonition
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    During engagement, describe the omen, dream, or warning. The crew gains **+1d** to the engagement roll.
+  price: 1
+  class_default: false
+- id: moonlight-ritual
+  class: Occultist
+  name: Moonlight Ritual
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When you Push, gain **+1 effect** if you apply a superstition or eldritch ritual to the situation.
+  price: 1
+  class_default: false
+- id: foretold
+  class: Occultist
+  name: Foretold
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    Pay 1 less Stress for flashbacks based on an omen, dream, sign, horoscope, or prior ritual warning.
+  price: 1
+  class_default: false

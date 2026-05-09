@@ -1,0 +1,64 @@
+- id: money-talks
+  class: Dilettante
+  name: Money Talks
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.special-armor.png
+  description: |-
+    Expend to resist denied access, social embarrassment, class gatekeeping, or awkward expense, or to push when privilege, charm, or money carries you.
+  price: 1
+  class_default: false
+- id: calling-in-favors
+  class: Dilettante
+  name: Calling in Favors
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    Once per operation, name a favour owed by someone useful. They provide access, transport, cover, introduction, or temporary quality.
+  price: 1
+  class_default: false
+- id: licentious-indulgence
+  class: Dilettante
+  name: Licentious Indulgence
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When you **Indulge Vice**, roll **+1d**. If you overindulge, the fallout is public, expensive, compromising, or noticed.
+  price: 1
+  class_default: false
+- id: dilettante-a-chance-encounter
+  class: Dilettante
+  name: A Chance Encounter
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    In an elite, private, fashionable, or diplomatic venue, name who you hope is present. The GM says where or why.
+  price: 1
+  class_default: false
+- id: opening-gambit
+  class: Dilettante
+  name: Opening Gambit
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When another character creates an opening, gain **+1 effect** to convert it into access, leverage, or social control.
+  price: 1
+  class_default: false
+- id: investments
+  class: Dilettante
+  name: Investments
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    During downtime, convert holdings or quiet arrangements into transport, an introduction, temporary quality, or a useful invitation.
+  price: 1
+  class_default: false
+- id: silver-tongued-devil
+  class: Dilettante
+  name: Silver-Tongued Devil
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When you tempt someone toward a bad idea they already half-want, gain **+1 effect**.
+  price: 1
+  class_default: false
+- id: finest-money-can-buy
+  class: Dilettante
+  name: Finest Money Can Buy
+  img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
+  description: |-
+    When you declare a load item, it may be fine, bespoke, fashionable, or socially acceptable if wealth or taste would help.
+  price: 1
+  class_default: false
