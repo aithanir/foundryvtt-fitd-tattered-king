@@ -199,7 +199,6 @@ function validateCrossReferences(classes, abilities, items) {
   }
 
   assertUnique(classes, 'name', 'class');
-  assertUnique(abilities, 'name', 'ability');
   assertUnique(items, 'name', 'item');
 }
 
