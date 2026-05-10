@@ -70,10 +70,10 @@ Columns:
 
 If available locally, inspect:
 
-- `../upstream/foundryvtt-blades-in-the-dark`
-- `../upstream/foundry-bitd-alternate-sheets`
-- `../refs/foundry-v14-notes`
-- `../refs/ttk-design-docs`
+- `upstream/foundryvtt-blades-in-the-dark`
+- `upstream/foundry-bitd-alternate-sheets`
+- `refs/foundry-v14-notes`
+- `refs/ttk-design-docs`
 
 If those folders are absent, ask the user before making assumptions about upstream internals.
 
