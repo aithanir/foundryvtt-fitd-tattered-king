@@ -6,6 +6,11 @@
     Expend to resist sudden violence, discovery, blame, or being cornered, or to push when timing and trickery keep you alive.
   price: 1
   class_default: false
+  tags: [special-armour, signature, field]
+  automation:
+    - kind: specialArmour
+      slot: special
+      triggers: [resist, push]
 - id: bait-and-switch
   class: Scoundrel
   name: Bait and Switch

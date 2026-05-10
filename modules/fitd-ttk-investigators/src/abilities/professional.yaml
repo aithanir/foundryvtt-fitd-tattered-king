@@ -6,6 +6,11 @@
     Expend to resist official scrutiny, procedural obstruction, or loss of authority, or to push when procedure carries you.
   price: 1
   class_default: false
+  tags: [special-armour, signature, field]
+  automation:
+    - kind: specialArmour
+      slot: special
+      triggers: [resist, push]
 - id: rise-to-authority
   class: Professional
   name: Rise to Authority

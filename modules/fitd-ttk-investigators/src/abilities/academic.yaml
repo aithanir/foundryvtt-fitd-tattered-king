@@ -6,6 +6,11 @@
     Expend to resist ambiguity, false certainty, or limited information, or to push when comprehensive knowledge carries you.
   price: 1
   class_default: false
+  tags: [special-armour, signature, mystery]
+  automation:
+    - kind: specialArmour
+      slot: special
+      triggers: [resist, push]
 - id: skeptic
   class: Academic
   name: Skeptic

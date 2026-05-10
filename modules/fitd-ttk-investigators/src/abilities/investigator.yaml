@@ -6,6 +6,11 @@
     Expend to resist being watched, followed, exposed, or trapped in a surveillance net, or to push when surveillance carries you.
   price: 1
   class_default: false
+  tags: [special-armour, signature, field]
+  automation:
+    - kind: specialArmour
+      slot: special
+      triggers: [resist, push]
 - id: working-a-hunch
   class: Investigator
   name: Working a Hunch

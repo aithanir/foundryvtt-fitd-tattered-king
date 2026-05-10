@@ -6,6 +6,11 @@
     Expend to resist denied access, social embarrassment, class gatekeeping, or awkward expense, or to push when privilege, charm, or money carries you.
   price: 1
   class_default: false
+  tags: [special-armour, signature, resource]
+  automation:
+    - kind: specialArmour
+      slot: special
+      triggers: [resist, push]
 - id: calling-in-favors
   class: Dilettante
   name: Calling in Favors

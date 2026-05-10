@@ -6,6 +6,11 @@
     Expend to resist malfunction, ridicule, dangerous curios, or dubious procedure, or to push when odd methods carry you.
   price: 1
   class_default: false
+  tags: [special-armour, signature, field]
+  automation:
+    - kind: specialArmour
+      slot: special
+      triggers: [resist, push]
 - id: private-collection
   class: Eccentric
   name: Private Collection

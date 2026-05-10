@@ -6,6 +6,11 @@
     Expend to resist scandal, scrutiny, or dangerous attention, or to push when reputation or persona carries the attempt.
   price: 1
   class_default: false
+  tags: [special-armour, signature, field]
+  automation:
+    - kind: specialArmour
+      slot: special
+      triggers: [resist, push]
 - id: captivating-performance
   class: Artist
   name: Captivating Performance
