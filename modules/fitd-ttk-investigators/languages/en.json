@@ -1,4 +1,13 @@
 {
   "FITD-TTK-INVESTIGATORS.ModuleName": "Tattered King: Investigators",
-  "FITD-TTK-INVESTIGATORS.ModuleDescription": "Adds the Tattered King assets for Playbooks and related content."
+  "FITD-TTK-INVESTIGATORS.ModuleDescription": "Adds the Tattered King assets for Playbooks and related content.",
+  "FITD-TTK-INVESTIGATORS.SpecialArmour": "Special Armour",
+  "FITD-TTK-INVESTIGATORS.SpecialArmourAvailable": "Special Armour available",
+  "FITD-TTK-INVESTIGATORS.SpecialArmourSpent": "Special Armour spent",
+  "FITD-TTK-INVESTIGATORS.UseSpecialArmour": "Use Special Armour",
+  "FITD-TTK-INVESTIGATORS.ExpendSpecialArmour": "Expend Special Armour",
+  "FITD-TTK-INVESTIGATORS.SpecialArmourConfirm": "Expend Special Armour: {ability}?",
+  "FITD-TTK-INVESTIGATORS.SpecialArmourConfirmHint": "This marks the native Special armour box. The table still decides whether the fictional trigger applies.",
+  "FITD-TTK-INVESTIGATORS.SpecialArmourChat": "{ability}: Special Armour expended.",
+  "FITD-TTK-INVESTIGATORS.SpecialArmourTooltip": "{ability}: {description}"
 }

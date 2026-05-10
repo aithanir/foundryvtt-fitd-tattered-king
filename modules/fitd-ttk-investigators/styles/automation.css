@@ -1,0 +1,33 @@
+.fitd-ttk-special-armour-label {
+  border-bottom: 1px dotted currentColor;
+  cursor: help;
+}
+
+.fitd-ttk-special-armour-button {
+  align-items: center;
+  background: transparent;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  gap: 0.25rem;
+  line-height: 1;
+  margin-left: 0.35rem;
+  min-height: 1.35rem;
+  padding: 0.15rem 0.35rem;
+}
+
+.fitd-ttk-special-armour-button:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+.fitd-ttk-special-armour-button i {
+  pointer-events: none;
+}
+
+.blades-alt .fitd-ttk-special-armour-button {
+  font-size: 0.8rem;
+  vertical-align: middle;
+}
