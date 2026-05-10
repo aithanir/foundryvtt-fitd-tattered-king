@@ -139,7 +139,7 @@ function buildSpecialArmourButton(actor, item) {
   button.dataset.disabled = String(spent || !actor.isOwner);
   button.dataset.tooltip = formatAutomationItemTooltip(item);
   button.title = formatAutomationItemTooltip(item);
-  button.innerHTML = `<img src="${SPECIAL_ARMOUR_ICON}" alt="">`;
+  button.innerHTML = `<img src="${SPECIAL_ARMOUR_ICON}" alt=""><span>SA</span>`;
 
   button.addEventListener('click', async (event) => {
     event.preventDefault();
@@ -207,13 +207,15 @@ async function confirmSpecialArmourUse(item) {
 
 async function postSpecialArmourChat(actor, item, choice) {
   const content = `
-    <p>${escapeHtml(
-      game.i18n.format(`${I18N_PREFIX}.SpecialArmourChat`, {
-        ability: item.name,
-        choice: choice.label,
-      })
-    )}</p>
-    <p>${escapeHtml(item.system?.description ?? '')}</p>
+    <div class="dice-tooltip blades-die-tooltip fitd-ttk-special-armour-chat">
+      <div class="chat-label label-stripe-chat">${escapeHtml(item.name)}</div>
+      <div class="chat-label-small label-stripe-chat-small">${escapeHtml(
+        game.i18n.format(`${I18N_PREFIX}.SpecialArmourChat`, {
+          choice: choice.chatLabel || choice.label,
+        })
+      )}</div>
+      <div class="description"><p>${escapeHtml(item.system?.description ?? '')}</p></div>
+    </div>
   `;
 
   await globalThis.ChatMessage.create({
@@ -251,6 +253,7 @@ function getSpecialArmourOption(trigger) {
   return {
     kind: key,
     label: localize(`SpecialArmourChoice.${key}`),
+    chatLabel: localizeOptional(`SpecialArmourChatChoice.${key}`),
   };
 }
 
@@ -261,6 +264,11 @@ function getRootElement(html) {
 
 function localize(key) {
   return game.i18n.localize(`${I18N_PREFIX}.${key}`);
+}
+
+function localizeOptional(key) {
+  const fullKey = `${I18N_PREFIX}.${key}`;
+  return game.i18n.has(fullKey) ? game.i18n.localize(fullKey) : null;
 }
 
 function normalizeName(value) {

@@ -5,17 +5,18 @@
 
 .fitd-ttk-special-armour-button {
   align-items: center;
-  background: transparent;
-  border: 0;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid currentColor;
+  border-radius: 3px;
   cursor: pointer;
-  display: inline-grid;
-  height: 1.15rem;
+  display: inline-flex;
+  gap: 0.15rem;
+  height: 1.4rem;
   line-height: 1;
   margin-left: 0.25rem;
-  padding: 0;
-  place-items: center;
-  vertical-align: text-bottom;
-  width: 1.15rem;
+  padding: 0.1rem 0.2rem;
+  text-decoration: none;
+  vertical-align: middle;
 }
 
 .fitd-ttk-special-armour-button[data-disabled="true"] {
@@ -26,9 +27,17 @@
 
 .fitd-ttk-special-armour-button img {
   display: block;
-  height: 1rem;
+  height: 1.05rem;
   pointer-events: none;
-  width: 1rem;
+  width: 1.05rem;
+}
+
+.fitd-ttk-special-armour-button span {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  pointer-events: none;
+  text-transform: uppercase;
 }
 
 .fitd-ttk-special-armour-button:hover {
@@ -36,8 +45,7 @@
 }
 
 .blades-alt .fitd-ttk-special-armour-button {
-  height: 1rem;
-  width: 1rem;
+  height: 1.3rem;
 }
 
 .fitd-ttk-special-armour-choice {
@@ -45,4 +53,8 @@
   display: flex;
   gap: 0.4rem;
   margin: 0.35rem 0;
+}
+
+.fitd-ttk-special-armour-chat .description p {
+  margin-bottom: 0;
 }

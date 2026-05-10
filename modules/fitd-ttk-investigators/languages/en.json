@@ -11,6 +11,9 @@
   "FITD-TTK-INVESTIGATORS.SpecialArmourChoice.resist": "Expend to Resist",
   "FITD-TTK-INVESTIGATORS.SpecialArmourChoice.push": "Expend to Push",
   "FITD-TTK-INVESTIGATORS.SpecialArmourChoice.use": "Expend",
-  "FITD-TTK-INVESTIGATORS.SpecialArmourChat": "Expended {ability}: {choice}.",
+  "FITD-TTK-INVESTIGATORS.SpecialArmourChatChoice.resist": "Expended to Resist",
+  "FITD-TTK-INVESTIGATORS.SpecialArmourChatChoice.push": "Expended to Push",
+  "FITD-TTK-INVESTIGATORS.SpecialArmourChatChoice.use": "Expended",
+  "FITD-TTK-INVESTIGATORS.SpecialArmourChat": "{choice}",
   "FITD-TTK-INVESTIGATORS.SpecialArmourTooltip": "{ability}: {description}"
 }
