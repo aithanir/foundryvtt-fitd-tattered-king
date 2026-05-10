@@ -6,28 +6,43 @@
 .fitd-ttk-special-armour-button {
   align-items: center;
   background: transparent;
-  border: 1px solid currentColor;
-  border-radius: 3px;
+  border: 0;
   cursor: pointer;
-  display: inline-flex;
-  font: inherit;
-  gap: 0.25rem;
+  display: inline-grid;
+  height: 1.15rem;
   line-height: 1;
-  margin-left: 0.35rem;
-  min-height: 1.35rem;
-  padding: 0.15rem 0.35rem;
+  margin-left: 0.25rem;
+  padding: 0;
+  place-items: center;
+  vertical-align: text-bottom;
+  width: 1.15rem;
 }
 
-.fitd-ttk-special-armour-button:disabled {
+.fitd-ttk-special-armour-button[data-disabled="true"] {
   cursor: default;
-  opacity: 0.55;
+  filter: grayscale(1);
+  opacity: 0.45;
 }
 
-.fitd-ttk-special-armour-button i {
+.fitd-ttk-special-armour-button img {
+  display: block;
+  height: 1rem;
   pointer-events: none;
+  width: 1rem;
+}
+
+.fitd-ttk-special-armour-button:hover {
+  text-shadow: none;
 }
 
 .blades-alt .fitd-ttk-special-armour-button {
-  font-size: 0.8rem;
-  vertical-align: middle;
+  height: 1rem;
+  width: 1rem;
+}
+
+.fitd-ttk-special-armour-choice {
+  align-items: baseline;
+  display: flex;
+  gap: 0.4rem;
+  margin: 0.35rem 0;
 }

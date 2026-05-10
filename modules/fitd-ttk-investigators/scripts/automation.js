@@ -1,4 +1,7 @@
 const MODULE_ID = 'fitd-ttk-investigators';
+const I18N_PREFIX = 'FITD-TTK-INVESTIGATORS';
+const SPECIAL_ARMOUR_ICON =
+  'modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.special-armor.png';
 const SPECIAL_ARMOUR_PATH = 'system.armor-uses.special';
 
 Hooks.once('ready', () => {
@@ -82,9 +85,9 @@ function insertSpecialArmourButton(container, button) {
     return;
   }
 
-  const label = container.querySelector('label');
-  if (label) {
-    label.append(button);
+  const abilityName = container.querySelector('.ability-name');
+  if (abilityName) {
+    abilityName.after(button);
     return;
   }
 
@@ -99,20 +102,21 @@ function insertSpecialArmourButton(container, button) {
 
 function buildSpecialArmourButton(actor, item) {
   const spent = isSpecialArmourSpent(actor);
-  const button = document.createElement('button');
-  button.type = 'button';
+  const button = document.createElement('a');
+  button.href = '#';
+  button.role = 'button';
+  button.ariaLabel = spent ? localize('SpecialArmourSpent') : localize('UseSpecialArmour');
   button.className = 'fitd-ttk-special-armour-button';
-  button.disabled = spent || !actor.isOwner;
+  button.dataset.disabled = String(spent || !actor.isOwner);
   button.dataset.tooltip = formatAutomationItemTooltip(item);
   button.title = formatAutomationItemTooltip(item);
-  button.innerHTML = `<i class="fa-solid fa-shield-halved" aria-hidden="true"></i><span>${escapeHtml(
-    spent ? localize('SpecialArmourSpent') : localize('UseSpecialArmour')
-  )}</span>`;
+  button.innerHTML = `<img src="${SPECIAL_ARMOUR_ICON}" alt="">`;
 
   button.addEventListener('click', async (event) => {
     event.preventDefault();
     event.stopPropagation();
 
+    if (spent || !actor.isOwner) return;
     await expendSpecialArmour(actor, item);
   });
 
@@ -122,19 +126,31 @@ function buildSpecialArmourButton(actor, item) {
 async function expendSpecialArmour(actor, item) {
   if (!actor.isOwner || isSpecialArmourSpent(actor)) return;
 
-  const confirmed = await confirmSpecialArmourUse(item);
-  if (!confirmed) return;
+  const choice = await confirmSpecialArmourUse(item);
+  if (!choice) return;
 
   await actor.update({ [SPECIAL_ARMOUR_PATH]: true });
-  await postSpecialArmourChat(actor, item);
+  await postSpecialArmourChat(actor, item, choice);
 }
 
 async function confirmSpecialArmourUse(item) {
+  const options = getSpecialArmourOptions(item);
   const content = `
     <p><strong>${escapeHtml(
-      game.i18n.format(`${MODULE_ID}.SpecialArmourConfirm`, { ability: item.name })
+      game.i18n.format(`${I18N_PREFIX}.SpecialArmourConfirm`, { ability: item.name })
     )}</strong></p>
-    <p>${escapeHtml(item.system?.description ?? '')}</p>
+    <form>
+      ${options
+        .map(
+          (option, index) => `
+            <label class="fitd-ttk-special-armour-choice">
+              <input type="radio" name="choice" value="${option.kind}" ${index === 0 ? 'checked' : ''}>
+              <span>${escapeHtml(option.label)}</span>
+            </label>
+          `
+        )
+        .join('')}
+    </form>
     <p>${escapeHtml(localize('SpecialArmourConfirmHint'))}</p>
   `;
 
@@ -142,23 +158,34 @@ async function confirmSpecialArmourUse(item) {
     return globalThis.Dialog.confirm({
       title: localize('ExpendSpecialArmour'),
       content,
-      yes: () => true,
+      yes: (html) => {
+        const root = getRootElement(html);
+        const value = root?.querySelector('input[name="choice"]:checked')?.value;
+        return options.find((option) => option.kind === value) ?? options[0];
+      },
       no: () => false,
       defaultYes: false,
     });
   }
 
-  return window.confirm(
-    `${game.i18n.format(`${MODULE_ID}.SpecialArmourConfirm`, { ability: item.name })}\n\n${
+  const confirmed = window.confirm(
+    `${game.i18n.format(`${I18N_PREFIX}.SpecialArmourConfirm`, { ability: item.name })}\n\n${
       item.system?.description ?? ''
     }`
   );
+  return confirmed ? options[0] : false;
 }
 
-async function postSpecialArmourChat(actor, item) {
-  const content = `<p>${escapeHtml(
-    game.i18n.format(`${MODULE_ID}.SpecialArmourChat`, { ability: item.name })
-  )}</p>`;
+async function postSpecialArmourChat(actor, item, choice) {
+  const content = `
+    <p>${escapeHtml(
+      game.i18n.format(`${I18N_PREFIX}.SpecialArmourChat`, {
+        ability: item.name,
+        choice: choice.label,
+      })
+    )}</p>
+    <p>${escapeHtml(item.system?.description ?? '')}</p>
+  `;
 
   await globalThis.ChatMessage.create({
     speaker: globalThis.ChatMessage.getSpeaker({ actor }),
@@ -171,10 +198,31 @@ function isSpecialArmourSpent(actor) {
 }
 
 function formatAutomationItemTooltip(item) {
-  return game.i18n.format(`${MODULE_ID}.SpecialArmourTooltip`, {
+  return game.i18n.format(`${I18N_PREFIX}.SpecialArmourTooltip`, {
     ability: item.name,
     description: item.system?.description ?? '',
   });
+}
+
+function getSpecialArmourOptions(item) {
+  const automation = item.flags?.[MODULE_ID]?.automation ?? [];
+  const specialArmour = automation.find(
+    (entry) => entry?.kind === 'specialArmour' && entry?.slot === 'special'
+  );
+  const triggers = Array.isArray(specialArmour?.triggers) ? specialArmour.triggers : [];
+  const options = triggers.map((trigger) => getSpecialArmourOption(trigger)).filter(Boolean);
+
+  return options.length > 0 ? options : [getSpecialArmourOption('use')];
+}
+
+function getSpecialArmourOption(trigger) {
+  const key = String(trigger ?? '').trim();
+  if (!key) return null;
+
+  return {
+    kind: key,
+    label: localize(`SpecialArmourChoice.${key}`),
+  };
 }
 
 function getRootElement(html) {
@@ -183,7 +231,7 @@ function getRootElement(html) {
 }
 
 function localize(key) {
-  return game.i18n.localize(`${MODULE_ID}.${key}`);
+  return game.i18n.localize(`${I18N_PREFIX}.${key}`);
 }
 
 function normalizeName(value) {
