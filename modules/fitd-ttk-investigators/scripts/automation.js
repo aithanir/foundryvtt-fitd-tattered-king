@@ -11,11 +11,11 @@ Hooks.once('ready', () => {
   Hooks.on('renderBladesAlternateActorSheet', enhanceSpecialArmour);
 });
 
-function enhanceSpecialArmour(app, html) {
+function enhanceSpecialArmour(app, html, data) {
   const actor = app.actor;
   if (actor?.type !== 'character') return;
 
-  const items = getSpecialArmourItems(actor);
+  const items = getSpecialArmourItems(actor, data);
   if (items.length === 0) return;
 
   const root = getRootElement(html);
@@ -25,11 +25,40 @@ function enhanceSpecialArmour(app, html) {
   addSpecialArmourItemControls(root, actor, items);
 }
 
-function getSpecialArmourItems(actor) {
-  return actor.items.filter((item) => {
-    const automation = item.flags?.[MODULE_ID]?.automation ?? [];
-    return automation.some((entry) => entry?.kind === 'specialArmour' && entry?.slot === 'special');
+function getSpecialArmourItems(actor, data) {
+  return uniqueItemsById([
+    ...actor.items.filter(isSpecialArmourItem),
+    ...getSelectedVirtualAutomationItems(data),
+  ]);
+}
+
+function isSpecialArmourItem(item) {
+  const automation = item.flags?.[MODULE_ID]?.automation ?? [];
+  return automation.some((entry) => entry?.kind === 'specialArmour' && entry?.slot === 'special');
+}
+
+function getSelectedVirtualAutomationItems(data) {
+  const abilities = data?.available_playbook_abilities;
+  if (!Array.isArray(abilities)) return [];
+
+  return abilities.filter((item) => {
+    const progress = Number(item?._progress) || 0;
+    return progress > 0 && isSpecialArmourItem(item);
   });
+}
+
+function uniqueItemsById(items) {
+  const seen = new Set();
+  const unique = [];
+
+  for (const item of items) {
+    const key = item.uuid ?? item.id ?? item._id ?? item.name;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    unique.push(item);
+  }
+
+  return unique;
 }
 
 function annotateSpecialArmourCheckbox(root, items) {
