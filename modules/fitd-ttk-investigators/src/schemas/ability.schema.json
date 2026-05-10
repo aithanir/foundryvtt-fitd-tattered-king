@@ -35,6 +35,11 @@
       "type": "boolean",
       "default": false
     },
+    "sequence": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Optional presentation order within the ability's class. Lower values sort first after selected/special-armour grouping."
+    },
     "tags": {
       "$ref": "#/$defs/tags"
     },

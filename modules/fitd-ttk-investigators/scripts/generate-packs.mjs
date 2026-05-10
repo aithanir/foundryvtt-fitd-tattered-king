@@ -58,7 +58,8 @@ async function main() {
   const abilities = await loadYamlDocuments(
     path.join(SRC_DIR, 'abilities'),
     schemas.ability,
-    'ability'
+    'ability',
+    normalizeAbilitySource
   );
   const items = await loadItemDocuments(schemas.item, classes);
 
@@ -78,6 +79,13 @@ function normalizeClassSource(source) {
   return {
     ...source,
     base_skills: normalizeBaseSkills(source),
+  };
+}
+
+function normalizeAbilitySource(source, context) {
+  return {
+    ...source,
+    sequence: source.sequence ?? sortValue(context.index),
   };
 }
 
@@ -297,6 +305,7 @@ function buildAbilityDocument(source, index) {
     folder: null,
     sort: sortValue(index),
     flags: buildFlags(source, {
+      sequence: source.sequence,
       automation: source.automation ?? [],
       ...(source.flags ?? {}),
     }),

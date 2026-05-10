@@ -32,6 +32,10 @@ port those changes back into `src`.
   as `items/academic.yaml`; `items/common.yaml` stays unclassed/general.
 - Put custom authoring tags in `tags`; the generator stores them in module
   flags for later automation.
+- Author abilities in their intended class presentation order. The generator
+  stores that order as a module `sequence` flag; add an explicit `sequence`
+  field only when an ability needs to sort somewhere other than its YAML
+  position.
 - Author `description`, `experience_clues`, and `additional_info` as plain text
   or light markdown.
 - Always serialize long-form text fields such as `description`,

@@ -1,4 +1,5 @@
 import { BladesHelpers } from '../../../systems/blades-in-the-dark/module/blades-helpers.js';
+import { BladesActorSheet } from '../../../systems/blades-in-the-dark/module/blades-actor-sheet.js';
 import { BladesSheet } from '../../../systems/blades-in-the-dark/module/blades-sheet.js';
 
 const MODULE_ID = 'fitd-ttk-investigators';
@@ -11,10 +12,20 @@ let addContext = null;
 Hooks.once('ready', async () => {
   if (game.system?.id !== 'blades-in-the-dark') return;
 
+  registerBaseSheetAbilityOrdering();
   registerBaseSheetItemFilters();
   await registerAlternateSheetItemFilters();
+  await registerAlternateSheetAbilityOrdering();
   await registerAlternateSheetClassDropFix();
 });
+
+function registerBaseSheetAbilityOrdering() {
+  wrapMethod(BladesActorSheet.prototype, 'getData', async function (wrapped, ...args) {
+    const sheetData = await wrapped(...args);
+    sortOwnedAbilitySlots(sheetData?.items);
+    return sheetData;
+  });
+}
 
 function registerBaseSheetItemFilters() {
   wrapMethod(BladesSheet.prototype, '_onItemAddClick', function (wrapped, event, ...args) {
@@ -58,6 +69,19 @@ async function registerAlternateSheetItemFilters() {
     }
 
     return wrapped(itemType, ...args);
+  });
+}
+
+async function registerAlternateSheetAbilityOrdering() {
+  if (!game.modules.get('bitd-alternate-sheets')?.active) return;
+
+  const { BladesAlternateActorSheet } =
+    await import('../../bitd-alternate-sheets/scripts/blades-alternate-actor-sheet.js');
+
+  wrapMethod(BladesAlternateActorSheet.prototype, 'getData', async function (wrapped, ...args) {
+    const sheetData = await wrapped(...args);
+    sortAbilityList(sheetData?.available_playbook_abilities);
+    return sheetData;
   });
 }
 
@@ -161,7 +185,7 @@ async function getInvestigatorEntries(type, packId) {
   );
   const items = worldItems.concat(packItems);
 
-  return items.sort((a, b) => a.name.localeCompare(b.name));
+  return type === 'ability' ? sortAbilityList(items) : items.sort((a, b) => a.name.localeCompare(b.name));
 }
 
 async function getInvestigatorPackEntries(type, packId) {
@@ -216,6 +240,74 @@ function isInvestigatorClassIcon(icon) {
     icon.startsWith(`modules/${MODULE_ID}/styles/assets/icons/ttk-investigator-icon.`) &&
     icon.endsWith('.png')
   );
+}
+
+function sortOwnedAbilitySlots(items) {
+  if (!Array.isArray(items)) return;
+
+  const sortedAbilities = sortAbilityList(
+    items.filter((item) => item.type === 'ability' && isInvestigatorAbility(item)),
+    { ownedSelected: true }
+  );
+  let abilityIndex = 0;
+
+  for (const [index, item] of items.entries()) {
+    if (item.type === 'ability' && isInvestigatorAbility(item)) {
+      items[index] = sortedAbilities[abilityIndex];
+      abilityIndex += 1;
+    }
+  }
+}
+
+function sortAbilityList(abilities, options = {}) {
+  if (!Array.isArray(abilities)) return abilities;
+  return abilities.sort((a, b) => compareAbilities(a, b, options));
+}
+
+function compareAbilities(a, b, options) {
+  return (
+    compareNumbers(abilityBucket(a, options), abilityBucket(b, options)) ||
+    compareNumbers(abilitySequence(a), abilitySequence(b)) ||
+    normalizeAbilityName(a).localeCompare(normalizeAbilityName(b))
+  );
+}
+
+function abilityBucket(item, options) {
+  const selected = isAbilitySelected(item, options);
+  const specialArmour = isSpecialArmourAbility(item);
+
+  if (selected && specialArmour) return 0;
+  if (selected) return 1;
+  if (specialArmour) return 2;
+  return 3;
+}
+
+function isAbilitySelected(item, options = {}) {
+  if (options.ownedSelected) return true;
+  if (item?._progress !== undefined) return Number(item._progress) > 0;
+  if (item?._ownedId) return true;
+  return Boolean(item?.system?.purchased);
+}
+
+function isSpecialArmourAbility(item) {
+  const automation = item?.flags?.[MODULE_ID]?.automation ?? [];
+  return automation.some((entry) => entry?.kind === 'specialArmour' && entry?.slot === 'special');
+}
+
+function abilitySequence(item) {
+  const sequence = Number(item?.flags?.[MODULE_ID]?.sequence);
+  if (Number.isFinite(sequence)) return sequence;
+
+  const sort = Number(item?.sort);
+  return Number.isFinite(sort) ? sort : Number.MAX_SAFE_INTEGER;
+}
+
+function normalizeAbilityName(item) {
+  return String(item?.name ?? '').trim();
+}
+
+function compareNumbers(a, b) {
+  return a === b ? 0 : a - b;
 }
 
 function wrapMethod(target, methodName, wrapper) {
