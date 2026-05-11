@@ -10,6 +10,17 @@ export const MAX_VETERAN_ABILITIES = 3;
 export const SPECIAL_ARMOUR_ICON =
   'modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.special-armor.png';
 export const SPECIAL_ARMOUR_PATH = 'system.armor-uses.special';
+export const ABILITY_USES_FLAG = 'abilityUses';
+
+export const USAGE_REFRESHES = new Set(['scene', 'session', 'operation']);
+export const ROLL_REMINDER_TRIGGERS = new Set([
+  'any',
+  'competency',
+  'resistance',
+  'flashback',
+  'engagement',
+  'downtime',
+]);
 
 export const DEFAULT_ACTOR_ICONS = new Set(['icons/svg/mystery-man.svg']);
 
@@ -24,12 +35,44 @@ export function getAutomationEntries(item) {
   return Array.isArray(automation) ? automation : [];
 }
 
+export function getModuleSourceId(item) {
+  return item?.flags?.[MODULE_ID]?.sourceId ?? item?.id ?? item?._id ?? normalizeName(item?.name);
+}
+
 export function hasSpecialArmourAutomation(item) {
   return getAutomationEntries(item).some(isSpecialArmourAutomationEntry);
 }
 
 export function isSpecialArmourAutomationEntry(entry) {
   return entry?.kind === 'specialArmour' && entry?.slot === 'special';
+}
+
+export function getUsageAutomationEntry(item) {
+  return getAutomationEntries(item).find(isUsageAutomationEntry) ?? null;
+}
+
+export function isUsageAutomationEntry(entry) {
+  const limit = Number(entry?.limit);
+  return (
+    entry?.kind === 'usage' &&
+    Number.isInteger(limit) &&
+    limit > 0 &&
+    USAGE_REFRESHES.has(entry?.refresh)
+  );
+}
+
+export function getRollReminderEntries(item) {
+  return getAutomationEntries(item).filter(isRollReminderAutomationEntry);
+}
+
+export function isRollReminderAutomationEntry(entry) {
+  return (
+    entry?.kind === 'rollReminder' &&
+    ROLL_REMINDER_TRIGGERS.has(entry?.trigger ?? 'any') &&
+    typeof entry?.condition === 'string' &&
+    entry.condition.trim().length > 0 &&
+    typeof entry?.benefit?.type === 'string'
+  );
 }
 
 export function getRootElement(html) {
