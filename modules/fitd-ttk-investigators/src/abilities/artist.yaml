@@ -19,6 +19,13 @@
     When you seize a room’s attention through performance, speech, spectacle, or charm, gain **+1 effect** to create an opening.
   price: 1
   class_default: false
+  automation:
+    - kind: rollReminder
+      trigger: competency
+      benefit:
+        type: effect
+        value: 1
+      condition: When you seize a room's attention through performance, speech, spectacle, or charm.
 - id: truth-from-fiction
   class: Artist
   name: Truth from Fiction
@@ -59,6 +66,13 @@
     When someone treats you as harmless, decorative, or safe company, **Improve position** to draw them out or deflect suspicion.
   price: 1
   class_default: false
+  automation:
+    - kind: rollReminder
+      trigger: competency
+      benefit:
+        type: position
+        value: improve
+      condition: When someone treats you as harmless, decorative, or safe company.
 - id: notices-and-reviews
   class: Artist
   name: Notices and Reviews

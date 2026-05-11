@@ -19,6 +19,13 @@
     When rank, credentials, or procedure could plausibly seize control of a scene, step in. **Improve position** on your first action.
   price: 1
   class_default: false
+  automation:
+    - kind: rollReminder
+      trigger: competency
+      benefit:
+        type: position
+        value: improve
+      condition: When rank, credentials, or procedure could plausibly seize control of a scene.
 - id: professional-courtesy
   class: Professional
   name: Professional Courtesy
@@ -51,6 +58,10 @@
     Once per operation, produce mundane official support: car, phone, letterhead, desk, courier, forms, appointment, or clerical help.
   price: 1
   class_default: false
+  automation:
+    - kind: usage
+      limit: 1
+      refresh: operation
 - id: official-channels
   class: Professional
   name: Official Channels

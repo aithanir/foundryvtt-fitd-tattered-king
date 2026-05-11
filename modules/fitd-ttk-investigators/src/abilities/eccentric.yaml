@@ -19,6 +19,10 @@
     Once per operation, produce an odd object, tool, part, map, specimen, or hobby resource that plausibly helps now.
   price: 1
   class_default: false
+  automation:
+    - kind: usage
+      limit: 1
+      refresh: operation
 - id: i-know-a-chap
   class: Eccentric
   name: I Know a Chap

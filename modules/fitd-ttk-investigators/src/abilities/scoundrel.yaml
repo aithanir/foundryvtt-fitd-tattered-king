@@ -19,6 +19,13 @@
     When you swap, plant, remove, or mislabel an object, record, or Evidence, **Improve position**.
   price: 1
   class_default: false
+  automation:
+    - kind: rollReminder
+      trigger: competency
+      benefit:
+        type: position
+        value: improve
+      condition: When you swap, plant, remove, or mislabel an object, record, or Evidence.
 - id: pilfer
   class: Scoundrel
   name: Pilfer

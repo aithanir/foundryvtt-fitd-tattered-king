@@ -19,6 +19,10 @@
     Once per operation, name a favour owed by someone useful. They provide access, transport, cover, introduction, or temporary quality.
   price: 1
   class_default: false
+  automation:
+    - kind: usage
+      limit: 1
+      refresh: operation
 - id: licentious-indulgence
   class: Dilettante
   name: Licentious Indulgence

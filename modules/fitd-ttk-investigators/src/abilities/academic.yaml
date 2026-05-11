@@ -19,6 +19,13 @@
     Gain **+1d** when resisting deception, false certainty, or unnatural shock.
   price: 1
   class_default: false
+  automation:
+    - kind: rollReminder
+      trigger: resistance
+      benefit:
+        type: dice
+        value: 1
+      condition: When resisting deception, false certainty, or unnatural shock.
 - id: extensive-research
   class: Academic
   name: Extensive Research
@@ -29,7 +36,7 @@
   class_default: false
 - id: eureka
   class: Academic
-  name: "Eureka!"
+  name: 'Eureka!'
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
   description: |-
     When you Push on a Research or Fabricate action, gain **+1 effect**.
@@ -43,6 +50,10 @@
     Once per session, when you Push, you may resolve an action with Insight.
   price: 1
   class_default: false
+  automation:
+    - kind: usage
+      limit: 1
+      refresh: session
 - id: higher-education
   class: Academic
   name: Higher Education

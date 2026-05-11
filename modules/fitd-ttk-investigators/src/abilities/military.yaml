@@ -21,7 +21,7 @@
   class_default: false
 - id: if-it-bleeds
   class: Military
-  name: "If it Bleeds…"
+  name: 'If it Bleeds…'
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
   description: |-
     Gain **+1 effect** when attacking a wounded target.
@@ -51,6 +51,13 @@
     When danger erupts suddenly, you may act before panic or confusion takes hold. **Improve position** on your first action.
   price: 1
   class_default: false
+  automation:
+    - kind: rollReminder
+      trigger: competency
+      benefit:
+        type: position
+        value: improve
+      condition: When danger erupts suddenly and you act before panic or confusion takes hold.
 - id: well-maintained
   class: Military
   name: Well-Maintained
@@ -67,3 +74,7 @@
     Once per session, stabilize someone under pressure. They may ignore one physical harm penalty until the scene ends.
   price: 1
   class_default: false
+  automation:
+    - kind: usage
+      limit: 1
+      refresh: session

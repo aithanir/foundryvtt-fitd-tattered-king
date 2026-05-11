@@ -19,9 +19,16 @@
     When you act on an incomplete but grounded lead, gain **+1 effect**. If it fails, the GM shows what your hunch missed.
   price: 1
   class_default: false
+  automation:
+    - kind: rollReminder
+      trigger: competency
+      benefit:
+        type: effect
+        value: 1
+      condition: When you act on an incomplete but grounded lead.
 - id: evidence
   class: Investigator
-  name: "Evidence!"
+  name: 'Evidence!'
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
   description: |-
     When you confront someone with Evidence, gain **+1 effect** to pressure, expose, unsettle, or force a reaction.
@@ -43,6 +50,13 @@
     When you press a witness, source, suspect, or system for answers despite risk, gain **+1d**.
   price: 1
   class_default: false
+  automation:
+    - kind: rollReminder
+      trigger: competency
+      benefit:
+        type: dice
+        value: 1
+      condition: When you press a witness, source, suspect, or system for answers despite risk.
 - id: small-favor
   class: Investigator
   name: Small Favor
@@ -51,6 +65,10 @@
     Once per operation, name a minor contact, clerk, copper, journalist, or old acquaintance who can provide a narrow help.
   price: 1
   class_default: false
+  automation:
+    - kind: usage
+      limit: 1
+      refresh: operation
 - id: loose-ends
   class: Investigator
   name: Loose Ends

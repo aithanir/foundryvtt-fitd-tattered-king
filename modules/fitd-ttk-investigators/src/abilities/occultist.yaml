@@ -35,6 +35,13 @@
     When a sign, omen, phrase, number, or image recurs, name the pattern. Gain **+1d** when acting on it.
   price: 1
   class_default: false
+  automation:
+    - kind: rollReminder
+      trigger: competency
+      benefit:
+        type: dice
+        value: 1
+      condition: When a sign, omen, phrase, number, or image recurs and you act on that pattern.
 - id: a-test-of-will
   class: Occultist
   name: A Test of Will

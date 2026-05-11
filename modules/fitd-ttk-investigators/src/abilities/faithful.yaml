@@ -19,6 +19,10 @@
     Once per scene, when fear, despair, or pressure would split the crew, isolate someone, or make an ally give up, reduce or redirect that consequence.
   price: 1
   class_default: false
+  automation:
+    - kind: usage
+      limit: 1
+      refresh: scene
 - id: hallow
   class: Faithful
   name: Hallow
@@ -35,6 +39,16 @@
     Once per scene, steady someone with prayer, witness, or conviction. They gain **+1d** on their next resistance roll against Mental Shock.
   price: 1
   class_default: false
+  automation:
+    - kind: usage
+      limit: 1
+      refresh: scene
+    - kind: rollReminder
+      trigger: resistance
+      benefit:
+        type: dice
+        value: 1
+      condition: When prayer, witness, or conviction steadies someone against Mental Shock.
 - id: a-glimmer-of-hope
   class: Faithful
   name: A Glimmer of Hope
@@ -59,6 +73,10 @@
     Once per scene, create a brief pause: silence, prayer, breath, touch, or stillness. One person may act before pressure resumes.
   price: 1
   class_default: false
+  automation:
+    - kind: usage
+      limit: 1
+      refresh: scene
 - id: confession
   class: Faithful
   name: Confession

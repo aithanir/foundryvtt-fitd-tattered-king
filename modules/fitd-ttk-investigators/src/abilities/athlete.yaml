@@ -13,7 +13,7 @@
       triggers: [resist, push]
 - id: watch-this
   class: Athlete
-  name: "Watch This!"
+  name: 'Watch This!'
   img: modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.default.png
   description: |-
     Push yourself to attempt a physical line that would normally need setup, more time, or be too much to resolve in one action.
@@ -35,6 +35,13 @@
     When you make a physical action from a **desperate position**, gain **+1 effect**. On success, you may immediately reposition yourself.
   price: 1
   class_default: false
+  automation:
+    - kind: rollReminder
+      trigger: competency
+      benefit:
+        type: effect
+        value: 1
+      condition: When you make a physical action from a desperate position.
 - id: grit-your-teeth
   class: Athlete
   name: Grit Your Teeth
@@ -43,6 +50,13 @@
     Gain **+1d** to resist pain, fatigue, fear, intimidation, or panic when training, breath, or bodily focus steadies you.
   price: 1
   class_default: false
+  automation:
+    - kind: rollReminder
+      trigger: resistance
+      benefit:
+        type: dice
+        value: 1
+      condition: When resisting pain, fatigue, fear, intimidation, or panic through training, breath, or bodily focus.
 - id: perseverance
   class: Athlete
   name: Perseverance
@@ -51,6 +65,13 @@
     When a pursuit, search, stakeout, climb, or chase would stall from exhaustion or repetition, **Improve position** to continue.
   price: 1
   class_default: false
+  automation:
+    - kind: rollReminder
+      trigger: competency
+      benefit:
+        type: position
+        value: improve
+      condition: When a pursuit, search, stakeout, climb, or chase would stall from exhaustion or repetition.
 - id: practice-makes-perfect
   class: Athlete
   name: Practice Makes Perfect
@@ -67,3 +88,7 @@
     Once per session, roll Fortune using **Physique** to clear Stress. **6:** clear 2. **4/5:** clear 1. **1–3:** clear 0.
   price: 1
   class_default: false
+  automation:
+    - kind: usage
+      limit: 1
+      refresh: session
