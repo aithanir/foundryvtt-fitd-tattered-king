@@ -54,7 +54,7 @@
       "name": "class",
       "label": "Classes",
       "system": "blades-in-the-dark",
-      "path": "./packs/classes.db",
+      "path": "./packs/classes",
       "banner": "systems/blades-in-the-dark/images/compendium-banners/Doskvol_00.webp",
       "type": "Item"
     },
@@ -62,7 +62,7 @@
       "name": "ability",
       "label": "Abilities",
       "system": "blades-in-the-dark",
-      "path": "./packs/abilities.db",
+      "path": "./packs/abilities",
       "banner": "systems/blades-in-the-dark/images/compendium-banners/Doskvol_06.webp",
       "type": "Item"
     },
@@ -70,7 +70,7 @@
       "name": "item",
       "label": "Items",
       "system": "blades-in-the-dark",
-      "path": "./packs/items.db",
+      "path": "./packs/items",
       "banner": "systems/blades-in-the-dark/images/compendium-banners/Doskvol_05.webp",
       "type": "Item"
     }
