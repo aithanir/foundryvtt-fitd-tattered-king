@@ -16,6 +16,7 @@ import {
   localize,
   normalizeName,
 } from './shared.js';
+import { wrapMethod } from './wrappers.js';
 
 let addContext = null;
 
@@ -33,11 +34,20 @@ Hooks.once('ready', async () => {
 });
 
 function registerBaseSheetAbilityOrdering() {
-  wrapMethod(BladesActorSheet.prototype, 'getData', async function (wrapped, ...args) {
-    const sheetData = await wrapped(...args);
-    sortOwnedAbilitySlots(sheetData?.items);
-    return sheetData;
-  });
+  wrapMethod(
+    BladesActorSheet.prototype,
+    'getData',
+    async function (wrapped, ...args) {
+      const sheetData = await wrapped(...args);
+      sortOwnedAbilitySlots(sheetData?.items);
+      return sheetData;
+    },
+    {
+      libWrapperTarget:
+        'CONFIG.Actor.sheetClasses.character["blades.BladesActorSheet"].cls.prototype.getData',
+      label: 'BladesActorSheet.prototype.getData',
+    }
+  );
 }
 
 function registerBaseSheetClassDrops() {
@@ -52,46 +62,70 @@ function registerBaseSheetClassDrops() {
 
       event?.preventDefault?.();
       await switchBaseSheetInvestigatorClass(this.actor, item);
+    },
+    {
+      libWrapperTarget:
+        'CONFIG.Actor.sheetClasses.character["blades.BladesActorSheet"].cls.prototype._onDropItem',
+      label: 'BladesActorSheet.prototype._onDropItem',
+      type: 'MIXED',
     }
   );
 }
 
 function registerBaseSheetItemFilters() {
-  wrapMethod(BladesSheet.prototype, '_onItemAddClick', async function (wrapped, event, ...args) {
-    const itemType = event?.currentTarget?.dataset?.itemType;
-    if (!['ability', 'class', 'item'].includes(itemType) || this.actor?.type !== 'character') {
-      return wrapped(event, ...args);
+  wrapMethod(
+    BladesSheet.prototype,
+    '_onItemAddClick',
+    async function (wrapped, event, ...args) {
+      const itemType = event?.currentTarget?.dataset?.itemType;
+      if (!['ability', 'class', 'item'].includes(itemType) || this.actor?.type !== 'character') {
+        return wrapped(event, ...args);
+      }
+
+      if (itemType === 'ability' && isInvestigatorActor(this.actor)) {
+        event.preventDefault();
+        return openInvestigatorAbilityDialog(this.actor);
+      }
+
+      if (itemType === 'class') {
+        event.preventDefault();
+        return openInvestigatorClassDialog(this.actor);
+      }
+
+      return withAddContext({ actor: this.actor, itemType }, () => wrapped(event, ...args));
+    },
+    {
+      libWrapperTarget:
+        'CONFIG.Actor.sheetClasses.character["blades.BladesActorSheet"].cls.prototype._onItemAddClick',
+      label: 'BladesSheet.prototype._onItemAddClick',
+      type: 'MIXED',
     }
+  );
 
-    if (itemType === 'ability' && isInvestigatorActor(this.actor)) {
-      event.preventDefault();
-      return openInvestigatorAbilityDialog(this.actor);
+  wrapMethod(
+    BladesHelpers,
+    'getAllItemsByType',
+    async function (wrapped, itemType, ...args) {
+      const items = await wrapped(itemType, ...args);
+      if (itemType === 'class') return filterToInvestigatorClasses(items);
+      if (itemType === 'ability') {
+        return addContext?.itemType === 'ability'
+          ? filterAbilitiesForActor(items, addContext.actor)
+          : filterToInvestigatorAbilities(items);
+      }
+      if (itemType !== 'item') return items;
+
+      if (addContext?.itemType === 'item') {
+        return filterItemsForActor(items, addContext.actor);
+      }
+
+      return filterToInvestigatorItems(items);
+    },
+    {
+      libWrapperTarget: 'BladesHelpers.getAllItemsByType',
+      label: 'BladesHelpers.getAllItemsByType',
     }
-
-    if (itemType === 'class') {
-      event.preventDefault();
-      return openInvestigatorClassDialog(this.actor);
-    }
-
-    return withAddContext({ actor: this.actor, itemType }, () => wrapped(event, ...args));
-  });
-
-  wrapMethod(BladesHelpers, 'getAllItemsByType', async function (wrapped, itemType, ...args) {
-    const items = await wrapped(itemType, ...args);
-    if (itemType === 'class') return filterToInvestigatorClasses(items);
-    if (itemType === 'ability') {
-      return addContext?.itemType === 'ability'
-        ? filterAbilitiesForActor(items, addContext.actor)
-        : filterToInvestigatorAbilities(items);
-    }
-    if (itemType !== 'item') return items;
-
-    if (addContext?.itemType === 'item') {
-      return filterItemsForActor(items, addContext.actor);
-    }
-
-    return filterToInvestigatorItems(items);
-  });
+  );
 }
 
 function registerBaseSheetClassDeletes() {
@@ -121,17 +155,22 @@ async function registerAlternateSheetItemFilters() {
   if (!game.modules.get('bitd-alternate-sheets')?.active) return;
 
   const { Utils } = await import('../../bitd-alternate-sheets/scripts/utils.js');
-  wrapMethod(Utils, 'getSourcedItemsByType', async function (wrapped, itemType, ...args) {
-    if (itemType === 'ability') {
-      return getInvestigatorAbilities();
-    }
+  wrapMethod(
+    Utils,
+    'getSourcedItemsByType',
+    async function (wrapped, itemType, ...args) {
+      if (itemType === 'ability') {
+        return getInvestigatorAbilities();
+      }
 
-    if (itemType === 'item') {
-      return getInvestigatorItems();
-    }
+      if (itemType === 'item') {
+        return getInvestigatorItems();
+      }
 
-    return wrapped(itemType, ...args);
-  });
+      return wrapped(itemType, ...args);
+    },
+    { label: 'Alternate Utils.getSourcedItemsByType' }
+  );
 }
 
 async function registerAlternateSheetAbilityOrdering() {
@@ -140,11 +179,18 @@ async function registerAlternateSheetAbilityOrdering() {
   const { BladesAlternateActorSheet } =
     await import('../../bitd-alternate-sheets/scripts/blades-alternate-actor-sheet.js');
 
-  wrapMethod(BladesAlternateActorSheet.prototype, 'getData', async function (wrapped, ...args) {
-    const sheetData = await wrapped(...args);
-    sortAbilityList(sheetData?.available_playbook_abilities);
-    return sheetData;
-  });
+  // Alternate sheet render data includes virtual ability state; direct wrapping
+  // preserves the known-compatible internal call flow when libWrapper is active.
+  wrapMethod(
+    BladesAlternateActorSheet.prototype,
+    'getData',
+    async function (wrapped, ...args) {
+      const sheetData = await wrapped(...args);
+      sortAbilityList(sheetData?.available_playbook_abilities);
+      return sheetData;
+    },
+    { label: 'BladesAlternateActorSheet.prototype.getData' }
+  );
 }
 
 async function registerAlternateSheetVeteranControl() {
@@ -163,6 +209,8 @@ async function registerAlternateSheetClassDropFix() {
   const { Utils } = await import('../../bitd-alternate-sheets/scripts/utils.js');
   const { queueUpdate } = await import('../../bitd-alternate-sheets/scripts/lib/update-queue.js');
 
+  // This internal alternate-sheet seam may consume class drops, so keep it as a
+  // direct MIXED wrapper instead of routing it through a libWrapper target path.
   wrapMethod(
     BladesAlternateActorSheet.prototype,
     'switchPlaybook',
@@ -173,6 +221,10 @@ async function registerAlternateSheetClassDropFix() {
       }
 
       return switchInvestigatorClass(this, newPlaybookItem, { Utils, queueUpdate });
+    },
+    {
+      label: 'BladesAlternateActorSheet.prototype.switchPlaybook',
+      type: 'MIXED',
     }
   );
 }
@@ -196,8 +248,8 @@ async function switchInvestigatorClass(sheet, classItem, { Utils, queueUpdate })
   await sheet.switchToPlaybookAcquaintances(classItem);
   await setActorAttributesFromClass(actor, classItem, { Utils, queueUpdate });
   await ensureActorClass(actor, classItem, queueUpdate);
-  await repairActorClass(actor, classItem, queueUpdate);
   await updateActorIconFromClass(actor, classItem, queueUpdate);
+  await waitForRenderCycle();
   sheet.render(false);
 }
 
@@ -217,7 +269,7 @@ async function setActorAttributesFromClass(actor, classItem, { Utils, queueUpdat
     attribute.exp_max = String(attribute.exp_max);
   }
 
-  await queueUpdate(() => actor.update({ system: { attributes } }));
+  await queueUpdate(() => actor.update({ system: { attributes } }, { render: false }));
 }
 
 async function ensureActorClass(actor, classItem, queueUpdate = null) {
@@ -228,26 +280,14 @@ async function ensureActorClass(actor, classItem, queueUpdate = null) {
     .map((item) => item.id);
   if (existingClassIds.length > 0) {
     await queuedActorUpdate(queueUpdate, () =>
-      actor.deleteEmbeddedDocuments('Item', existingClassIds)
+      actor.deleteEmbeddedDocuments('Item', existingClassIds, { render: false })
     );
   }
 
   const classData = classItem.toObject();
-  await queuedActorUpdate(queueUpdate, () => actor.createEmbeddedDocuments('Item', [classData]));
-}
-
-async function repairActorClass(actor, classItem, queueUpdate = null) {
-  const classItems = actor.items.filter((item) => item.type === 'class');
-  const hasSingleTargetClass = classItems.length === 1 && classItems[0].id === classItem.id;
-  if (hasSingleTargetClass) return;
-
-  const classIds = classItems.map((item) => item.id);
-  if (classIds.length > 0) {
-    await queuedActorUpdate(queueUpdate, () => actor.deleteEmbeddedDocuments('Item', classIds));
-  }
-
-  const classData = classItem.toObject();
-  await queuedActorUpdate(queueUpdate, () => actor.createEmbeddedDocuments('Item', [classData]));
+  await queuedActorUpdate(queueUpdate, () =>
+    actor.createEmbeddedDocuments('Item', [classData], { render: false })
+  );
 }
 
 async function clearActorAbilityState(actor, queueUpdate = null) {
@@ -255,12 +295,14 @@ async function clearActorAbilityState(actor, queueUpdate = null) {
 
   const abilityIds = actor.items.filter((item) => item.type === 'ability').map((item) => item.id);
   if (abilityIds.length > 0) {
-    await queuedActorUpdate(queueUpdate, () => actor.deleteEmbeddedDocuments('Item', abilityIds));
+    await queuedActorUpdate(queueUpdate, () =>
+      actor.deleteEmbeddedDocuments('Item', abilityIds, { render: false })
+    );
   }
 
   if (actor.getFlag(ALTERNATE_SHEETS_ID, 'multiAbilityProgress')) {
     await queuedActorUpdate(queueUpdate, () =>
-      actor.unsetFlag(ALTERNATE_SHEETS_ID, 'multiAbilityProgress')
+      actor.unsetFlag(ALTERNATE_SHEETS_ID, 'multiAbilityProgress', { render: false })
     );
   }
 }
@@ -270,11 +312,22 @@ async function updateActorIconFromClass(actor, classItem, queueUpdate = null) {
   if (!isInvestigatorClassIcon(classIcon)) return;
   if (actor.img === classIcon) return;
 
-  await queuedActorUpdate(queueUpdate, () => actor.update({ img: classIcon }));
+  await queuedActorUpdate(queueUpdate, () => actor.update({ img: classIcon }, { render: false }));
 }
 
 async function queuedActorUpdate(queueUpdate, callback) {
   return queueUpdate ? queueUpdate(callback) : callback();
+}
+
+async function waitForRenderCycle() {
+  await new Promise((resolve) => {
+    if (typeof globalThis.requestAnimationFrame === 'function') {
+      globalThis.requestAnimationFrame(resolve);
+      return;
+    }
+
+    globalThis.setTimeout(resolve, 0);
+  });
 }
 
 function filterAbilitiesForActor(abilities, actor) {
@@ -801,15 +854,4 @@ function normalizeAbilityName(item) {
 
 function compareNumbers(a, b) {
   return a === b ? 0 : a - b;
-}
-
-function wrapMethod(target, methodName, wrapper) {
-  if (typeof target?.[methodName] !== 'function') {
-    return;
-  }
-
-  const original = target[methodName];
-  target[methodName] = function (...args) {
-    return wrapper.call(this, original.bind(this), ...args);
-  };
 }

@@ -19,11 +19,7 @@
       "path": "languages/en.json"
     }
   ],
-  "esmodules": [
-    "scripts/class-icons.js",
-    "scripts/item-filters.js",
-    "scripts/automation.js"
-  ],
+  "esmodules": ["scripts/class-icons.js", "scripts/item-filters.js", "scripts/automation.js"],
   "styles": ["styles/automation.css"],
   "relationships": {
     "systems": [
@@ -44,6 +40,14 @@
         "manifest": "https://raw.githubusercontent.com/justinross/foundry-bitd-alternate-sheets/master/module.json",
         "compatibility": {
           "minimum": "1.0.20"
+        }
+      },
+      {
+        "id": "lib-wrapper",
+        "type": "module",
+        "manifest": "https://github.com/ruipin/fvtt-lib-wrapper/releases/latest/download/module.json",
+        "compatibility": {
+          "minimum": "1.8.0"
         }
       }
     ],
