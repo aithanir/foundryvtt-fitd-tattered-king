@@ -1,7 +1,15 @@
-2026/05/10-15:15:31.487645 743908bfd6c0 Recovering log #111
-2026/05/10-15:15:31.509748 743908bfd6c0 Delete type=0 #111
-2026/05/10-15:15:31.510484 743908bfd6c0 Delete type=3 #110
-2026/05/10-15:15:31.515312 7438bb7fe6c0 Level-0 table #115: started
-2026/05/10-15:15:31.521145 7438bb7fe6c0 Level-0 table #115: 12496 bytes OK
-2026/05/10-15:15:31.530140 7438bb7fe6c0 Delete type=0 #113
-2026/05/10-15:15:31.530903 7438bb7fe6c0 Manual compaction at level-0 from '!items!3CcUKtJGvm8Ml7H2' @ 72057594037927935 : 1 .. '!items.effects!yyemcAJblDOVOXg8.TASBp9KThJlPRst7' @ 0 : 0; will stop at (end)
+2026/05/11-21:00:18.569054 7e03bbfff6c0 Recovering log #176
+2026/05/11-21:00:18.586411 7e03bbfff6c0 Delete type=0 #176
+2026/05/11-21:00:18.587109 7e03bbfff6c0 Delete type=3 #175
+2026/05/11-21:00:18.593161 7e03baffd6c0 Level-0 table #180: started
+2026/05/11-21:00:18.598448 7e03baffd6c0 Level-0 table #180: 12496 bytes OK
+2026/05/11-21:00:18.608619 7e03baffd6c0 Delete type=0 #178
+2026/05/11-21:00:18.609387 7e03baffd6c0 Manual compaction at level-0 from '!items!3CcUKtJGvm8Ml7H2' @ 72057594037927935 : 1 .. '!items.effects!yyemcAJblDOVOXg8.TASBp9KThJlPRst7' @ 0 : 0; will stop at (end)
+2026/05/11-21:00:18.609586 7e03baffd6c0 Manual compaction at level-1 from '!items!3CcUKtJGvm8Ml7H2' @ 72057594037927935 : 1 .. '!items.effects!yyemcAJblDOVOXg8.TASBp9KThJlPRst7' @ 0 : 0; will stop at '!items.effects!yyemcAJblDOVOXg8.TASBp9KThJlPRst7' @ 191 : 1
+2026/05/11-21:00:18.609767 7e03baffd6c0 Compacting 1@1 + 1@2 files
+2026/05/11-21:00:18.615750 7e03baffd6c0 Generated table #181@1: 39 keys, 12496 bytes
+2026/05/11-21:00:18.615922 7e03baffd6c0 Compacted 1@1 + 1@2 files => 12496 bytes
+2026/05/11-21:00:18.622791 7e03baffd6c0 compacted to: files[ 0 0 1 0 0 0 0 ]
+2026/05/11-21:00:18.624303 7e03baffd6c0 Delete type=2 #174
+2026/05/11-21:00:18.625354 7e03baffd6c0 Delete type=2 #180
+2026/05/11-21:00:18.626141 7e03baffd6c0 Manual compaction at level-1 from '!items.effects!yyemcAJblDOVOXg8.TASBp9KThJlPRst7' @ 191 : 1 .. '!items.effects!yyemcAJblDOVOXg8.TASBp9KThJlPRst7' @ 0 : 0; will stop at (end)
