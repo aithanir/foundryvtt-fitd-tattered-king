@@ -1,11 +1,14 @@
 import { BladesHelpers } from '../../../systems/blades-in-the-dark/module/blades-helpers.js';
 import { BladesActorSheet } from '../../../systems/blades-in-the-dark/module/blades-actor-sheet.js';
 import { BladesSheet } from '../../../systems/blades-in-the-dark/module/blades-sheet.js';
+import { openFormDialog } from '../../../systems/blades-in-the-dark/module/lib/dialog-compat.js';
 
 const MODULE_ID = 'fitd-ttk-investigators';
 const ABILITIES_PACK = `${MODULE_ID}.ability`;
 const CLASSES_PACK = `${MODULE_ID}.class`;
 const ITEMS_PACK = `${MODULE_ID}.item`;
+const ALTERNATE_SHEETS_ID = 'bitd-alternate-sheets';
+const MAX_VETERAN_ABILITIES = 3;
 
 let addContext = null;
 
@@ -13,9 +16,12 @@ Hooks.once('ready', async () => {
   if (game.system?.id !== 'blades-in-the-dark') return;
 
   registerBaseSheetAbilityOrdering();
+  registerBaseSheetClassDrops();
   registerBaseSheetItemFilters();
+  registerBaseSheetClassDeletes();
   await registerAlternateSheetItemFilters();
   await registerAlternateSheetAbilityOrdering();
+  await registerAlternateSheetVeteranControl();
   await registerAlternateSheetClassDropFix();
 });
 
@@ -27,11 +33,33 @@ function registerBaseSheetAbilityOrdering() {
   });
 }
 
+function registerBaseSheetClassDrops() {
+  wrapMethod(BladesActorSheet.prototype, '_onDropItem', async function (wrapped, event, droppedItem, ...args) {
+    const item = await fromUuid(droppedItem?.uuid);
+    if (this.actor?.type !== 'character' || !(await isInvestigatorClassCandidate(item))) {
+      return wrapped(event, droppedItem, ...args);
+    }
+
+    event?.preventDefault?.();
+    await switchBaseSheetInvestigatorClass(this.actor, item);
+  });
+}
+
 function registerBaseSheetItemFilters() {
-  wrapMethod(BladesSheet.prototype, '_onItemAddClick', function (wrapped, event, ...args) {
+  wrapMethod(BladesSheet.prototype, '_onItemAddClick', async function (wrapped, event, ...args) {
     const itemType = event?.currentTarget?.dataset?.itemType;
-    if (!['ability', 'item'].includes(itemType) || this.actor?.type !== 'character') {
+    if (!['ability', 'class', 'item'].includes(itemType) || this.actor?.type !== 'character') {
       return wrapped(event, ...args);
+    }
+
+    if (itemType === 'ability' && isInvestigatorActor(this.actor)) {
+      event.preventDefault();
+      return openInvestigatorAbilityDialog(this.actor);
+    }
+
+    if (itemType === 'class') {
+      event.preventDefault();
+      return openInvestigatorClassDialog(this.actor);
     }
 
     return withAddContext({ actor: this.actor, itemType }, () => wrapped(event, ...args));
@@ -55,6 +83,29 @@ function registerBaseSheetItemFilters() {
   });
 }
 
+function registerBaseSheetClassDeletes() {
+  Hooks.on('renderBladesActorSheet', (app, html) => {
+    const actor = app.actor;
+    if (actor?.type !== 'character' || !isInvestigatorActor(actor) || !actor.isOwner) return;
+
+    getRootElement(html)
+      ?.querySelectorAll('.item[data-item-id] .item-delete')
+      .forEach((control) => {
+        const itemId = control.closest('.item')?.dataset?.itemId;
+        const item = actor.items.get(itemId);
+        if (!isInvestigatorClass(item)) return;
+
+        control.addEventListener(
+          'click',
+          async () => {
+            await clearActorAbilityState(actor);
+          },
+          { capture: true, once: true }
+        );
+      });
+  });
+}
+
 async function registerAlternateSheetItemFilters() {
   if (!game.modules.get('bitd-alternate-sheets')?.active) return;
 
@@ -73,7 +124,7 @@ async function registerAlternateSheetItemFilters() {
 }
 
 async function registerAlternateSheetAbilityOrdering() {
-  if (!game.modules.get('bitd-alternate-sheets')?.active) return;
+  if (!game.modules.get(ALTERNATE_SHEETS_ID)?.active) return;
 
   const { BladesAlternateActorSheet } =
     await import('../../bitd-alternate-sheets/scripts/blades-alternate-actor-sheet.js');
@@ -85,21 +136,32 @@ async function registerAlternateSheetAbilityOrdering() {
   });
 }
 
+async function registerAlternateSheetVeteranControl() {
+  if (!game.modules.get(ALTERNATE_SHEETS_ID)?.active) return;
+
+  Hooks.on('renderBladesAlternateActorSheet', (app, html) => {
+    enhanceAlternateSheetVeteranControl(app, html);
+  });
+}
+
 async function registerAlternateSheetClassDropFix() {
-  if (!game.modules.get('bitd-alternate-sheets')?.active) return;
+  if (!game.modules.get(ALTERNATE_SHEETS_ID)?.active) return;
 
   const { BladesAlternateActorSheet } =
     await import('../../bitd-alternate-sheets/scripts/blades-alternate-actor-sheet.js');
+  const { Utils } = await import('../../bitd-alternate-sheets/scripts/utils.js');
+  const { queueUpdate } = await import('../../bitd-alternate-sheets/scripts/lib/update-queue.js');
 
   wrapMethod(
     BladesAlternateActorSheet.prototype,
     'switchPlaybook',
     async function (wrapped, newPlaybookItem, ...args) {
-      await wrapped(newPlaybookItem, ...args);
+      const isInvestigatorNewClass = await isInvestigatorClassCandidate(newPlaybookItem);
+      if (!isInvestigatorNewClass) {
+        return wrapped(newPlaybookItem, ...args);
+      }
 
-      if (!isInvestigatorClass(newPlaybookItem)) return;
-      await ensureActorClass(this.actor, newPlaybookItem);
-      await updateActorIconFromClass(this.actor, newPlaybookItem);
+      return switchInvestigatorClass(this, newPlaybookItem, { Utils, queueUpdate });
     }
   );
 }
@@ -115,28 +177,91 @@ async function withAddContext(context, callback) {
   }
 }
 
-async function ensureActorClass(actor, classItem) {
+async function switchInvestigatorClass(sheet, classItem, { Utils, queueUpdate }) {
+  const actor = sheet.actor;
+  if (actor?.type !== 'character' || !actor.isOwner) return;
+
+  await clearActorAbilityState(actor, queueUpdate);
+  await sheet.switchToPlaybookAcquaintances(classItem);
+  await setActorAttributesFromClass(actor, classItem, { Utils, queueUpdate });
+  await ensureActorClass(actor, classItem, queueUpdate);
+  await repairActorClass(actor, classItem, queueUpdate);
+  await updateActorIconFromClass(actor, classItem, queueUpdate);
+  sheet.render(false);
+}
+
+async function switchBaseSheetInvestigatorClass(actor, classItem) {
+  if (actor?.type !== 'character' || !actor.isOwner) return;
+
+  await clearActorAbilityState(actor);
+  await ensureActorClass(actor, classItem);
+  await updateActorIconFromClass(actor, classItem);
+  actor.sheet?.render(false);
+}
+
+async function setActorAttributesFromClass(actor, classItem, { Utils, queueUpdate }) {
+  const attributes = await Utils.getStartingAttributes(classItem);
+  for (const attribute of Object.values(attributes)) {
+    attribute.exp = String(attribute.exp);
+    attribute.exp_max = String(attribute.exp_max);
+  }
+
+  await queueUpdate(() => actor.update({ system: { attributes } }));
+}
+
+async function ensureActorClass(actor, classItem, queueUpdate = null) {
   if (actor?.type !== 'character' || !actor.isOwner) return;
 
   const existingClassIds = actor.items
     .filter((item) => item.type === 'class')
     .map((item) => item.id);
   if (existingClassIds.length > 0) {
-    await actor.deleteEmbeddedDocuments('Item', existingClassIds);
+    await queuedActorUpdate(queueUpdate, () => actor.deleteEmbeddedDocuments('Item', existingClassIds));
   }
 
   const classData = classItem.toObject();
-  delete classData._id;
-  await actor.createEmbeddedDocuments('Item', [classData]);
+  await queuedActorUpdate(queueUpdate, () => actor.createEmbeddedDocuments('Item', [classData]));
 }
 
-async function updateActorIconFromClass(actor, classItem) {
+async function repairActorClass(actor, classItem, queueUpdate = null) {
+  const classItems = actor.items.filter((item) => item.type === 'class');
+  const hasSingleTargetClass = classItems.length === 1 && classItems[0].id === classItem.id;
+  if (hasSingleTargetClass) return;
+
+  const classIds = classItems.map((item) => item.id);
+  if (classIds.length > 0) {
+    await queuedActorUpdate(queueUpdate, () => actor.deleteEmbeddedDocuments('Item', classIds));
+  }
+
+  const classData = classItem.toObject();
+  await queuedActorUpdate(queueUpdate, () => actor.createEmbeddedDocuments('Item', [classData]));
+}
+
+async function clearActorAbilityState(actor, queueUpdate = null) {
+  if (actor?.type !== 'character' || !actor.isOwner) return;
+
+  const abilityIds = actor.items.filter((item) => item.type === 'ability').map((item) => item.id);
+  if (abilityIds.length > 0) {
+    await queuedActorUpdate(queueUpdate, () => actor.deleteEmbeddedDocuments('Item', abilityIds));
+  }
+
+  if (actor.getFlag(ALTERNATE_SHEETS_ID, 'multiAbilityProgress')) {
+    await queuedActorUpdate(queueUpdate, () =>
+      actor.unsetFlag(ALTERNATE_SHEETS_ID, 'multiAbilityProgress')
+    );
+  }
+}
+
+async function updateActorIconFromClass(actor, classItem, queueUpdate = null) {
   const classIcon = classItem.img;
   if (!isInvestigatorClassIcon(classIcon)) return;
-  if (!canReplaceActorIcon(actor.img)) return;
   if (actor.img === classIcon) return;
 
-  await actor.update({ img: classIcon });
+  await queuedActorUpdate(queueUpdate, () => actor.update({ img: classIcon }));
+}
+
+async function queuedActorUpdate(queueUpdate, callback) {
+  return queueUpdate ? queueUpdate(callback) : callback();
 }
 
 function filterAbilitiesForActor(abilities, actor) {
@@ -144,7 +269,7 @@ function filterAbilitiesForActor(abilities, actor) {
 }
 
 function filterItemsForActor(items, actor) {
-  return filterEntriesForActor(filterToInvestigatorItems(items), actor);
+  return sortItemsForActor(filterEntriesForActor(filterToInvestigatorItems(items), actor), actor);
 }
 
 function filterEntriesForActor(entries, actor) {
@@ -156,6 +281,22 @@ function filterEntriesForActor(entries, actor) {
     if (!actorClass) return false;
     return itemClass === actorClass;
   });
+}
+
+function sortItemsForActor(items, actor) {
+  const actorClass = getActorClassName(actor);
+
+  return items.sort((a, b) => {
+    return (
+      compareNumbers(itemBucketForActor(a, actorClass), itemBucketForActor(b, actorClass)) ||
+      normalizeAbilityName(a).localeCompare(normalizeAbilityName(b))
+    );
+  });
+}
+
+function itemBucketForActor(item, actorClass) {
+  const itemClass = normalizeClassName(item.system?.class);
+  return itemClass && itemClass === actorClass ? 0 : 1;
 }
 
 function filterToInvestigatorAbilities(items) {
@@ -208,6 +349,18 @@ function isInvestigatorClass(item) {
   return item.type === 'class' && isFromInvestigatorPack(item, CLASSES_PACK);
 }
 
+async function isInvestigatorClassCandidate(item) {
+  if (isInvestigatorClass(item)) return true;
+  if (item?.type !== 'class') return false;
+
+  const classes = await getInvestigatorPackEntries('class', CLASSES_PACK);
+  return classes.some((classItem) => classItem.id === item.id || classItem.name === item.name);
+}
+
+function isInvestigatorActor(actor) {
+  return actor?.type === 'character' && actor.items?.some((item) => isInvestigatorClass(item));
+}
+
 function isFromInvestigatorPack(item, packId) {
   if (item.pack === packId) return true;
   if (item.compendium?.collection === packId) return true;
@@ -227,11 +380,6 @@ function getActorClassName(actor) {
 
 function normalizeClassName(value) {
   return typeof value === 'string' ? value.trim().toLowerCase() : '';
-}
-
-function canReplaceActorIcon(actorIcon) {
-  if (!actorIcon) return true;
-  return actorIcon === 'icons/svg/mystery-man.svg' || isInvestigatorClassIcon(actorIcon);
 }
 
 function isInvestigatorClassIcon(icon) {
@@ -273,6 +421,8 @@ function compareAbilities(a, b, options) {
 }
 
 function abilityBucket(item, options) {
+  if (options.ignoreSelection) return isSpecialArmourAbility(item) ? 0 : 1;
+
   const selected = isAbilitySelected(item, options);
   const specialArmour = isSpecialArmourAbility(item);
 
@@ -287,6 +437,346 @@ function isAbilitySelected(item, options = {}) {
   if (item?._progress !== undefined) return Number(item._progress) > 0;
   if (item?._ownedId) return true;
   return Boolean(item?.system?.purchased);
+}
+
+async function openInvestigatorAbilityDialog(actor, { veteranOnly = false } = {}) {
+  if (!actor?.isOwner) return;
+
+  const veteranCount = getVeteranAbilityCount(actor);
+  const veteranSlotsRemaining = Math.max(0, MAX_VETERAN_ABILITIES - veteranCount);
+  const canSelectVeteran = veteranSlotsRemaining > 0;
+  const classAbilities = veteranOnly ? [] : await getAbilityDialogCandidates(actor, false);
+  const veteranAbilities = canSelectVeteran ? await getAbilityDialogCandidates(actor, true) : [];
+  const abilities = veteranOnly ? veteranAbilities : classAbilities.concat(veteranAbilities);
+
+  if ((veteranOnly ? veteranAbilities : classAbilities).length === 0) {
+    ui.notifications.warn(localize('VeteranNoCandidates'));
+    return;
+  }
+
+  const content = buildAbilityDialogContent({
+    classAbilities,
+    veteranAbilities,
+    veteranOnly,
+    canSelectVeteran,
+    veteranSlotsRemaining,
+  });
+  const result = await openAbilityDialogV2({
+    title: localize(veteranOnly ? 'VeteranDialogTitle' : 'AbilityDialogTitle'),
+    content,
+    okLabel: game.i18n.localize('Add'),
+    cancelLabel: game.i18n.localize('Cancel'),
+  });
+
+  if (!result) return;
+
+  const selectedAsVeteran = veteranOnly || result.veteran === 'on';
+  const selectedId = selectedAsVeteran ? result.select_veteran_ability : result.select_ability;
+  if (!selectedId) return;
+
+  const selectedAbility = abilities.find((ability) => ability.id === selectedId);
+  if (!selectedAbility) return;
+
+  if (selectedAsVeteran && getVeteranAbilityCount(actor) >= MAX_VETERAN_ABILITIES) {
+    ui.notifications.warn(localize('VeteranLimitReached'));
+    return;
+  }
+
+  await addAbilityToActor(actor, selectedAbility, { veteran: selectedAsVeteran });
+}
+
+async function openInvestigatorClassDialog(actor) {
+  if (!actor?.isOwner) return;
+
+  const classes = sortByName(await getInvestigatorPackEntries('class', CLASSES_PACK));
+  const content = `
+    <form class="items-to-add">
+      <div class="items-list">
+        <div class="item-group">
+          <header>${escapeHtml(game.i18n.localize('BITD.Class'))}</header>
+          ${classes
+            .map(
+              (classItem) => `
+                <div class="item-block">
+                  <input
+                    id="select-class-${escapeHtml(classItem.id)}"
+                    type="radio"
+                    name="select_class"
+                    value="${escapeHtml(classItem.id)}"
+                  >
+                  <label for="select-class-${escapeHtml(classItem.id)}">
+                    ${escapeHtml(classItem.name)}
+                  </label>
+                </div>
+              `
+            )
+            .join('')}
+        </div>
+      </div>
+    </form>
+  `;
+  const result = await openFormDialog({
+    title: localize('ClassDialogTitle'),
+    content,
+    okLabel: game.i18n.localize('Add'),
+    cancelLabel: game.i18n.localize('Cancel'),
+  });
+  if (!result?.select_class) return;
+
+  const classItem = classes.find((item) => item.id === result.select_class);
+  if (!classItem) return;
+
+  await switchBaseSheetInvestigatorClass(actor, classItem);
+}
+
+async function getAbilityDialogCandidates(actor, veteran) {
+  const actorClass = getActorClassName(actor);
+  const ownedNames = new Set(
+    actor.items.filter((item) => item.type === 'ability').map((item) => normalizeName(item.name))
+  );
+  const abilities = await getInvestigatorAbilities();
+
+  return abilities.filter((ability) => {
+    const abilityClass = normalizeClassName(ability.system?.class);
+    if (!abilityClass || ownedNames.has(normalizeName(ability.name))) return false;
+    return veteran ? abilityClass !== actorClass : abilityClass === actorClass;
+  });
+}
+
+function buildAbilityDialogContent({
+  classAbilities,
+  veteranAbilities,
+  veteranOnly,
+  canSelectVeteran,
+  veteranSlotsRemaining,
+}) {
+  const veteranControl = veteranOnly
+    ? ''
+    : `
+      <input
+        id="fitd-ttk-veteran-toggle"
+        class="fitd-ttk-veteran-mode"
+        type="checkbox"
+        name="veteran"
+        ${canSelectVeteran ? '' : 'disabled'}
+      >
+      <label class="fitd-ttk-veteran-toggle" for="fitd-ttk-veteran-toggle">
+        ${escapeHtml(localize('VeteranToggle'))}
+      </label>
+      <p class="notes">${escapeHtml(
+        localize(canSelectVeteran ? 'VeteranSlotsRemaining' : 'VeteranLimitReached', {
+          count: veteranSlotsRemaining,
+        })
+      )}</p>
+    `;
+
+  const container = document.createElement('div');
+  container.innerHTML = `
+    <div
+      class="items-to-add fitd-ttk-ability-dialog ${veteranOnly ? 'fitd-ttk-veteran-only' : ''}"
+      data-veteran="${veteranOnly ? 'true' : 'false'}"
+    >
+      ${veteranControl}
+      <div class="items-list fitd-ttk-class-ability-list" style="${veteranOnly ? 'display: none;' : ''}">
+        ${sortedAbilityGroups(classAbilities)
+          .map(([className, group]) => buildAbilityDialogGroup(className, group, 'select_ability'))
+          .join('')}
+      </div>
+      <div class="items-list fitd-ttk-veteran-ability-list" style="${veteranOnly ? '' : 'display: none;'}">
+        ${sortedAbilityGroups(veteranAbilities)
+          .map(([className, group]) =>
+            buildAbilityDialogGroup(className, group, 'select_veteran_ability')
+          )
+          .join('')}
+      </div>
+    </div>
+  `;
+
+  wireAbilityDialogToggle(container);
+  return container;
+}
+
+async function openAbilityDialogV2({ title, content, okLabel, cancelLabel }) {
+  const DialogV2 = foundry?.applications?.api?.DialogV2;
+  if (!DialogV2) {
+    return openFormDialog({
+      title,
+      content: content.outerHTML,
+      okLabel,
+      cancelLabel,
+    });
+  }
+
+  return DialogV2.wait({
+    window: { title },
+    content,
+    buttons: [
+      {
+        action: 'ok',
+        label: okLabel,
+        icon: 'fas fa-check',
+        default: true,
+        callback: (event, button) => serializeAbilityDialog(button.form),
+      },
+      {
+        action: 'cancel',
+        label: cancelLabel,
+        icon: 'fas fa-times',
+        callback: () => undefined,
+      },
+    ],
+  });
+}
+
+function serializeAbilityDialog(form) {
+  if (!form) return {};
+
+  return {
+    veteran: form.elements.veteran?.checked ? 'on' : undefined,
+    select_ability: form.elements.select_ability?.value || undefined,
+    select_veteran_ability: form.elements.select_veteran_ability?.value || undefined,
+  };
+}
+
+function wireAbilityDialogToggle(content) {
+  const toggle = content.querySelector('.fitd-ttk-veteran-mode');
+  if (!toggle) return;
+
+  const update = () => {
+    const classList = content.querySelector('.fitd-ttk-class-ability-list');
+    const veteranList = content.querySelector('.fitd-ttk-veteran-ability-list');
+    if (!classList || !veteranList) return;
+
+    classList.style.display = toggle.checked ? 'none' : '';
+    veteranList.style.display = toggle.checked ? '' : 'none';
+  };
+
+  toggle.addEventListener('change', update);
+  update();
+}
+
+function buildAbilityDialogGroup(className, abilities, inputName) {
+  return `
+    <div class="item-group">
+      <header>${escapeHtml(className)}</header>
+      ${abilities
+        .map((ability) => {
+          const description = BladesHelpers.stripHtml(ability.system?.description || '');
+          return `
+            <div class="item-block">
+              <input
+                id="${escapeHtml(inputName)}-${escapeHtml(ability.id)}"
+                type="radio"
+                name="${escapeHtml(inputName)}"
+                value="${escapeHtml(ability.id)}"
+              >
+              <label for="${escapeHtml(inputName)}-${escapeHtml(ability.id)}" title="${escapeHtml(description)}">
+                ${escapeHtml(BladesHelpers.trimClassFromName(ability.name))}
+              </label>
+            </div>
+          `;
+        })
+        .join('')}
+    </div>
+  `;
+}
+
+function sortedAbilityGroups(abilities) {
+  return Object.entries(groupAbilitiesByClass(abilities))
+    .sort(([classA], [classB]) => classA.localeCompare(classB))
+    .map(([className, group]) => [
+      className,
+      sortAbilityList(group, { ignoreSelection: true }),
+    ]);
+}
+
+function sortByName(items) {
+  return items.sort((a, b) => normalizeName(a.name).localeCompare(normalizeName(b.name)));
+}
+
+function groupAbilitiesByClass(abilities) {
+  return abilities.reduce((groups, ability) => {
+    const className = ability.system?.class || game.i18n.localize('BITD.Generic');
+    groups[className] ??= [];
+    groups[className].push(ability);
+    return groups;
+  }, {});
+}
+
+async function addAbilityToActor(actor, ability, { veteran = false } = {}) {
+  const data = ability.toObject();
+  delete data._id;
+
+  if (veteran) {
+    data.flags ??= {};
+    data.flags[MODULE_ID] ??= {};
+    data.flags[MODULE_ID].veteran = true;
+  }
+
+  await actor.createEmbeddedDocuments('Item', [data]);
+}
+
+function enhanceAlternateSheetVeteranControl(app, html) {
+  const actor = app.actor;
+  if (!isInvestigatorActor(actor) || !actor.isOwner) return;
+
+  const root = getRootElement(html);
+  const abilityList = root?.querySelector('.ability-list.check-list');
+  if (!abilityList || abilityList.querySelector('.fitd-ttk-veteran-ability')) return;
+
+  const remaining = Math.max(0, MAX_VETERAN_ABILITIES - getVeteranAbilityCount(actor));
+  if (remaining <= 0) return;
+
+  const row = buildAlternateVeteranRow(actor, remaining);
+  abilityList.append(row);
+  row.addEventListener('change', async (event) => {
+    if (!event.target?.matches('.fitd-ttk-veteran-checkbox')) return;
+    event.preventDefault();
+    await openInvestigatorAbilityDialog(actor, { veteranOnly: true });
+    app.render(false);
+  });
+}
+
+function buildAlternateVeteranRow(actor, remaining) {
+  const row = document.createElement('div');
+  row.className = 'ability-block fitd-ttk-veteran-ability';
+  row.dataset.abilityName = localize('VeteranAbilityName');
+
+  row.innerHTML = `
+    <div class="ability-checkboxes">
+      ${Array.from({ length: remaining }, (_, index) => {
+        const slot = index + 1;
+        const id = `character-${actor.id}-veteran-${slot}`;
+        return `
+          <input
+            type="checkbox"
+            class="fitd-ttk-veteran-checkbox"
+            id="${escapeHtml(id)}"
+            data-veteran-slot="${slot}"
+          >
+        `;
+      }).join('')}
+    </div>
+    <label>
+      <span class="ability-name">${escapeHtml(localize('VeteranAbilityName'))}:</span>
+      <span class="ability-description">${escapeHtml(localize('VeteranAbilityDescription'))}</span>
+    </label>
+  `;
+
+  return row;
+}
+
+function getVeteranAbilityCount(actor) {
+  const actorClass = getActorClassName(actor);
+  if (!actorClass) return 0;
+
+  return actor.items.filter((item) => isVeteranAbility(actorClass, item)).length;
+}
+
+function isVeteranAbility(actorClass, item) {
+  if (item?.type !== 'ability' || !isInvestigatorAbility(item)) return false;
+  const abilityClass = normalizeClassName(item.system?.class);
+  return Boolean(abilityClass && abilityClass !== actorClass);
 }
 
 function isSpecialArmourAbility(item) {
@@ -308,6 +798,28 @@ function normalizeAbilityName(item) {
 
 function compareNumbers(a, b) {
   return a === b ? 0 : a - b;
+}
+
+function getRootElement(html) {
+  if (html instanceof HTMLElement) return html;
+  return html?.[0] ?? null;
+}
+
+function localize(key, data = null) {
+  const fullKey = `${MODULE_ID.toUpperCase()}.${key}`;
+  return data ? game.i18n.format(fullKey, data) : game.i18n.localize(fullKey);
+}
+
+function normalizeName(value) {
+  return String(value ?? '')
+    .trim()
+    .toLowerCase();
+}
+
+function escapeHtml(value) {
+  const element = document.createElement('span');
+  element.textContent = String(value ?? '');
+  return element.innerHTML;
 }
 
 function wrapMethod(target, methodName, wrapper) {

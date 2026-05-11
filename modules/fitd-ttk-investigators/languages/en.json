@@ -15,5 +15,14 @@
   "FITD-TTK-INVESTIGATORS.SpecialArmourChatChoice.push": "Expended to Push",
   "FITD-TTK-INVESTIGATORS.SpecialArmourChatChoice.use": "Expended",
   "FITD-TTK-INVESTIGATORS.SpecialArmourChat": "{choice}",
-  "FITD-TTK-INVESTIGATORS.SpecialArmourTooltip": "{ability}: {description}"
+  "FITD-TTK-INVESTIGATORS.SpecialArmourTooltip": "{ability}: {description}",
+  "FITD-TTK-INVESTIGATORS.ClassDialogTitle": "Select Class",
+  "FITD-TTK-INVESTIGATORS.AbilityDialogTitle": "Add Ability",
+  "FITD-TTK-INVESTIGATORS.VeteranAbilityName": "Veteran",
+  "FITD-TTK-INVESTIGATORS.VeteranAbilityDescription": "Select an ability from another class",
+  "FITD-TTK-INVESTIGATORS.VeteranDialogTitle": "Select Veteran Ability",
+  "FITD-TTK-INVESTIGATORS.VeteranToggle": "Veteran ability",
+  "FITD-TTK-INVESTIGATORS.VeteranSlotsRemaining": "{count} Veteran slots remaining.",
+  "FITD-TTK-INVESTIGATORS.VeteranLimitReached": "Veteran ability limit reached.",
+  "FITD-TTK-INVESTIGATORS.VeteranNoCandidates": "No available abilities to add."
 }

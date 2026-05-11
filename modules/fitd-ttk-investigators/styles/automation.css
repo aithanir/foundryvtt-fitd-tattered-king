@@ -58,3 +58,31 @@
 .fitd-ttk-special-armour-chat .description p {
   margin-bottom: 0;
 }
+
+.fitd-ttk-ability-dialog .fitd-ttk-veteran-toggle {
+  align-items: center;
+  display: inline-flex;
+  font-weight: 700;
+  gap: 0.35rem;
+  margin-bottom: 0.25rem;
+}
+
+.fitd-ttk-ability-dialog .fitd-ttk-veteran-mode {
+  margin-right: 0.35rem;
+}
+
+.fitd-ttk-ability-dialog .fitd-ttk-veteran-mode:checked ~ .fitd-ttk-class-ability-list {
+  display: none !important;
+}
+
+.fitd-ttk-ability-dialog .fitd-ttk-veteran-mode:checked ~ .fitd-ttk-veteran-ability-list {
+  display: block !important;
+}
+
+.fitd-ttk-veteran-ability .ability-name {
+  font-weight: 700;
+}
+
+.fitd-ttk-veteran-ability .fitd-ttk-veteran-checkbox {
+  cursor: pointer;
+}
