@@ -2,13 +2,20 @@ import { BladesHelpers } from '../../../systems/blades-in-the-dark/module/blades
 import { BladesActorSheet } from '../../../systems/blades-in-the-dark/module/blades-actor-sheet.js';
 import { BladesSheet } from '../../../systems/blades-in-the-dark/module/blades-sheet.js';
 import { openFormDialog } from '../../../systems/blades-in-the-dark/module/lib/dialog-compat.js';
-
-const MODULE_ID = 'fitd-ttk-investigators';
-const ABILITIES_PACK = `${MODULE_ID}.ability`;
-const CLASSES_PACK = `${MODULE_ID}.class`;
-const ITEMS_PACK = `${MODULE_ID}.item`;
-const ALTERNATE_SHEETS_ID = 'bitd-alternate-sheets';
-const MAX_VETERAN_ABILITIES = 3;
+import {
+  ABILITIES_PACK,
+  ALTERNATE_SHEETS_ID,
+  CLASSES_PACK,
+  ITEMS_PACK,
+  MAX_VETERAN_ABILITIES,
+  MODULE_ID,
+  escapeHtml,
+  getRootElement,
+  hasSpecialArmourAutomation,
+  isInvestigatorClassIcon,
+  localize,
+  normalizeName,
+} from './shared.js';
 
 let addContext = null;
 
@@ -34,15 +41,19 @@ function registerBaseSheetAbilityOrdering() {
 }
 
 function registerBaseSheetClassDrops() {
-  wrapMethod(BladesActorSheet.prototype, '_onDropItem', async function (wrapped, event, droppedItem, ...args) {
-    const item = await fromUuid(droppedItem?.uuid);
-    if (this.actor?.type !== 'character' || !(await isInvestigatorClassCandidate(item))) {
-      return wrapped(event, droppedItem, ...args);
-    }
+  wrapMethod(
+    BladesActorSheet.prototype,
+    '_onDropItem',
+    async function (wrapped, event, droppedItem, ...args) {
+      const item = await fromUuid(droppedItem?.uuid);
+      if (this.actor?.type !== 'character' || !(await isInvestigatorClassCandidate(item))) {
+        return wrapped(event, droppedItem, ...args);
+      }
 
-    event?.preventDefault?.();
-    await switchBaseSheetInvestigatorClass(this.actor, item);
-  });
+      event?.preventDefault?.();
+      await switchBaseSheetInvestigatorClass(this.actor, item);
+    }
+  );
 }
 
 function registerBaseSheetItemFilters() {
@@ -216,7 +227,9 @@ async function ensureActorClass(actor, classItem, queueUpdate = null) {
     .filter((item) => item.type === 'class')
     .map((item) => item.id);
   if (existingClassIds.length > 0) {
-    await queuedActorUpdate(queueUpdate, () => actor.deleteEmbeddedDocuments('Item', existingClassIds));
+    await queuedActorUpdate(queueUpdate, () =>
+      actor.deleteEmbeddedDocuments('Item', existingClassIds)
+    );
   }
 
   const classData = classItem.toObject();
@@ -326,7 +339,9 @@ async function getInvestigatorEntries(type, packId) {
   );
   const items = worldItems.concat(packItems);
 
-  return type === 'ability' ? sortAbilityList(items) : items.sort((a, b) => a.name.localeCompare(b.name));
+  return type === 'ability'
+    ? sortAbilityList(items)
+    : items.sort((a, b) => a.name.localeCompare(b.name));
 }
 
 async function getInvestigatorPackEntries(type, packId) {
@@ -380,14 +395,6 @@ function getActorClassName(actor) {
 
 function normalizeClassName(value) {
   return typeof value === 'string' ? value.trim().toLowerCase() : '';
-}
-
-function isInvestigatorClassIcon(icon) {
-  return (
-    typeof icon === 'string' &&
-    icon.startsWith(`modules/${MODULE_ID}/styles/assets/icons/ttk-investigator-icon.`) &&
-    icon.endsWith('.png')
-  );
 }
 
 function sortOwnedAbilitySlots(items) {
@@ -684,10 +691,7 @@ function buildAbilityDialogGroup(className, abilities, inputName) {
 function sortedAbilityGroups(abilities) {
   return Object.entries(groupAbilitiesByClass(abilities))
     .sort(([classA], [classB]) => classA.localeCompare(classB))
-    .map(([className, group]) => [
-      className,
-      sortAbilityList(group, { ignoreSelection: true }),
-    ]);
+    .map(([className, group]) => [className, sortAbilityList(group, { ignoreSelection: true })]);
 }
 
 function sortByName(items) {
@@ -780,8 +784,7 @@ function isVeteranAbility(actorClass, item) {
 }
 
 function isSpecialArmourAbility(item) {
-  const automation = item?.flags?.[MODULE_ID]?.automation ?? [];
-  return automation.some((entry) => entry?.kind === 'specialArmour' && entry?.slot === 'special');
+  return hasSpecialArmourAutomation(item);
 }
 
 function abilitySequence(item) {
@@ -798,28 +801,6 @@ function normalizeAbilityName(item) {
 
 function compareNumbers(a, b) {
   return a === b ? 0 : a - b;
-}
-
-function getRootElement(html) {
-  if (html instanceof HTMLElement) return html;
-  return html?.[0] ?? null;
-}
-
-function localize(key, data = null) {
-  const fullKey = `${MODULE_ID.toUpperCase()}.${key}`;
-  return data ? game.i18n.format(fullKey, data) : game.i18n.localize(fullKey);
-}
-
-function normalizeName(value) {
-  return String(value ?? '')
-    .trim()
-    .toLowerCase();
-}
-
-function escapeHtml(value) {
-  const element = document.createElement('span');
-  element.textContent = String(value ?? '');
-  return element.innerHTML;
 }
 
 function wrapMethod(target, methodName, wrapper) {

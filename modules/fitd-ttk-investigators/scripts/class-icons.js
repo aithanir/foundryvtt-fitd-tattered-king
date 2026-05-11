@@ -1,6 +1,4 @@
-const MODULE_ID = 'fitd-ttk-investigators';
-const CLASS_ICON_PREFIX = `modules/${MODULE_ID}/styles/assets/icons/ttk-investigator-icon.`;
-const DEFAULT_ACTOR_ICONS = new Set(['icons/svg/mystery-man.svg']);
+import { DEFAULT_ACTOR_ICONS, isInvestigatorClassIcon } from './shared.js';
 
 Hooks.on('createItem', async (item, _options, userId) => {
   if (userId !== game.user.id) return;
@@ -22,8 +20,4 @@ Hooks.on('createItem', async (item, _options, userId) => {
 function canReplaceActorIcon(actorIcon) {
   if (!actorIcon) return true;
   return DEFAULT_ACTOR_ICONS.has(actorIcon) || isInvestigatorClassIcon(actorIcon);
-}
-
-function isInvestigatorClassIcon(icon) {
-  return typeof icon === 'string' && icon.startsWith(CLASS_ICON_PREFIX) && icon.endsWith('.png');
 }

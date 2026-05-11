@@ -1,8 +1,16 @@
-const MODULE_ID = 'fitd-ttk-investigators';
-const I18N_PREFIX = 'FITD-TTK-INVESTIGATORS';
-const SPECIAL_ARMOUR_ICON =
-  'modules/fitd-ttk-investigators/styles/assets/icons/ttk-ability-icon.special-armor.png';
-const SPECIAL_ARMOUR_PATH = 'system.armor-uses.special';
+import {
+  SPECIAL_ARMOUR_ICON,
+  SPECIAL_ARMOUR_PATH,
+  escapeCss,
+  escapeHtml,
+  getAutomationEntries,
+  getRootElement,
+  hasSpecialArmourAutomation,
+  isSpecialArmourAutomationEntry,
+  localize,
+  localizeOptional,
+  normalizeName,
+} from './shared.js';
 
 Hooks.once('ready', () => {
   if (game.system?.id !== 'blades-in-the-dark') return;
@@ -33,8 +41,7 @@ function getSpecialArmourItems(actor, data) {
 }
 
 function isSpecialArmourItem(item) {
-  const automation = item.flags?.[MODULE_ID]?.automation ?? [];
-  return automation.some((entry) => entry?.kind === 'specialArmour' && entry?.slot === 'special');
+  return hasSpecialArmourAutomation(item);
 }
 
 function getSelectedVirtualAutomationItems(data) {
@@ -165,9 +172,7 @@ async function expendSpecialArmour(actor, item) {
 async function confirmSpecialArmourUse(item) {
   const options = getSpecialArmourOptions(item);
   const content = `
-    <p><strong>${escapeHtml(
-      game.i18n.format(`${I18N_PREFIX}.SpecialArmourConfirm`, { ability: item.name })
-    )}</strong></p>
+    <p><strong>${escapeHtml(localize('SpecialArmourConfirm', { ability: item.name }))}</strong></p>
     <form>
       ${options
         .map(
@@ -198,9 +203,7 @@ async function confirmSpecialArmourUse(item) {
   }
 
   const confirmed = window.confirm(
-    `${game.i18n.format(`${I18N_PREFIX}.SpecialArmourConfirm`, { ability: item.name })}\n\n${
-      item.system?.description ?? ''
-    }`
+    `${localize('SpecialArmourConfirm', { ability: item.name })}\n\n${item.system?.description ?? ''}`
   );
   return confirmed ? options[0] : false;
 }
@@ -210,7 +213,7 @@ async function postSpecialArmourChat(actor, item, choice) {
     <div class="dice-tooltip blades-die-tooltip fitd-ttk-special-armour-chat">
       <div class="chat-label label-stripe-chat">${escapeHtml(item.name)}</div>
       <div class="chat-label-small label-stripe-chat-small">${escapeHtml(
-        game.i18n.format(`${I18N_PREFIX}.SpecialArmourChat`, {
+        localize('SpecialArmourChat', {
           choice: choice.chatLabel || choice.label,
         })
       )}</div>
@@ -229,17 +232,14 @@ function isSpecialArmourSpent(actor) {
 }
 
 function formatAutomationItemTooltip(item) {
-  return game.i18n.format(`${I18N_PREFIX}.SpecialArmourTooltip`, {
+  return localize('SpecialArmourTooltip', {
     ability: item.name,
     description: item.system?.description ?? '',
   });
 }
 
 function getSpecialArmourOptions(item) {
-  const automation = item.flags?.[MODULE_ID]?.automation ?? [];
-  const specialArmour = automation.find(
-    (entry) => entry?.kind === 'specialArmour' && entry?.slot === 'special'
-  );
+  const specialArmour = getAutomationEntries(item).find(isSpecialArmourAutomationEntry);
   const triggers = Array.isArray(specialArmour?.triggers) ? specialArmour.triggers : [];
   const options = triggers.map((trigger) => getSpecialArmourOption(trigger)).filter(Boolean);
 
@@ -255,38 +255,4 @@ function getSpecialArmourOption(trigger) {
     label: localize(`SpecialArmourChoice.${key}`),
     chatLabel: localizeOptional(`SpecialArmourChatChoice.${key}`),
   };
-}
-
-function getRootElement(html) {
-  if (html instanceof HTMLElement) return html;
-  return html?.[0] ?? null;
-}
-
-function localize(key) {
-  return game.i18n.localize(`${I18N_PREFIX}.${key}`);
-}
-
-function localizeOptional(key) {
-  const fullKey = `${I18N_PREFIX}.${key}`;
-  return game.i18n.has(fullKey) ? game.i18n.localize(fullKey) : null;
-}
-
-function normalizeName(value) {
-  return String(value ?? '')
-    .trim()
-    .toLowerCase();
-}
-
-function escapeHtml(value) {
-  const element = document.createElement('span');
-  element.textContent = String(value ?? '');
-  return element.innerHTML;
-}
-
-function escapeCss(value) {
-  if (typeof globalThis.CSS?.escape === 'function') {
-    return globalThis.CSS.escape(value);
-  }
-
-  return String(value ?? '').replace(/["\\]/g, '\\$&');
 }
