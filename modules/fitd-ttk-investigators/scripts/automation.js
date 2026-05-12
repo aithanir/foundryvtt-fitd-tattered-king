@@ -8,19 +8,19 @@ import {
   getAutomationEntries,
   getModuleSourceId,
   getRootElement,
-  getRollReminderEntries,
   getUsageAutomationEntry,
-  hasSpecialArmourAutomation,
   isSpecialArmourAutomationEntry,
+  isRollReminderAutomationEntry,
+  isUsageAutomationEntry,
   localize,
   localizeOptional,
   normalizeName,
 } from './shared.js';
-import { isInvestigatorActor } from './core/investigator-items.js';
+import { getInvestigatorAbilities, isInvestigatorActor } from './core/investigator-items.js';
 import { wrapMethod } from './wrappers.js';
 import { BladesActor } from '../../../systems/blades-in-the-dark/module/blades-actor.js';
 
-let pendingRollReminderPanel = null;
+let automationCachePromise = null;
 
 Hooks.once('ready', () => {
   if (game.system?.id !== 'blades-in-the-dark') return;
@@ -29,18 +29,15 @@ Hooks.once('ready', () => {
   Hooks.on('renderBladesAlternateActorSheet', enhanceSpecialArmour);
   Hooks.on('renderBladesActorSheet', enhanceUsageTracking);
   Hooks.on('renderBladesAlternateActorSheet', enhanceUsageTracking);
-  Hooks.on('renderDialog', injectPendingRollReminders);
-  Hooks.on('renderApplication', injectPendingRollReminders);
-  Hooks.on('renderApplicationV2', injectPendingRollReminders);
   registerRollReminders();
   registerAutomationApi();
 });
 
-function enhanceSpecialArmour(app, html, data) {
+async function enhanceSpecialArmour(app, html, data) {
   const actor = app.actor;
   if (actor?.type !== 'character') return;
 
-  const items = getSpecialArmourItems(actor, data);
+  const items = await getSpecialArmourItems(actor, data);
   if (items.length === 0) return;
 
   const root = getRootElement(html);
@@ -50,26 +47,25 @@ function enhanceSpecialArmour(app, html, data) {
   addSpecialArmourItemControls(root, actor, items);
 }
 
-function enhanceUsageTracking(app, html, data) {
+async function enhanceUsageTracking(app, html, data) {
   const actor = app.actor;
   if (!isInvestigatorActor(actor)) return;
 
   const root = getRootElement(html);
   if (!root) return;
 
-  const items = getUsageItems(actor, data);
-  if (items.length > 0) addUsageItemControls(root, actor, items);
+  const items = await getUsageItems(actor, data);
+  if (items.length > 0) await addUsageItemControls(root, actor, items);
 }
 
-function getSpecialArmourItems(actor, data) {
-  return uniqueItemsById([
-    ...actor.items.filter(isSpecialArmourItem),
-    ...getSelectedVirtualAutomationItems(data),
-  ]);
-}
-
-function isSpecialArmourItem(item) {
-  return hasSpecialArmourAutomation(item);
+async function getSpecialArmourItems(actor, data) {
+  return filterItemsWithAutomation(
+    uniqueItemsById([
+      ...actor.items.filter((item) => item.type === 'ability'),
+      ...getSelectedVirtualAutomationItems(data),
+    ]),
+    hasSpecialArmourAutomationResolved
+  );
 }
 
 function getSelectedVirtualAutomationItems(data) {
@@ -78,15 +74,81 @@ function getSelectedVirtualAutomationItems(data) {
 
   return abilities.filter((item) => {
     const progress = Number(item?._progress) || 0;
-    return progress > 0 && isSpecialArmourItem(item);
+    return progress > 0;
   });
 }
 
-function getUsageItems(actor, data) {
-  return uniqueItemsById([
-    ...actor.items.filter((item) => item.type === 'ability' && getUsageAutomationEntry(item)),
-    ...getSelectedVirtualAutomationItems(data).filter(getUsageAutomationEntry),
-  ]);
+async function getUsageItems(actor, data) {
+  return filterItemsWithAutomation(
+    uniqueItemsById([
+      ...actor.items.filter((item) => item.type === 'ability'),
+      ...getSelectedVirtualAutomationItems(data),
+    ]),
+    getUsageAutomationEntryResolved
+  );
+}
+
+async function filterItemsWithAutomation(items, predicate) {
+  const filtered = [];
+
+  for (const item of items) {
+    if (await predicate(item)) filtered.push(item);
+  }
+
+  return filtered;
+}
+
+async function getResolvedAutomationEntries(item) {
+  const entries = getAutomationEntries(item);
+  if (entries.length > 0) return entries;
+
+  const cache = await getAutomationCache();
+  return (
+    cache.get(getModuleSourceId(item)) ??
+    cache.get(item?.id) ??
+    cache.get(item?._id) ??
+    cache.get(normalizeName(item?.name)) ??
+    []
+  );
+}
+
+async function getAutomationCache() {
+  automationCachePromise ??= buildAutomationCache();
+  return automationCachePromise;
+}
+
+async function buildAutomationCache() {
+  const cache = new Map();
+  const abilities = await getInvestigatorAbilities();
+
+  for (const item of abilities) {
+    const entries = getAutomationEntries(item);
+    if (entries.length === 0) continue;
+
+    addAutomationCacheEntry(cache, getModuleSourceId(item), entries);
+    addAutomationCacheEntry(cache, item.id, entries);
+    addAutomationCacheEntry(cache, item._id, entries);
+    addAutomationCacheEntry(cache, normalizeName(item.name), entries);
+  }
+
+  return cache;
+}
+
+function addAutomationCacheEntry(cache, key, entries) {
+  if (!key || cache.has(key)) return;
+  cache.set(key, entries);
+}
+
+async function hasSpecialArmourAutomationResolved(item) {
+  return (await getResolvedAutomationEntries(item)).some(isSpecialArmourAutomationEntry);
+}
+
+async function getUsageAutomationEntryResolved(item) {
+  return (await getResolvedAutomationEntries(item)).find(isUsageAutomationEntry) ?? null;
+}
+
+async function getRollReminderEntriesResolved(item) {
+  return (await getResolvedAutomationEntries(item)).filter(isRollReminderAutomationEntry);
 }
 
 function uniqueItemsById(items) {
@@ -194,14 +256,18 @@ function buildSpecialArmourButton(actor, item) {
   return button;
 }
 
-function addUsageItemControls(root, actor, items) {
+async function addUsageItemControls(root, actor, items) {
   for (const item of items) {
     for (const container of findItemContainers(root, item)) {
       if (container.querySelector('.fitd-ttk-usage-button')) continue;
 
-      const button = buildUsageButton(actor, item);
+      const button = await buildUsageButton(actor, item);
       insertUsageButton(container, button);
-      container.classList.toggle('fitd-ttk-usage-used', getUsageState(actor, item).used >= 1);
+      const usage = await getUsageAutomationEntryResolved(item);
+      container.classList.toggle(
+        'fitd-ttk-usage-used',
+        getUsageState(actor, item, usage).used >= 1
+      );
     }
   }
 }
@@ -216,9 +282,9 @@ function insertUsageButton(container, button) {
   insertSpecialArmourButton(container, button);
 }
 
-function buildUsageButton(actor, item) {
-  const usage = getUsageAutomationEntry(item);
-  const state = getUsageState(actor, item);
+async function buildUsageButton(actor, item) {
+  const usage = await getUsageAutomationEntryResolved(item);
+  const state = getUsageState(actor, item, usage);
   const used = state.used >= usage.limit;
   const button = document.createElement('a');
   button.href = '#';
@@ -242,10 +308,10 @@ function buildUsageButton(actor, item) {
 }
 
 async function toggleAbilityUse(actor, item) {
-  const usage = getUsageAutomationEntry(item);
+  const usage = await getUsageAutomationEntryResolved(item);
   if (!usage) return;
 
-  const state = getUsageState(actor, item);
+  const state = getUsageState(actor, item, usage);
   const wasUsed = state.used >= usage.limit;
   const used = state.used >= usage.limit ? 0 : usage.limit;
   await setAbilityUse(actor, item, { used, limit: usage.limit, refresh: usage.refresh });
@@ -253,13 +319,17 @@ async function toggleAbilityUse(actor, item) {
   renderActorSheets(actor);
 }
 
-function getUsageState(actor, item) {
+function getUsageState(actor, item, usage = null) {
   const sourceId = getModuleSourceId(item);
   const state = actor.getFlag?.(MODULE_ID, ABILITY_USES_FLAG)?.[sourceId] ?? {};
   return {
     used: Number(state.used) || 0,
-    limit: Number(state.limit) || Number(getUsageAutomationEntry(item)?.limit) || 1,
-    refresh: state.refresh ?? getUsageAutomationEntry(item)?.refresh ?? 'session',
+    limit:
+      Number(state.limit) ||
+      Number(usage?.limit) ||
+      Number(getUsageAutomationEntry(item)?.limit) ||
+      1,
+    refresh: state.refresh ?? usage?.refresh ?? getUsageAutomationEntry(item)?.refresh ?? 'session',
   };
 }
 
@@ -477,12 +547,8 @@ function registerRollReminders() {
     BladesActor.prototype,
     'rollAttributePopup',
     async function (wrapped, attributeName, ...args) {
-      pendingRollReminderPanel = buildRollReminderPanel(this, attributeName);
-      try {
-        return await wrapped(attributeName, ...args);
-      } finally {
-        pendingRollReminderPanel = null;
-      }
+      const reminderPanel = await buildRollReminderPanel(this, attributeName);
+      return withRollReminderDialogInjection(reminderPanel, () => wrapped(attributeName, ...args));
     },
     {
       libWrapperTarget: 'CONFIG.Actor.documentClass.prototype.rollAttributePopup',
@@ -491,22 +557,55 @@ function registerRollReminders() {
   );
 }
 
-function injectPendingRollReminders(_app, html) {
-  if (!pendingRollReminderPanel) return;
+async function withRollReminderDialogInjection(reminderPanel, callback) {
+  if (!reminderPanel) return callback();
 
-  const root = getRootElement(html);
-  if (!root?.querySelector) return;
+  const stopContentInjection = startDialogContentInjection(reminderPanel);
 
-  const form = root.querySelector('form.bitd-roll-dialog');
-  if (!form || form.querySelector('.fitd-ttk-roll-reminders')) return;
-
-  form.insertAdjacentHTML('afterbegin', pendingRollReminderPanel);
+  try {
+    return await callback();
+  } finally {
+    stopContentInjection();
+  }
 }
 
-function buildRollReminderPanel(actor, attributeName) {
+function startDialogContentInjection(reminderPanel) {
+  const dialogV2 = globalThis.foundry?.applications?.api?.DialogV2;
+  const originalWait = dialogV2?.wait;
+  if (typeof originalWait !== 'function') return () => {};
+
+  const injectedWait = function (options = {}, ...args) {
+    if (typeof options.content === 'string' && options.content.includes('bitd-roll-dialog')) {
+      options = {
+        ...options,
+        content: injectReminderPanelIntoDialogContent(options.content, reminderPanel),
+      };
+    }
+
+    return originalWait.call(this, options, ...args);
+  };
+
+  dialogV2.wait = injectedWait;
+
+  return () => {
+    if (dialogV2.wait === injectedWait) dialogV2.wait = originalWait;
+  };
+}
+
+function injectReminderPanelIntoDialogContent(content, reminderPanel) {
+  if (content.includes('fitd-ttk-roll-reminders')) return content;
+
+  const formStart = content.indexOf('<form class="bitd-roll-dialog">');
+  if (formStart < 0) return `${reminderPanel}${content}`;
+
+  const insertAt = formStart + '<form class="bitd-roll-dialog">'.length;
+  return `${content.slice(0, insertAt)}${reminderPanel}${content.slice(insertAt)}`;
+}
+
+async function buildRollReminderPanel(actor, attributeName) {
   if (!isInvestigatorActor(actor)) return null;
 
-  const groups = getOwnedRollReminderGroups(actor, attributeName);
+  const groups = await getOwnedRollReminderGroups(actor, attributeName);
   if (groups.length === 0) return null;
 
   return `
@@ -537,10 +636,10 @@ function buildRollReminderPanel(actor, attributeName) {
   `;
 }
 
-function getOwnedRollReminderGroups(actor, attributeName) {
+async function getOwnedRollReminderGroups(actor, attributeName) {
   const groups = new Map();
 
-  for (const reminder of getOwnedRollReminders(actor, attributeName)) {
+  for (const reminder of await getOwnedRollReminders(actor, attributeName)) {
     const key = getRollBenefitKey(reminder.entry);
     const group = groups.get(key) ?? {
       label: formatRollBenefit(reminder.entry),
@@ -553,15 +652,19 @@ function getOwnedRollReminderGroups(actor, attributeName) {
   return Array.from(groups.values());
 }
 
-function getOwnedRollReminders(actor, attributeName) {
+async function getOwnedRollReminders(actor, attributeName) {
   const trigger = getRollTrigger(attributeName);
-  return actor.items
-    .filter((item) => item.type === 'ability')
-    .flatMap((item) =>
-      getRollReminderEntries(item)
-        .filter((entry) => reminderMatchesTrigger(entry, trigger))
-        .map((entry) => ({ item, entry }))
-    );
+  const reminders = [];
+  const abilityItems = actor.items.filter((candidate) => candidate.type === 'ability');
+
+  for (const item of abilityItems) {
+    const entries = await getRollReminderEntriesResolved(item);
+    for (const entry of entries) {
+      if (reminderMatchesTrigger(entry, trigger)) reminders.push({ item, entry });
+    }
+  }
+
+  return reminders;
 }
 
 function getRollTrigger(attributeName) {
