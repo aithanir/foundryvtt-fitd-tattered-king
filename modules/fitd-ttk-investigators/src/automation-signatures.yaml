@@ -1,0 +1,124 @@
+- kind: rollReminder
+  triggers:
+    - trigger: competency
+      benefits:
+        - benefit:
+            type: dice
+            value: 1
+          abilities:
+            - ability: Seeking Answers
+              class: Investigator
+            - ability: Read the Signs
+              class: Occultist
+        - benefit:
+            type: effect
+            value: 1
+          abilities:
+            - ability: Captivating Performance
+              class: Artist
+            - ability: Daredevil
+              class: Athlete
+            - ability: Clinical Eye
+              class: Doctor
+            - ability: Working a Hunch
+              class: Investigator
+        - benefit:
+            type: position
+            value: improve
+          abilities:
+            - ability: Endearing Disposition
+              class: Artist
+            - ability: Perseverance
+              class: Athlete
+            - ability: Drilled Response
+              class: Military
+            - ability: Rise to Authority
+              class: Professional
+            - ability: Bait and Switch
+              class: Scoundrel
+    - trigger: resistance
+      benefits:
+        - benefit:
+            type: dice
+            value: 1
+          abilities:
+            - ability: Skeptic
+              class: Academic
+            - ability: Grit Your Teeth
+              class: Athlete
+            - ability: Take Heart
+              class: Faithful
+- kind: specialArmour
+  triggers:
+    - trigger: none
+      benefits:
+        - benefit:
+            slot: special
+            triggers:
+              - resist
+              - push
+          abilities:
+            - ability: Deep Knowledge
+              class: Academic
+            - ability: Celebrated
+              class: Artist
+            - ability: Able-Bodied
+              class: Athlete
+            - ability: Money Talks
+              class: Dilettante
+            - ability: White Coat
+              class: Doctor
+            - ability: Unorthodox Method
+              class: Eccentric
+            - ability: Delay the Inevitable
+              class: Faithful
+            - ability: Under Surveillance
+              class: Investigator
+            - ability: Prepared for the Worst
+              class: Military
+            - ability: The Stars Are Right
+              class: Occultist
+            - ability: Professionalism
+              class: Professional
+            - ability: Cheat Death
+              class: Scoundrel
+            - ability: Hard Living
+              class: Wanderer
+- kind: usage
+  triggers:
+    - trigger: none
+      benefits:
+        - benefit:
+            limit: 1
+            refresh: operation
+          abilities:
+            - ability: Calling in Favors
+              class: Dilettante
+            - ability: Private Collection
+              class: Eccentric
+            - ability: Small Favor
+              class: Investigator
+            - ability: Company Car
+              class: Professional
+        - benefit:
+            limit: 1
+            refresh: scene
+          abilities:
+            - ability: Keeping Faith
+              class: Faithful
+            - ability: Moment of Respite
+              class: Faithful
+            - ability: Take Heart
+              class: Faithful
+        - benefit:
+            limit: 1
+            refresh: session
+          abilities:
+            - ability: Knowledge is Power
+              class: Academic
+            - ability: Second Wind
+              class: Athlete
+            - ability: Emergency Aid
+              class: Doctor
+            - ability: Field Dressing
+              class: Military
